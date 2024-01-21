@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto'
-import { Product } from './model/product.js';
+import { Product } from '../model/product.js';
 
 export class ProductManagerMongo {
 

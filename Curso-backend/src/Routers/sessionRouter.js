@@ -1,48 +1,14 @@
 import { Router } from 'express'
-import passport from 'passport'
-
-import { appendJwtAsCookie, removeJwtFromCookies } from "../middlewares/passport.js";
+import { deleteCurrentUser, getCurrentUser, getGithubCallback, loginUser, logoutUser } from '../controller/session.controller.js'
 
 export const sessionRouter = Router()
 
-sessionRouter.post('/login',
-  passport.authenticate('local-login', {
-    failWithError: true
-  }),
-  appendJwtAsCookie,
-  async function (req, res) {
-    res.status(201).redirect('/api/products')
-  },
-)
+sessionRouter.post('/login', loginUser)
 
-sessionRouter.get('/current',
-  passport.authenticate('jwt', {
-    failWithError: true
-  }),
-  function (req, res) { return res.json(req.user) },
-)
+sessionRouter.get('/current', getCurrentUser)
 
-sessionRouter.delete('/current',
-  removeJwtFromCookies,
-  (req, res) => {
-    res.json({ status: 'success', message: 'logout OK' })
-  }
-)
+sessionRouter.delete('/current', deleteCurrentUser)
 
-sessionRouter.get('/githubcallback',
-  passport.authenticate('github-login', {
-    failWithError: true
-  }),
-  appendJwtAsCookie,
-  (req, res) => { res.redirect('/profile') },
-  (error, req, res, next) => { res.redirect('/login') }
-)
+sessionRouter.get('/githubcallback', getGithubCallback)
 
-sessionRouter.get('/logout', (req, res) => {
-  req.logout(error => {
-    if (error) {
-      console.log(error)
-    }
-    res.redirect('/api/login')
-  })
-})
+sessionRouter.get('/logout', logoutUser)

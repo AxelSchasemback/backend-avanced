@@ -2,10 +2,6 @@ import { Router } from "express"
 
 export const viewsRouter = Router()
 
-viewsRouter.get('/', (req, res) => {
-    res.render('index', { titulo: 'PG - Inicio', script: 'main' })
-})
-
 viewsRouter.get('/api/reset', (req, res) => {
     res.render('reset', {
         titulo: 'Reset Password'

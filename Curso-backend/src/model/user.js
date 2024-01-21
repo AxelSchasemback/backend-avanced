@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
-import { CartManagerMongo } from "../CartManagerMongo.js";
+import { CartManagerMongo } from "../dao/CartManagerMongo.js";
 
 const cm = new CartManagerMongo();
 
