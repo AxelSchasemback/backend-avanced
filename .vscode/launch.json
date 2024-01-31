@@ -1,0 +1,16 @@
+{
+    "configurations": [
+        {
+            "type": "chrome",
+            "name": "current",
+            "request": "launch",
+            "url": "http://localhost:8080/api/current"
+        },
+        {
+            "type": "chrome",
+            "name": "login",
+            "request": "launch",
+            "url": "http://localhost:8080/api/login"
+        }
+    ]
+}

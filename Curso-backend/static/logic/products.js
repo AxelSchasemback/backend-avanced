@@ -31,3 +31,32 @@ function addToCart(cartId, productId, nombre) {
         })
         .catch(error => console.error('Error:', error));
 }
+
+fetch('http://localhost:8080/api/current', {
+    method: 'GET',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+})
+    .then(resp => resp.json())
+    .then(data => {
+        console.log(data)
+        Toastify({
+            text: `Bienvenido ${data.payload.name}`,
+            duration: 4000,
+            destination: `/api/account`,
+            newWindow: true,
+            close: true,
+            gravity: "bottom",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "linear-gradient(313deg, #ffc107, #e13b11, #00000080, #000000)",
+            },
+            onClick: function () { }
+        }).showToast();
+    })
+    .catch(error => console.error('Error: ', error))
+
+    
+

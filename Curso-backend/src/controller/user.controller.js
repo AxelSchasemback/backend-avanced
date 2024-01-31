@@ -20,12 +20,6 @@ export const passportReset = () => {
         }
 }
 
-export const currentUser = () => {
-    passport.authenticate('jwt', { failWithError: true }),
-        async (req, res) => {
-            res.json({ status: 'success', payload: req.user })
-        }
-}
 
 export const githubLogin = () => {
     passport.authenticate('github', { scope: ['user: email'] })

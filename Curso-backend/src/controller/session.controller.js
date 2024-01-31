@@ -1,45 +1,45 @@
 import passport from "passport";
 import { appendJwtAsCookie, removeJwtFromCookies } from "../middlewares/passport.js";
 
-
-export const loginUser = () => {
+export function loginUser(req, res, next) {
     passport.authenticate('local-login', {
         failWithError: true
-    }),
-        appendJwtAsCookie,
-        async function (req, res) {
-            res.status(201).redirect('/api/products')
-        }
+    })(req, res, async function () {
+        await appendJwtAsCookie(req, res, next),
+            res.status(201).redirect('/api/products');
+    });
 }
 
-export const getCurrentUser = () => {
+
+export const currentUser = (req, res) => {
     passport.authenticate('jwt', {
         failWithError: true
-    }),
-        function (req, res) { return res.json(req.user) }
-}
+    })(req, res, function () {
+        console.log('payload: ' + JSON.stringify(req.user));
+        res.json({ status: 'success', payload: req.user });
+    });
+};
 
-export const deleteCurrentUser = () => {
-    removeJwtFromCookies,
-        (req, res) => {
-            res.json({ status: 'success', message: 'logout OK' })
-        }
-}
-
-export const getGithubCallback = () => {
-    passport.authenticate('github-login', {
-        failWithError: true
-    }),
-        appendJwtAsCookie,
-        (req, res) => { res.redirect('/profile') },
-        (error, req, res, next) => { res.redirect('/login') }
-}
-
-export const logoutUser = () => {
-    req.logout(error => {
-        if (error) {
-            console.log(error)
-        }
-        res.redirect('/api/login')
+export function deleteCurrentUser(req, res, next) {
+    (req, res, async function () {
+        await removeJwtFromCookies(req, res, next),
+            res.json({ status: 'success', message: 'logout OK' });
     })
 }
+
+export function getGithubCallback(req, res, next) {
+    passport.authenticate('github-login', {
+        failWithError: true
+    })(req, res, next),
+        appendJwtAsCookie(req, res)
+    res.redirect('/profile');
+};
+
+export function logoutUser(req, res) {
+    req.logout(error => {
+        if (error) {
+            console.log(error);
+        }
+        res.redirect('/api/login');
+    });
+};

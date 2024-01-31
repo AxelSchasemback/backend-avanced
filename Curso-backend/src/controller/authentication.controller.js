@@ -22,17 +22,19 @@ export const verefication = async (accessToken, refreshToken, profile, done) => 
 
 export const userRegister = async (req, _u, _p, done) => {
     try {
-        const dataUser = await User.register(req.body)
-        done(null, dataUser)
+        const user = await User.register(req.body)
+        done(null, user)
     } catch (error) {
         done(null, false, console.error(error))
     }
 }
 
-export const userLogin = async (req, email, password, done) => {
+export const userLogin = async (email, password, done) => {
+    console.log('email:' + email + 'password:' + password)
     try {
-        const dataUser = await User.validate(email, password)
-        done(null, dataUser)
+        const user = await User.validate(email, password)
+        console.log(user)
+        done(null, user)
     } catch (error) {
         return done(null, false, console.error(error))
     }

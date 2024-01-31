@@ -4,12 +4,14 @@ import { ProductManagerMongo } from "../dao/ProductManagerMongo.js"
 const pm = new ProductManagerMongo()
 
 export const getProduct = async (req, res) => {
+
     try {
+
         const filter = req.query.category ? { category: req.query.category } : {}
 
         const user = req.user || null
 
-        const cartId = req.session ? user.cartId : null
+        const cartId = user.cartId || null
 
         const pagination = {
             limit: req.query.limit || 10,
@@ -34,9 +36,11 @@ export const getProduct = async (req, res) => {
             data = await Product.paginate(filter, pagination);
         }
 
+        console.log(req.user)
+
         const products = data.docs.map(prod => ({
             html: `<div class="fond-card1">
-                    <img class="img-p" src="../static/public/img/productos/${prod.thumbnail}" alt="${prod.thumstail}">
+            <img class="img-p" src="../static/public/img/productos/${prod.thumbnail}" alt="${prod.thumstail}">
                     <span class="stock" id="segunStock">${prod.stock}</span>
                     <span class="fav-start fa fa-star"></span>
                     <div class="col-md-subCard">
@@ -46,14 +50,14 @@ export const getProduct = async (req, res) => {
                     ? `<button class="btn-cart btn-outline-dark" onclick="addToCart('${user.cartId}', '${prod._id}', '${prod.title}')")>Add to Cart</button>`
                     : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
                 }
-                    </div>
+                </div>
                 </div>`
         }));
 
         const context = {
             session: user,
-            cartId: cartId,
             products: products,
+            cartId: cartId,
             docs: data.docs,
             titulo: 'PG - Productos',
             sortExist: req.query.sort,
@@ -70,9 +74,8 @@ export const getProduct = async (req, res) => {
         };
 
         res.render('producto', context)
-
     } catch (error) {
-        res.redirect('/api/login')
+        res.json(error)
     }
 }
 

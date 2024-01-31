@@ -5,11 +5,13 @@ const COOKIE_OPTS = { signed: true, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 
 
 export async function appendJwtAsCookie(req, res, next) {
     try {
-        const accessToken = await encrypt(req.user)
-        res.cookie('authorization', accessToken, COOKIE_OPTS)
+        const accessToken = await encrypt(req.user);
+        console.log(req.user)
+        res.cookie('authorization', accessToken, COOKIE_OPTS);
         next()
     } catch (error) {
-        next(error)
+        console.error(error);
+        next(error);
     }
 }
 
@@ -24,20 +26,26 @@ passport.use('jwt', new JwtStrategy({
         if (req?.signedCookies) {
             token = req.signedCookies['authorization']
         }
+        console.log(token)
         return token
     }]),
     secretOrKey: JWT_PRIVATE_KEY,
-}, function loginUser(user, done) {
-    console.log(user)
-    done(null, user)
-}))
+}, async function (jwtPayload, done) {
+    try {
+        // Desencriptar el token para obtener el usuario
+        const user = await decrypt(jwtPayload);
+        done(null, user);
+    } catch (error) {
+        done(error, false);
+    }
+}));
 
 // -----------------------------------------------------------------
 
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2"
 import { gitHubCallBackUrl, gitHubClientSecre, gitHubClientId, JWT_PRIVATE_KEY } from "../config.js";
-import { encrypt } from "../utils/cryptography.js";
+import { decrypt, encrypt } from "../utils/cryptography.js";
 import { userLogin, userRegister, userReset, verefication } from "../controller/authentication.controller.js";
 
 passport.use('github', new GitHubStrategy({

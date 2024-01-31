@@ -59,6 +59,7 @@ const schemaUser = new mongoose.Schema(
       },
 
       validate: async function (email, pass) {
+        
         const usuario = await this.findOne({ email });
 
         if (!usuario) {
@@ -67,11 +68,13 @@ const schemaUser = new mongoose.Schema(
 
         const contraseñaValida = await usuario.validarContraseña(pass);
 
+
         if (!contraseñaValida) {
           throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
         }
 
         const data = this.userData(usuario);
+
         return data;
       },
     },
