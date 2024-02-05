@@ -15,7 +15,6 @@ export const currentUser = (req, res) => {
     passport.authenticate('jwt', {
         failWithError: true
     })(req, res, function () {
-        console.log('payload: ' + JSON.stringify(req.user));
         res.json({ status: 'success', payload: req.user });
     });
 };

@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
         defer></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js" defer></script>
+    <script type="text/javascript" src="https://sdk.mercadopago.com/js/v2" defer></script>
     <link rel="stylesheet" type="text/css" href="/static/public/style.css">
     <link rel="shotcut icon" href="/static/public/img/iconLogo.png">
     <title>{{titulo}}</title>
@@ -28,7 +30,7 @@
             <nav class="w-100">
                 <div class="nav-style collapse" id="navbarToggleExternalContent">
                     <div class="div-nav">
-                        <a href="/api/realTimeProducts"><img class="imgLogo"
+                        <a href="/api/products"><img class="imgLogo"
                                 src="/static/public/img/logoMinimalista.png" alt="proyectGaming"></a>
                         <div class="container-Nav-section navbar-collapse-md" id="navbarToggleExternalContent">
                             <!-- ************ LIST BAR, 5 SECCIONES ************* -->
@@ -60,22 +62,25 @@
                             <input class="submit" type="submit" value="buscar">
                             <div class="btn-group">
                                 <button class="btn btn-secondary dropdown-toggle boton-user" type="button"
-                                    data-bs-toggle="dropdown" aria-expanded="false"><img class="user-session" src="/static/public/img/usuario.png">
+                                    data-bs-toggle="dropdown" aria-expanded="false"><img class="user-session"
+                                        src="/static/public/img/usuario.png">
                                 </button>
                                 <ul class="dropdown-menu drop-user">
-                                    {{#if session}}
-                                    <li class="li-user"><a class="dropdown-item text-white" href="/api/account">Perfil</a></li>
-                                    <li class="li-user"><a class="dropdown-item text-white" href="/api/logout">Logout</a></li>
+                                    {{#if session }}
+                                    <li class="li-user"><a class="dropdown-item text-white"
+                                            href="/api/account">Perfil</a></li>
+                                    <li class="li-user"><a class="dropdown-item text-white"
+                                            href="/api/logout">Logout</a></li>
                                     {{else}}
-                                    <li class="li-user"><a class="dropdown-item text-white" href="/api/login">LogIn</a></li>
+                                    <li class="li-user"><a class="dropdown-item text-white" href="/api/login">LogIn</a>
+                                    </li>
                                     {{/if}}
                                 </ul>
                             </div>
-                            {{!-- <a {{#if session}} href="/api/logout"><img class="logout" {{else}} href="/api/login"><img
-                                    class="login" {{/if}} src="/static/public/img/usuario.png"></a> --}}
-                            <a href="/api/carts/{{cartId}}"><img class="cart"
-                                    src="/static/public/img/carretilla.png"></a>
-                            <span class="cnt-cart" id="cnt"> 0 </span>
+                            {{!-- < a {{ #if session }} href="/api/logout"><img class="logout" {{ else}}
+                                    href="/api/login"><img class="login" {{/if}}
+                                    src="/static/public/img/usuario.png"></a> --}}
+                                <a href="/carrito"><img class="cart" src="/static/public/img/carretilla.png"></a>
                         </div>
                     </div>
                 </div>

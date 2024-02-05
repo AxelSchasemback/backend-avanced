@@ -1,4 +1,22 @@
-import { Carts } from '../model/cart.js';
+import mongoose from "mongoose";
+
+const schemaCart = new mongoose.Schema({
+    _id: { type: String, ref: 'users' },
+    products:
+        [{
+            product: { type: String, ref: "products" },
+            quantity: { type: Number }
+        }]
+}, {
+    versionKey: false,
+    strict: 'throw',
+    _id: false
+})
+
+export const Carts = mongoose.model("carts", schemaCart);
+
+// -----------------------------------------------------
+
 
 export class CartManagerMongo {
 
@@ -70,7 +88,16 @@ export class CartManagerMongo {
         const idCarrito = await Carts.findById(idC).lean()
         const prod = idCarrito.products.find(prod => prod.product === idP)
         console.log(prod)
-        return  prod
+        return prod
+    }
+
+    async restarCart(idC) {
+        const updatedCart = await Carts.findByIdAndUpdate(
+            idC,
+            { $set: { products: [] } },
+            { new: true }
+        ).lean();
+        return updatedCart
     }
 
     async delCart(id) {
@@ -107,7 +134,7 @@ export class CartManagerMongo {
     }
 
     async updateCart(id, update) {
-        const updateCart = await Carts.findByIdAndUpdate(id, { $set: { products: update  } }, { new: true }).lean()
+        const updateCart = await Carts.findByIdAndUpdate(id, { $set: { products: update } }, { new: true }).lean()
         if (!updateCart) {
             throw new Error('error al actualizar carrito')
         }

@@ -9,6 +9,7 @@ import { MONGODB_URL, PORT, COOKIE_SECRET } from './config.js';
 import { authenticate } from './middlewares/passport.js';
 
 await mongoose.connect(MONGODB_URL);
+
 console.log(`Base de datos conectada`);
 
 const app = express();
@@ -19,6 +20,7 @@ app.use(authenticate)
 app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
+
 app.use(cookieParser(COOKIE_SECRET))
 
 viewsRouter.use('/static', express.static('./static'));
@@ -29,9 +31,9 @@ app.set('views', './static/views');
 
 app.set('view engine', 'handlebars');
 
-app.use('/', viewsRouter);
-
 app.use('/api', apiRouter);
+
+app.use('/', viewsRouter);
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);

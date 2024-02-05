@@ -1,4 +1,4 @@
-import { CartManagerMongo } from "../dao/CartManagerMongo.js"
+import { CartManagerMongo } from "../dao/cart.dao.js"
 
 const cm = new CartManagerMongo()
 
@@ -27,36 +27,27 @@ export const getCart = async (req, res) => {
 
 export const cartInfo = async (req, res) => {
 
-    const user = req.user || null
-
     const data = await cm.getPopulate(req.params['Cid'])
 
-    let totalPrice = 0;
-    let precios = []
-
-    data.products.forEach((prod) => {
-        totalPrice += prod.product.price * prod.quantity;
-        precios.push({ precios: (prod.product.price * prod.quantity) })
-    });
-
-    console.log(user ? data.products : [])
-
-    res.render('carrito', {
-        session: user,
-        userExist: user,
-        titulo: 'PG - producto',
-        product: data.products,
-        precios: precios,
-        total: totalPrice
-    })
-
+    res.json(data.products)
 }
 
 export const updateCart = async (req, res) => {
     try {
-        const { product, quantity } = req.body
-        const updateCarrito = await cm.updateCart(req.params['Cid'], { product, quantity })
-        res.json({ Borraste: updateCarrito })
+        const products = req.body
+
+        const updateCarrito = await cm.updateCart(req.params['Cid'], products)
+
+        res.json(updateCarrito)
+    } catch (error) {
+        res.send(error.message)
+    }
+}
+
+export const resetCart = async (req, res) => {
+    try {
+        const restart = await cm.restarCart(req.params['Cid'])
+        res.json(restart)
     } catch (error) {
         res.send(error.message)
     }

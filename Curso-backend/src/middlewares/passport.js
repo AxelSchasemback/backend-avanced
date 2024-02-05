@@ -6,7 +6,6 @@ const COOKIE_OPTS = { signed: true, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 
 export async function appendJwtAsCookie(req, res, next) {
     try {
         const accessToken = await encrypt(req.user);
-        console.log(req.user)
         res.cookie('authorization', accessToken, COOKIE_OPTS);
         next()
     } catch (error) {
@@ -26,13 +25,11 @@ passport.use('jwt', new JwtStrategy({
         if (req?.signedCookies) {
             token = req.signedCookies['authorization']
         }
-        console.log(token)
         return token
     }]),
     secretOrKey: JWT_PRIVATE_KEY,
 }, async function (jwtPayload, done) {
     try {
-        // Desencriptar el token para obtener el usuario
         const user = await decrypt(jwtPayload);
         done(null, user);
     } catch (error) {

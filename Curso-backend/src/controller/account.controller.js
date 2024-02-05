@@ -1,4 +1,4 @@
-import { User } from "../model/user.js";
+import { User } from "../dao/user.dao.js";
 
 export const getDataUser = async (req, res) => {
     try {

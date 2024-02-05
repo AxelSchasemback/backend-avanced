@@ -11,6 +11,12 @@
             "name": "login",
             "request": "launch",
             "url": "http://localhost:8080/api/login"
+        },
+        {
+            "type": "node-terminal",
+            "name": "Terminal de depuración de JavaScript",
+            "request": "launch",
+            "cwd": "${workspaceFolder}"
         }
     ]
 }

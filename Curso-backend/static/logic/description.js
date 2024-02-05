@@ -14,10 +14,9 @@ function addDesc() {
     })
     .then(response => {
         if (!response.ok) {
-            throw new Error('Error al agregar al carrito');
+            throw new Error('Error al agregar descripcion');
         }
         
-        console.log('Producto agregado al carrito');
         return response.json();
     })
     .catch(error => console.error('Error:', error));

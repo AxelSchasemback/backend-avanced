@@ -2,6 +2,28 @@ import { Router } from "express"
 
 export const viewsRouter = Router()
 
+viewsRouter.get('/payment', (req, res) => {
+    res.render('purchase', {
+        titulo: 'PG - payment',
+        userExist: req.user,
+        session: req.user
+    })
+})
+
+viewsRouter.get('/carrito', (req, res) => {
+    res.render('carrito', {
+        titulo: 'PG - producto',
+        userExist: req.user,
+        session: req.user
+    })
+})
+
+viewsRouter.get('/api/products', (req, res) => {
+    res.render('producto', {
+        titulo: 'PG - productos'
+    })
+})
+
 viewsRouter.get('/api/reset', (req, res) => {
     res.render('reset', {
         titulo: 'Reset Password'

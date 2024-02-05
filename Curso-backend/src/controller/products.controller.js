@@ -1,5 +1,4 @@
-import { Product } from "../model/product.js"
-import { ProductManagerMongo } from "../dao/ProductManagerMongo.js"
+import { ProductManagerMongo, Product } from "../dao/product.dao.js"
 
 const pm = new ProductManagerMongo()
 
@@ -10,8 +9,6 @@ export const getProduct = async (req, res) => {
         const filter = req.query.category ? { category: req.query.category } : {}
 
         const user = req.user || null
-
-        const cartId = user.cartId || null
 
         const pagination = {
             limit: req.query.limit || 10,
@@ -36,8 +33,6 @@ export const getProduct = async (req, res) => {
             data = await Product.paginate(filter, pagination);
         }
 
-        console.log(req.user)
-
         const products = data.docs.map(prod => ({
             html: `<div class="fond-card1">
             <img class="img-p" src="../static/public/img/productos/${prod.thumbnail}" alt="${prod.thumstail}">
@@ -47,7 +42,7 @@ export const getProduct = async (req, res) => {
                         <p class="name-prod">${prod.title}</p>
                         <span class="price-prod">$${prod.price}</span>
                         ${user
-                    ? `<button class="btn-cart btn-outline-dark" onclick="addToCart('${user.cartId}', '${prod._id}', '${prod.title}')")>Add to Cart</button>`
+                    ? `<button class="btn-cart btn-outline-dark" onclick="addToCart('${prod._id}', '${prod.title}')")>Add to Cart</button>`
                     : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
                 }
                 </div>
@@ -56,8 +51,8 @@ export const getProduct = async (req, res) => {
 
         const context = {
             session: user,
+            cartId: user.cartId,
             products: products,
-            cartId: cartId,
             docs: data.docs,
             titulo: 'PG - Productos',
             sortExist: req.query.sort,
