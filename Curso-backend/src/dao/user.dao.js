@@ -1,9 +1,7 @@
 import mongoose from "mongoose";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
-import { CartManagerMongo } from "../dao/cart.dao.js";
-
-const cm = new CartManagerMongo();
+import { cm } from "./index.dao.js";
 
 const schemaUser = new mongoose.Schema(
   {
@@ -16,6 +14,7 @@ const schemaUser = new mongoose.Schema(
     password: { type: String, required: true },
     rol: { type: String, default: 'user', required: true },
     cartId: { type: String, ref: 'carts' },
+    orders: { type: String, ref: 'Orders'}
   },
   {
     versionKey: false,
@@ -90,3 +89,43 @@ schemaUser.pre('save', async function (next) {
 });
 
 export const User = mongoose.model('users', schemaUser);
+
+// ----------------------------------------
+
+export class UserDao {
+  async getUser() {
+    return await Product.find().lean()
+  };
+  
+  async getUserById(id) {
+    const searchUser = await User.findById(id).lean()
+    if (!searchUser) {
+        throw new new Error('error al buscar: usuario no encontrado')
+    }
+    return searchUser
+  };
+  
+  async getUserByEmail(email) {
+    const searchName = await User.find({ email: email }).lean()
+    if (!searchName) {
+        throw new new Error('error al buscar: email de usuario no encontrado')
+    }
+    return searchName
+  }
+  
+  async updateUser(id, update) {
+    const updateUser = await User.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
+    if (!updateUser) {
+        throw new new Error('error al actualizar: usuario no encontrado')
+    }
+    return updateUser
+  }
+  
+  async delUser(id) {
+    const deleteUser = await User.findByIdAndDelete(id).lean()
+    if (!deleteUser) {
+        throw new new Error('error al borrar: usuario no encontrado')
+    }
+    return deleteUser
+  }
+}

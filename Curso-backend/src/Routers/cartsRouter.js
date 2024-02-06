@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { addToCart, cartInfo, deleteCart, getCart, updateCart, updateProductToCart, resetCart} from "../controller/carts.controller.js";
+import { createOrder } from "../controller/order.controller.js";
 import { usersOnly, adminsOnly } from "../middlewares/auth.js";
 
 export const CartsRouter = Router()
@@ -10,9 +11,11 @@ CartsRouter.get('/:Cid/products/:Pid', getCart, usersOnly)
 
 CartsRouter.get('/:Cid', cartInfo, usersOnly)
 
-CartsRouter.get('/:Cid/purchase', cartInfo)
+CartsRouter.get('/:Cid/purchase', cartInfo, usersOnly )
 
-CartsRouter.put('/:Cid/reset', resetCart)
+CartsRouter.post('/payment', createOrder, usersOnly)
+
+CartsRouter.post('/:Cid/reset', resetCart, usersOnly)
 
 CartsRouter.put('/:Cid', updateCart, usersOnly)
 

@@ -12,8 +12,6 @@ fetch(url, {
 
     .then(data => {
 
-        console.log(data)
-
         const validacion = data.filter((element) => element.product)
 
 
@@ -142,19 +140,13 @@ fetch(url, {
             const finalizarCompra = document.getElementById('comprar');
             finalizarCompra.addEventListener('click', () => {
 
-                const filterObject = products.find(prod => prod)
-
-                const { product, quantity } = filterObject
-
-                console.log(`Procesando producto con ID ${filterObject.product._id}`);
-
                 fetch(url, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                     },
 
-                    body: JSON.stringify({ product, quantity })
+                    body: JSON.stringify(products)
 
                 })
                     .then(response => response.json())
@@ -162,22 +154,15 @@ fetch(url, {
 
                         validacion.forEach(element => {
                             localStorage.removeItem(`cart-${element.product._id}`);
-                            console.log(`Producto con ID ${element.product._id} actualizado y eliminado del carrito local.`);
                         })
 
-                        console.log(data)
-
                         window.location.href = '/payment'
-
-                        return filterObject
                     })
                     .catch(error => {
                         console.error('error al procesar la compra', error)
                     })
             })
         }
-
-        console.log(products)
 
         mostrarTabla(products)
 
@@ -220,60 +205,4 @@ fetch(url, {
         }
 
     })
-
-    // async function compra() {
-    //     try {
-
-    //         const cartId = JSON.parse(localStorage.getItem('carrito'));
-    //         console.log(cartId);
-    //         const response = await fetch(`api/carts/${cartId}/purchase`, {
-    //             method: 'POST',
-    //             headers: {
-    //                 'Content-Type': 'application/json',
-    //             },
-    //         });
-
-    //         if (!response.ok) {
-    //             const data = await response.json();
-    //             if (data && data.error) {
-    //                 throw new Error(`Error en la solicitud: ${data.error}`);
-    //             } else {
-    //                 throw new Error(`Error en la solicitud: ${response.status} ${response.statusText}`);
-    //             }
-    //         }
-    //         const data = await response.json();
-
-    //         if (data) {
-
-    //             Swal.fire({
-    //                 title: 'Compra exitosa!',
-    //                 text: `ID del ticket: +${data.ticket.code}`,
-    //                 icon: 'success',
-    //                 confirmButtonText: 'Aceptar',
-    //             }).then((result) => {
-    //                 if (result.isConfirmed) {
-    //                     window.location.href = './productos'
-    //                 }
-    //             });
-    //             localStorage.removeItem('carrito');
-    //         } else {
-    //             const errorMessage = data.failedProducts ? 'Productos no disponibles: ' + data.failedProducts.join(', ') : 'Error desconocido en la compra';
-    //             alert('Error en la compra. ' + errorMessage);
-    //         }
-    //     } catch (error) {
-    //         console.error('Error en la compra:', error.message);
-    //         alert('Error en la compra. Consulta la consola para más detalles.');
-    //     }
-    // }
-
-    // async function realizarCompra() {
-
-    //     try {
-    //         await compra();
-    //     } catch (error) {
-    //         console.error('Error general:', error);
-    //         alert('Error general en la compra. Consulta la consola para más detalles.');
-    //     }
-
-    // }
     .catch(error => console.error('Error: ', error))

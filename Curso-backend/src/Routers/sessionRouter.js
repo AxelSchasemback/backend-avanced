@@ -6,7 +6,7 @@ export const sessionRouter = Router()
 
 sessionRouter.post('/login', loginUser)
 
-sessionRouter.get('/current', currentUser, usersOnly, usersOnly)
+sessionRouter.get('/current', currentUser, usersOnly)
 
 sessionRouter.delete('/current', adminsOnly, deleteCurrentUser)
 

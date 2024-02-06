@@ -35,7 +35,7 @@ export class ProductManagerMongo {
     };
 
     async getProductById(id) {
-        const searchProd = await Product.findbyId(id).lean()
+        const searchProd = await Product.findById(id).lean()
         if (!searchProd) {
             throw new new Error('error al buscar: producto no encontrado')
         }
@@ -43,7 +43,7 @@ export class ProductManagerMongo {
     };
 
     async getProductByCategory(category) {
-        const searchCat = await Product.findMany({ category: category }).lean()
+        const searchCat = await Product.find({ category: category }).lean()
         if (!searchCat) {
             throw new new Error('error al buscar: categoria no encontrada')
         }

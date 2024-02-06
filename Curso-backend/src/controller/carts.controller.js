@@ -1,6 +1,5 @@
-import { CartManagerMongo } from "../dao/cart.dao.js"
+import { cm } from "../dao/index.dao.js";
 
-const cm = new CartManagerMongo()
 
 export const addToCart = async (req, res) => {
     const { idCarrito, idProducto } = req.params;
