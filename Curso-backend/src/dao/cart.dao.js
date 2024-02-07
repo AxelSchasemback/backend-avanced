@@ -18,7 +18,7 @@ export const Carts = mongoose.model("carts", schemaCart);
 // -----------------------------------------------------
 
 
-export class CartManagerMongo {
+export class CartDao {
 
     async createCart(cartId) {
 

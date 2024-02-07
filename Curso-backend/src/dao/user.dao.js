@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
-import { cm } from "./index.dao.js";
+import { cartManager } from "./index.dao.js";
 
 const schemaUser = new mongoose.Schema(
   {
@@ -14,7 +14,7 @@ const schemaUser = new mongoose.Schema(
     password: { type: String, required: true },
     rol: { type: String, default: 'user', required: true },
     cartId: { type: String, ref: 'carts' },
-    orders: { type: String, ref: 'Orders'}
+    orders: [{ type: String, ref: 'Orders'}]
   },
   {
     versionKey: false,
@@ -26,7 +26,7 @@ const schemaUser = new mongoose.Schema(
     },
     statics: {
       cartId: async function () {
-        return await cm.createCart(randomUUID())
+        return await cartManager.createCart(randomUUID())
       },
 
       userData: function (data) {
@@ -36,7 +36,8 @@ const schemaUser = new mongoose.Schema(
           sex: data.sex,
           date: data.date,
           description: data.description,
-          cartId: data.cartId
+          cartId: data.cartId,
+          orders: data.orders
         };
         return dataUser;
       },
@@ -49,7 +50,8 @@ const schemaUser = new mongoose.Schema(
           sex: reqBody.sex,
           email: reqBody.email,
           password: reqBody.password,
-          cartId: await this.cartId()
+          cartId: await this.cartId(),
+          orders: []
         });
 
         await newUser.save();
@@ -106,11 +108,11 @@ export class UserDao {
   };
   
   async getUserByEmail(email) {
-    const searchName = await User.find({ email: email }).lean()
-    if (!searchName) {
+    const searchEmail = await User.findOne({ email: email }).lean()
+    if (!searchEmail) {
         throw new new Error('error al buscar: email de usuario no encontrado')
     }
-    return searchName
+    return searchEmail
   }
   
   async updateUser(id, update) {

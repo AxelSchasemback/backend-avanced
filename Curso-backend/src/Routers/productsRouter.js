@@ -4,7 +4,7 @@ import { usersOnly, adminsOnly } from "../middlewares/auth.js";
 
 export const productsRouter = Router()
 
-productsRouter.get('/', getProduct, usersOnly)
+productsRouter.get('/', getProduct)
 
 productsRouter.get('/:id', getById, usersOnly)
 

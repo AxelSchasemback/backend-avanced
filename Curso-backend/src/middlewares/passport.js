@@ -41,13 +41,13 @@ passport.use('jwt', new JwtStrategy({
 
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2"
-import { gitHubCallBackUrl, gitHubClientSecre, gitHubClientId, JWT_PRIVATE_KEY } from "../config.js";
+import { gitHubCallBackUrl, gitHubClientSecret, gitHubClientId, JWT_PRIVATE_KEY } from "../config/config.js";
 import { decrypt, encrypt } from "../utils/cryptography.js";
 import { userLogin, userRegister, userReset, verefication } from "../controller/authentication.controller.js";
 
 passport.use('github', new GitHubStrategy({
     clientID: gitHubClientId,
-    clientSecret: gitHubClientSecre,
+    clientSecret: gitHubClientSecret,
     callbackURL: gitHubCallBackUrl
 }, verefication))
 

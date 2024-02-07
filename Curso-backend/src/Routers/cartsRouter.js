@@ -17,7 +17,7 @@ CartsRouter.post('/payment', createOrder, usersOnly)
 
 CartsRouter.post('/:Cid/reset', resetCart, usersOnly)
 
-CartsRouter.put('/:Cid', updateCart, usersOnly)
+CartsRouter.put('/:Cid', updateCart, adminsOnly)
 
 CartsRouter.put('/:Cid/products/:Pid', updateProductToCart, adminsOnly)
 

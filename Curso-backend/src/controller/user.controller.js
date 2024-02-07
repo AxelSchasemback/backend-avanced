@@ -1,14 +1,13 @@
 import passport from "passport";
 import { appendJwtAsCookie } from "../middlewares/passport.js";
 
-export const passportRegister = () => {
+export const passportRegister = (req, res, next) => {
     passport.authenticate('local-register', {
         failWithError: true
-    }),
-        appendJwtAsCookie,
-        async function (req, res) {
-            res.status(201).redirect('/api/products')
-        }
+    })(req, res, async function () {
+        await appendJwtAsCookie(req, res, next),
+            res.status(201).redirect('/api/products');
+    });
 }
 
 export const passportReset = () => {
@@ -16,7 +15,7 @@ export const passportReset = () => {
         failWithError: true
     }),
         async function (req, res) {
-            res.status(201).redirect('/api/products')
+            res.status(201).redirect('/api/login')
         }
 }
 

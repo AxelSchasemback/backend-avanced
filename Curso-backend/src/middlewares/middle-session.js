@@ -1,6 +1,6 @@
 import session from 'express-session';
 import connectMongo from 'connect-mongo'
-import { SECRET_CODE, MONGODB_URL } from '../config.js';
+import { SECRET_CODE, MONGODB_URL } from '../config/config.js';
 import { Router } from 'express';
 
 export const middleSession = Router()

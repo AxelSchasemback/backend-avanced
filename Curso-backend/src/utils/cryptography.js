@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken"
-import { JWT_PRIVATE_KEY } from "../config.js"
+import { JWT_PRIVATE_KEY } from "../config/config.js"
 
 
 export function encrypt(user) {

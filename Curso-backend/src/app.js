@@ -5,7 +5,7 @@ import { engine } from 'express-handlebars';
 import mongoose from 'mongoose';
 import { serverSession } from './middlewares/middle-session.js';
 import cookieParser from 'cookie-parser'
-import { MONGODB_URL, PORT, COOKIE_SECRET } from './config.js';
+import { MONGODB_URL, PORT, COOKIE_SECRET } from './config/config.js';
 import { authenticate } from './middlewares/passport.js';
 
 await mongoose.connect(MONGODB_URL);

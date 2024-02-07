@@ -22,7 +22,7 @@ export const Product = mongoose.model("products", schemaProduct);
 
 // --------------------------------------------------------
 
-export class ProductManagerMongo {
+export class ProductDao {
 
     async creteProduct(dataProduct) {
         dataProduct._id = randomUUID()
