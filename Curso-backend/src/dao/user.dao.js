@@ -3,18 +3,24 @@ import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
 import { cartManager } from "./index.dao.js";
 
+const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Al menos 8 caracteres, una mayúscula y un número
+
 const schemaUser = new mongoose.Schema(
   {
     _id: { type: String, default: randomUUID(), required: true },
-    name: { type: String, required: true },
+    name: { type: String, required: true, minlength: 2 }, // Mínimo 2 caracteres para el nombre
     date: { type: String },
     sex: { type: String },
     description: { type: String, default: '' },
     email: { type: String, required: true },
-    password: { type: String, required: true },
+    password: {
+      type: String, required: true, validate: {
+        validator: value => passwordRegex.test(value), message: 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número'
+      }
+    },
     rol: { type: String, default: 'user', required: true },
     cartId: { type: String, ref: 'carts' },
-    orders: [{ type: String, ref: 'Orders'}]
+    orders: [{ type: String, ref: 'Orders' }]
   },
   {
     versionKey: false,
@@ -60,7 +66,7 @@ const schemaUser = new mongoose.Schema(
       },
 
       validate: async function (email, pass) {
-        
+
         const usuario = await this.findOne({ email });
 
         if (!usuario) {
@@ -68,7 +74,6 @@ const schemaUser = new mongoose.Schema(
         }
 
         const contraseñaValida = await usuario.validarContraseña(pass);
-
 
         if (!contraseñaValida) {
           throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
@@ -98,35 +103,35 @@ export class UserDao {
   async getUser() {
     return await Product.find().lean()
   };
-  
+
   async getUserById(id) {
     const searchUser = await User.findById(id).lean()
     if (!searchUser) {
-        throw new new Error('error al buscar: usuario no encontrado')
+      throw new new Error('error al buscar: usuario no encontrado')
     }
     return searchUser
   };
-  
+
   async getUserByEmail(email) {
     const searchEmail = await User.findOne({ email: email }).lean()
     if (!searchEmail) {
-        throw new new Error('error al buscar: email de usuario no encontrado')
+      throw new new Error('error al buscar: email de usuario no encontrado')
     }
     return searchEmail
   }
-  
+
   async updateUser(id, update) {
     const updateUser = await User.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
     if (!updateUser) {
-        throw new new Error('error al actualizar: usuario no encontrado')
+      throw new new Error('error al actualizar: usuario no encontrado')
     }
     return updateUser
   }
-  
+
   async delUser(id) {
     const deleteUser = await User.findByIdAndDelete(id).lean()
     if (!deleteUser) {
-        throw new new Error('error al borrar: usuario no encontrado')
+      throw new new Error('error al borrar: usuario no encontrado')
     }
     return deleteUser
   }

@@ -19,7 +19,6 @@ export const passportReset = () => {
         }
 }
 
-
 export const githubLogin = () => {
     passport.authenticate('github', { scope: ['user: email'] })
 }
