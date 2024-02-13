@@ -18,37 +18,41 @@ viewsRouter.get('/carrito', (req, res) => {
     })
 })
 
-viewsRouter.get('/api/products', (req, res) => {
+viewsRouter.get('/products', (req, res) => {
     res.render('producto', {
         titulo: 'PG - productos'
     })
 })
 
-viewsRouter.get('/api/reset', (req, res) => {
+viewsRouter.get('/reset', (req, res) => {
     res.render('reset', {
         titulo: 'Reset Password'
     })
 })
 
-viewsRouter.get('/api/login', (req, res) => {
+viewsRouter.get('/login', (req, res) => {
     res.render('login', { titulo: 'PG - login' })
 })
 
-viewsRouter.get('/api/combos', (req, res) => {
+viewsRouter.get('/combos', (req, res) => {
     res.render('combos', { titulo: 'PG - Combos' })
 })
 
-viewsRouter.get('/api/help', (req, res) => {
+viewsRouter.get('/help', (req, res) => {
     res.render('ayuda', { titulo: 'PG - Help' })
 })
 
-viewsRouter.get('/api/register', (req, res) => {
+viewsRouter.get('/register', (req, res) => {
     res.render('registro', {
         titulo: 'PG - Register',
         script: 'userSesion'
     })
 })
 
-viewsRouter.get('/api/offer', (req, res) => {
-    res.render('ofertas', { titulo: 'PG - Offer' })
+viewsRouter.get('/oferta', (req, res) => {
+    res.render('ofertas', {
+        titulo: 'PG - ofertas',
+        userExist: req.user || null,
+        session: req.user || null
+    })
 })

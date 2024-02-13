@@ -25,10 +25,13 @@ export const getCart = async (req, res) => {
 }
 
 export const cartInfo = async (req, res) => {
+    try {
+        const data = await cartManager.getPopulate(req.params['Cid'])
+        res.json(data.products)
+    } catch (error) {
+        res.send(error.message)
+    }
 
-    const data = await cartManager.getPopulate(req.params['Cid'])
-
-    res.json(data.products)
 }
 
 export const updateCart = async (req, res) => {

@@ -3,7 +3,7 @@ import { User } from "../dao/user.dao.js";
 export const getDataUser = async (req, res) => {
     try {
         const user = req.user || null
-
+        
         console.log(user)
 
         const usuario = await User.findOne({ email: user.email }).lean()

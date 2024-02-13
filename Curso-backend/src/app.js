@@ -7,6 +7,7 @@ import { serverSession } from './middlewares/middle-session.js';
 import cookieParser from 'cookie-parser'
 import { MONGODB_URL, PORT, COOKIE_SECRET } from './config/config.js';
 import { authenticate } from './middlewares/passport.js';
+import { addLogger } from './utils/logger.js';
 
 await mongoose.connect(MONGODB_URL);
 
@@ -14,6 +15,7 @@ console.log(`Base de datos conectada`);
 
 const app = express();
 
+app.use(addLogger)
 app.use(serverSession)
 app.use(authenticate)
 
