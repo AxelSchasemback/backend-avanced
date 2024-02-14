@@ -1,7 +1,6 @@
 function addToCart(productId, nombre) {
 
     const cartId = JSON.parse(localStorage.getItem('cart-id'))
-    console.log(cartId)
 
     Toastify({
         text: `Sumaste ${nombre} al carrito`,

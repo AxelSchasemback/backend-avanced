@@ -4,8 +4,8 @@ export const getProductJSON = async (req, res) => {
 
     try {
         const getProducts = await productManager.getProduct()
-        res.json(getProducts)
+        res.status(200).json(getProducts)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }

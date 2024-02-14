@@ -1,27 +1,52 @@
-import winston from 'winston'
-import fs from 'fs/promises'
+import winston from 'winston';
 
-class logger {
-    constructor(entorno, level) {
-        this.entorno = entorno
-        this.level = level
+const optionLevels = {
+    levels: {
+        fatal: 0,
+        error: 1,
+        warning: 2,
+        info: 3,
+        succes: 4,
+        debug: 5
+    },
+    colors: {
+        fatal: 'black',
+        error: 'red',
+        warning: 'yellow',
+        info: 'blue',
+        succes: 'green',
+        debug: 'white'
     }
+};
 
-    log(nivel, mensaje) {
-        if (nivel <= this.level) {
-            const lineRegister = `${new Date().toLocaleString()}: ${mensaje}` + "\n"
-            if (this.entorno === "dev") {
-                console.log(lineRegister)
-            } else {
-                fs.appendFile('event.log', lineRegister)
-            }
-        }
-    }
-}
+winston.addColors(optionLevels)
 
-const winstonLogger = winston.createLogger({
-
+export const logger = winston.createLogger({
+    levels: optionLevels.levels,
     transports: [
-        new winston.transports.Console({ level: "debug" })
+        new winston.transports.Console({
+            format: winston.format.combine(
+                winston.format.colorize(),
+                winston.format.simple(),
+                winston.format.printf((info) => {
+                    const { level, message, ...rest } = info;
+
+                    // Imprime objetos y arrays de manera legible utilizando prettyPrint
+                    const prettyPrintedRest = Object.keys(rest).length
+                        ? `\n${JSON.stringify(rest, null, 2)}`
+                        : '';
+
+                    return ` - [${level}]: ${message}${prettyPrintedRest}`;
+                }),
+            ),
+        }),
+        new winston.transports.File({
+            level: 'error',
+            filename: 'eventsError.log',
+            format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.json()
+            )
+        })
     ]
-})
+});

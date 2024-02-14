@@ -1,5 +1,6 @@
 import { userManager, orderManager } from '../dao/index.dao.js'
 import { emailServices } from './email.services.js'
+import { logger } from '../utils/logger.js'
 
 export class OrderService {
     async createOrderServices(email, ref, products) {
@@ -14,7 +15,7 @@ export class OrderService {
 
         const order = await orderManager.createOrder(email, ref, filterProduct, total)
 
-        console.log({ order })
+        logger.info(order)
 
         await emailServices.send(
             user.email,

@@ -8,10 +8,9 @@ export const createOrder = async (req, res) => {
 
         const order = await new OrderService().createOrderServices(email, ref, filterProducts)
 
-        res.json(order)
+        res.status(201).json(order)
         
     } catch (error) {
-        console.error('Error al crear orden de compra:', error);
-        res.status(500).json({ error: 'Error interno del servidor al crear orden de compra' });
+        res.status(500).json({ message: error.message });
     }
 }

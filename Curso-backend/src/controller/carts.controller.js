@@ -6,10 +6,9 @@ export const addToCart = async (req, res) => {
 
     try {
         const updatedCart = await cartManager.addCart(idCarrito, idProducto);
-        res.json(updatedCart);
+        res.status(201).json(updatedCart);
     } catch (error) {
-        console.error('Error al agregar el producto al carrito:', error);
-        res.status(500).json({ error: 'Error interno del servidor' });
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -18,18 +17,18 @@ export const getCart = async (req, res) => {
     try {
         const { Cid, Pid } = req.params
         const cartProduct = await cartManager.getCartProduct(Cid, Pid)
-        res.json(cartProduct)
+        res.status(200).json(cartProduct)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
 export const cartInfo = async (req, res) => {
     try {
         const data = await cartManager.getPopulate(req.params['Cid'])
-        res.json(data.products)
+        res.status(200).json(data.products)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 
 }
@@ -40,18 +39,18 @@ export const updateCart = async (req, res) => {
 
         const updateCarrito = await cartManager.updateCart(req.params['Cid'], products)
 
-        res.json(updateCarrito)
+        res.status(201).json(updateCarrito)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
 export const resetCart = async (req, res) => {
     try {
         const restart = await cartManager.restarCart(req.params['Cid'])
-        res.json(restart)
+        res.status(201).json(restart)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -59,17 +58,17 @@ export const updateProductToCart = async (req, res) => {
     try {
         const { quantity } = req.body
         const updateQuantity = await cartManager.updateQuantity(req.params['Cid'], req.params['Pid'], quantity)
-        res.json(updateQuantity)
+        res.status(201).json(updateQuantity)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
 export const deleteCart = async (req, res) => {
     try {
         const delCart = await cartManager.delCart(req.params['Cid'])
-        res.json(delCart)
+        res.status(201).json(delCart)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }

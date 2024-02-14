@@ -1,5 +1,6 @@
 import { productManager } from "../dao/index.dao.js"
 import { Product } from "../dao/product.dao.js"
+import { logger } from "../utils/logger.js"
 
 export const getProduct = async (req, res) => {
 
@@ -16,7 +17,7 @@ export const getProduct = async (req, res) => {
             lean: true
         }
 
-        console.log(user)
+        logger.info({ user })
 
         let data;
 
@@ -67,18 +68,18 @@ export const getProduct = async (req, res) => {
             prevPage: data.prevPage,
         };
 
-        res.render('producto', context)
+        res.status(200).render('producto', context)
     } catch (error) {
-        res.json({ error: 'no se pudo cargar los productos' })
+        res.status(500).json({ message: error.message });
     }
 }
 
 export const getById = async (req, res) => {
     try {
         const search = await productManager.getProductById(req.params['id'])
-        res.json({ Product: search })
+        res.status(200).json({ Product: search })
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -86,9 +87,9 @@ export const createProduct = async (req, res) => {
     try {
         const { title, category, description, price, thumbnail, code, stock } = req.body;
         const dataProducts = await productManager.creteProduct({ title, category, description, price, thumbnail, code, stock })
-        res.json(dataProducts)
+        res.status(201).json(dataProducts)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -97,9 +98,9 @@ export const updateProduct = async (req, res) => {
         const { id } = req.params
         const { title, category, description, price, thumbnail, code, stock } = req.body;
         const update = await productManager.updateProduct(id, { title, category, description, price, thumbnail, code, stock })
-        res.json(update)
+        res.status(201).json(update)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -107,8 +108,8 @@ export const deleteProduct = async (req, res) => {
     const { id } = req.params
     try {
         await productManager.delProduct(id)
-        res.json(`se borro el producto de id: ${id}`)
+        res.status(201).json(`se borro el producto de id: ${id}`)
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }

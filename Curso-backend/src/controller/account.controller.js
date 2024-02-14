@@ -1,14 +1,13 @@
 import { User } from "../dao/user.dao.js";
 
+
 export const getDataUser = async (req, res) => {
     try {
         const user = req.user || null
-        
-        console.log(user)
 
         const usuario = await User.findOne({ email: user.email }).lean()
 
-        res.render('miCuenta', {
+        res.status(201).render('miCuenta', {
             session: user,
             cartId: usuario.cartId,
             titulo: 'PG - Account',
@@ -19,7 +18,7 @@ export const getDataUser = async (req, res) => {
             description: usuario.description
         })
     } catch (error) {
-        res.send(error.message)
+        res.status(500).json({ message: error.message });
     }
 }
 
@@ -32,9 +31,8 @@ export const postDescription = async (req, res) => {
             { $set: { description: req.body.description } },
             { new: true, lean: true }
         );
-        res.redirect('/api/account')
+        res.status(201).redirect('/api/account')
     } catch (error) {
-        console.error(error)
-        res.redirect('/api/account')
+        res.status(500).redirect('/api/account')
     }
 }

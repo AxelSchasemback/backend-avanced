@@ -7,6 +7,7 @@ import { accountRouter } from './accounRouter.js'
 import { middleSession } from "../middlewares/middle-session.js";
 import { middleProducts } from "../middlewares/middle-products.js";
 import { offerRouter } from './offerRouter.js'
+import { logResponseStatus } from '../middlewares/handle-logger.js'
 
 export const apiRouter = Router()
 
@@ -16,5 +17,6 @@ apiRouter.use('/carts', CartsRouter)
 apiRouter.use('/offer', offerRouter)
 apiRouter.use('/', userRouter)
 apiRouter.use('/', sessionRouter)
+apiRouter.use('/', logResponseStatus)
 apiRouter.use('/', middleSession)
 apiRouter.use('/', middleProducts)
