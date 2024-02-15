@@ -7,7 +7,8 @@ const optionLevels = {
         warning: 2,
         info: 3,
         succes: 4,
-        debug: 5
+        http: 5,
+        debug: 6
     },
     colors: {
         fatal: 'black',
@@ -15,6 +16,7 @@ const optionLevels = {
         warning: 'yellow',
         info: 'blue',
         succes: 'green',
+        http: 'skyblue',
         debug: 'white'
     }
 };

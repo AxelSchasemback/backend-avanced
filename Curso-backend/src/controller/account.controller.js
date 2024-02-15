@@ -15,6 +15,7 @@ export const getDataUser = async (req, res) => {
             email: usuario.email,
             sex: usuario.sex,
             date: usuario.date,
+            orders: usuario.orders,
             description: usuario.description
         })
     } catch (error) {

@@ -1,5 +1,4 @@
 import { User } from '../dao/user.dao.js'
-import { logger } from '../utils/logger.js'
 
 export const verefication = async (accessToken, refreshToken, profile, done) => {
     const user = await User.findOne({ email: profile.username })
@@ -30,7 +29,6 @@ export const userRegister = async (req, _u, _p, done) => {
 }
 
 export const userLogin = async (email, password, done) => {
-    logger.info('email:' + email + 'password:' + password)
     try {
         const user = await User.validate(email, password)
         done(null, user)

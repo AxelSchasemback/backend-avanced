@@ -57,7 +57,6 @@ export const getProduct = async (req, res) => {
             titulo: 'PG - Productos',
             sortExist: req.query.sort,
             sort: req.query.sort,
-            hayProducts: data.docs.length > 0,
             pageTitle: 'paginado',
             limit: data.limit,
             page: data.page,

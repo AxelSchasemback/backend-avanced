@@ -1,4 +1,4 @@
-<main>
+<main id="mainContent">
   <div class="fondo">
     <section>
       <div class="container-sec">
@@ -23,7 +23,6 @@
             <h1 class="title-card">Productos</h1>
           </th>
         </tr>
-        {{#if hayProducts}}
         <tr class="gen-card">
           <!-- Table Data - datos de Tablas -->
           <td class="prdt-1 card-product">
@@ -31,10 +30,6 @@
             {{{this.html}}}
             {{/each}}
           </td>
-          {{else}}
-          <h5>No se encontraron Productos</h5>
-        </tr>
-        {{/if}}
       </div>
     </table>
     <div class="pagination">
@@ -46,5 +41,7 @@
     </div>
   </div>
 </main>
-<script src="/static/logic/userCurrent.js"></script>
+<script src="/static/logic/spinner.js"></script>
 <script src="/static/logic/products.js"></script>
+<script src="/static/logic/userCurrent.js"></script>
+<script src="/static/logic/addToCart.js"></script>

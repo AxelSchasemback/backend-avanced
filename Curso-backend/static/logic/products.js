@@ -1,27 +1,32 @@
-function addToCart(productId, nombre) {
+// Define una función asincrónica que realizará la llamada fetch y manejará el resultado
+async function fetchDataAndRender() {
+    try {
+        // Realiza la llamada fetch y espera la respuesta
+        const response = await fetch('/api/products', {
+            method: 'GET',
+            headers: {
+                'Accept': 'text/html',
+            },
+        });
 
-    const cartId = JSON.parse(localStorage.getItem('cart-id'))
+        // Verifica si la respuesta es exitosa
+        if (response.ok) {
+            // Extrae el HTML de la respuesta
+            const htmlData = await response.text();
 
-    Toastify({
-        text: `Sumaste ${nombre} al carrito`,
-        duration: 4000,
-        destination: `/api/carts/${cartId}`,
-        newWindow: true,
-        close: true,
-        gravity: "bottom",
-        position: "right",
-        stopOnFocus: true,
-        style: {
-            background: "linear-gradient(313deg, #ffc107, #e13b11, #00000080, #000000)",
-        },
-    }).showToast();
+            // Agrega el HTML al contenedor deseado en tu DOM
+            document.body.innerHTML = htmlData;
 
-    fetch(`/api/carts/${cartId}/products/${productId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
-        .then(response => response.json)
-        .catch(error => console.error('Error:', error));
+            // A partir de aquí, puedes continuar con el resto de la lógica que depende de este contenido
+        } else {
+            console.error('Error en la llamada fetch:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
+
+// Llama a la función asincrónica
+fetchDataAndRender();
+
+// Resto de tu código aquí (que no depende del resultado del fetch y se ejecutará de inmediato)

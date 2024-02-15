@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         })
             .then((response) => {
-                if (response) window.location.href = "/api/products"
+                if (response) window.location.href = "/products"
             })
     })
 

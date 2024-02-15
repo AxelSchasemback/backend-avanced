@@ -24,13 +24,21 @@ viewsRouter.get('/products', (req, res) => {
     })
 })
 
+viewsRouter.get('/api/account', (req, res) => {
+    res.render('miCuenta', {
+        titulo: 'PG - account',
+        userExist: req.user || null,
+        session: req.user || null
+    })
+})
+
 viewsRouter.get('/reset', (req, res) => {
     res.render('reset', {
         titulo: 'Reset Password'
     })
 })
 
-viewsRouter.get('/login', (req, res) => {
+viewsRouter.get('/api/login', (req, res) => {
     res.render('login', { titulo: 'PG - login' })
 })
 
@@ -42,7 +50,7 @@ viewsRouter.get('/help', (req, res) => {
     res.render('ayuda', { titulo: 'PG - Help' })
 })
 
-viewsRouter.get('/register', (req, res) => {
+viewsRouter.get('/api/register', (req, res) => {
     res.render('registro', {
         titulo: 'PG - Register',
         script: 'userSesion'

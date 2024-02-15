@@ -2,7 +2,7 @@ import { logger } from '../utils/logger.js';
 
 export const logResponseStatus = (req, res, next) => {
 
-  const statusCode = res.status;
+  const statusCode = res.statusCode;
 
   let statusMessage;
   if (statusCode >= 200 && statusCode < 300) {

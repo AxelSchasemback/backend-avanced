@@ -30,8 +30,8 @@
             <nav class="w-100">
                 <div class="nav-style collapse" id="navbarToggleExternalContent">
                     <div class="div-nav">
-                        <a href="/products"><img class="imgLogo"
-                                src="/static/public/img/logoMinimalista.png" alt="proyectGaming"></a>
+                        <a href="/products"><img class="imgLogo" src="/static/public/img/logoMinimalista.png"
+                                alt="proyectGaming"></a>
                         <div class="container-Nav-section navbar-collapse-md" id="navbarToggleExternalContent">
                             <!-- ************ LIST BAR, 5 SECCIONES ************* -->
                             <ul class="list-bar">
@@ -44,16 +44,16 @@
                                         Mi Cuenta
                                     </a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                        <li><a class="dropdown-item" href="/account">Facturas</a>
+                                        <li><a class="dropdown-item" href="/api/account">Facturas</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/account">Estado de
+                                        <li><a class="dropdown-item" href="/api/account">Estado de
                                                 Compra</a>
                                         </li>
-                                        <li><a class="dropdown-item" href="/account">Favoritos</a>
+                                        <li><a class="dropdown-item" href="/api/account">Favoritos</a>
                                         </li>
                                     </ul>
                                 </li>
-                                <li class="botn"><a href="/api/help">Ayuda</a></li>
+                                <li class="botn"><a href="/help">Ayuda</a></li>
                             </ul>
                         </div>
                         <div class="row-end">
@@ -68,11 +68,13 @@
                                 <ul class="dropdown-menu drop-user">
                                     {{#if session }}
                                     <li class="li-user"><a class="dropdown-item text-white"
-                                            href="/account">Perfil</a></li>
+                                            href="/api/account">Perfil</a>
+                                    </li>
                                     <li class="li-user"><a class="dropdown-item text-white"
-                                            href="/logout">Logout</a></li>
+                                            href="/api/logout">Logout</a>
+                                    </li>
                                     {{else}}
-                                    <li class="li-user"><a class="dropdown-item text-white" href="/login">LogIn</a>
+                                    <li class="li-user"><a class="dropdown-item text-white" href="/api/login">LogIn</a>
                                     </li>
                                     {{/if}}
                                 </ul>
