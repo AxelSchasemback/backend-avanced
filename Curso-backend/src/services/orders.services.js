@@ -14,7 +14,7 @@ export class OrderService {
 
             if (validate) {
 
-                const status = "FAILED"
+                const status = "SUCCESS"
 
                 const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
 
@@ -24,8 +24,8 @@ export class OrderService {
 
                 await emailServices.send(
                     user.email,
-                    'Algo Salio MAL',
-                    `Su compra fue Rechazada`
+                    'Gracias por Su Compra',
+                    `Su compra fue Realizada con exito \n Nro de Ticket: ${order.code}`
                 )
 
                 user.orders.push(order._id)
@@ -33,27 +33,28 @@ export class OrderService {
                 await userManager.updateUser(user._id, user)
 
                 return order
+            } else {
+
+                const status = "FAILED"
+    
+                const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
+    
+                const order = await orderManager.createOrder(email, ref, status, filterProduct, total)
+    
+                logger.info(order)
+    
+                await emailServices.send(
+                    user.email,
+                    'Algo Salio MAL',
+                    `Su compra fue Rechazada`
+                )
+    
+                user.orders.push(order._id)
+    
+                await userManager.updateUser(user._id, user)
+    
+                return order
             }
-
-            const status = "SUCCESS"
-
-            const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
-
-            const order = await orderManager.createOrder(email, ref, status, filterProduct, total)
-
-            logger.info(order)
-
-            await emailServices.send(
-                user.email,
-                'Gracias por Su Compra',
-                `Su compra fue Realizada con exito \n Nro de Ticket: ${order.code}`
-            )
-
-            user.orders.push(order._id)
-
-            await userManager.updateUser(user._id, user)
-
-            return order
 
         } catch (error) {
             throw new Error('Error al crear Order: ' + error)

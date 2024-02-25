@@ -8,7 +8,7 @@ fetch('/api/current', {
 
     .then(data => {
 
-        if (data) {
+        if (data.payload) {
             localStorage.setItem('id', JSON.stringify(data.payload.cartId))
             Toastify({
                 text: `Bienvenido ${data.payload.name}`,
@@ -24,7 +24,9 @@ fetch('/api/current', {
                 },
             }).showToast();
         }
-        else { console.log('Error 404: User not Found') }
+        else { 
+            localStorage.clear()
+        }
 
     })
     .catch(error => console.error('Error: ', error))

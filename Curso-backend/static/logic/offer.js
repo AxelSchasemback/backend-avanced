@@ -67,36 +67,12 @@ function actualizarTarjetas(productos) {
                 </td>
             `;
     });
-
     productos.forEach(producto => {
-
         const botonAddToCart = document.getElementById(`btn-add-${producto._id}`);
 
         if (botonAddToCart) {
             botonAddToCart.addEventListener('click', () => {
-                fetch(`/api/carts/${cartId}/products/${producto._id}`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    }
-                })
-                    .then(response => {
-                        response.json
-                        Toastify({
-                            text: `Sumaste ${producto.title} al carrito`,
-                            duration: 4000,
-                            destination: `/api/carts/${cartId}`,
-                            newWindow: true,
-                            close: true,
-                            gravity: "bottom",
-                            position: "right",
-                            stopOnFocus: true,
-                            style: {
-                                background: "linear-gradient(313deg, #ffc107, #e13b11, #00000080, #000000)",
-                            },
-                        }).showToast();
-                    })
-                    .catch(error => console.error('Error:', error));
+                addToCart(producto._Id, producto.title, producto.stock)
             })
         }
     })

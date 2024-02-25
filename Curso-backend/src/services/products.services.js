@@ -15,7 +15,7 @@ export class productsServices {
 
             console.log({ lessForStock: lessForStock })
 
-            if (moreForStock == [] && lessForStock == []) {
+            if (moreForStock == [] && lessForStock == [] ) {
 
                 return true
             }
