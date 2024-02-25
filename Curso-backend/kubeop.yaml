@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: service
+metadata:
+  name: kubeop
+spec:
+  selector:
+    app: kubeop
+  ports:
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
+
+apiVersion: app/v1
+kinhd: Deployment
+metadata:
+  name: kubedeploy
+spec:
+  replicas: 5
+  selector:
+    mathLabels:
+      app: kubeop
+  template:
+    metadata:
+      labels:
+        app: kubeop
+    spec:
+      containers:
+        name: kubecontainer
+        image: axelschasemback/dockerop:1.0.0
+        ports:
+          containerPort: 8080
+        env:
+          name: MONGO_URL
+          value: mongodb+srv://schasembackaxel:6190@cluster0.lwrtq97.mongodb.net/ecommers
+        imagePullPolicy: Always
