@@ -23,7 +23,7 @@ function actualizarTarjetas(productos) {
     const generadorDeCard = document.getElementById('gen-card');
     const generadorCardStock = document.getElementById('gen-card2');
 
-    const cartId = JSON.parse(localStorage.getItem('cart-id')) || null
+    const cartId = JSON.parse(localStorage.getItem('id')) || null
     // Actualiza el contenido de generadorDeCard con las tarjetas de todos los productos
     generadorDeCard.innerHTML = '';
     productosCategory.forEach(producto => {

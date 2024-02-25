@@ -8,7 +8,7 @@ fetch('/api/current', {
     .then(resp => resp.json())
     .then(async user => {
 
-        const cartId = JSON.parse(localStorage.getItem('cart-id'));
+        const cartId = JSON.parse(localStorage.getItem('id'));
         const url = `/api/carts/${cartId}`;
 
         // Fetch a url + '/purchase'
@@ -63,9 +63,6 @@ fetch('/api/current', {
             const inputEmail = document.getElementById('email')
             Compra.addEventListener('click', async () => {
                 try {
-                    // Verificar si la compra fue exitosa (puedes agregar lógica adicional aquí)
-
-                    // Realizar la actualización de stock en la base de datos
                     await Promise.all(products.map(async (element) => {
                         const { product, quantity } = element;
                         const { _id, ...productDetails } = product;

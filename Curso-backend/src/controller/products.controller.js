@@ -17,7 +17,8 @@ export const getProduct = async (req, res) => {
             lean: true
         }
 
-        logger.info({ user })
+        logger.info(user)
+        console.log(user)
 
         let data;
 
@@ -42,8 +43,8 @@ export const getProduct = async (req, res) => {
                         <p class="name-prod">${prod.title}</p>
                         <span class="price-prod">$${prod.price}</span>
                         ${user
-                    ? `<button class="btn-cart btn-outline-dark" onclick="addToCart('${prod._id}', '${prod.title}')")>Add to Cart</button>`
-                    : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
+                    ? `<button class="btn-cart btn-outline-dark" onclick="addToCart('${prod._id}', '${prod.title}', ${prod.stock})")>Add to Cart</button>`
+                    : `<a href="/api/login" class="btn-cart btn-outline-dark">Iniciar sesión</a>`
                 }
                 </div>
                 </div>`

@@ -64,7 +64,7 @@ export class CartDao {
                 console.log('El carrito no fue encontrado.');
             }
         } catch (error) {
-            console.error('Error al añadir el producto al carrito:', error);
+            console.error('Error al añadir el producto al carrito:', error.message);
         }
     };
 

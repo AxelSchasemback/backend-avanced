@@ -1,6 +1,22 @@
-const cartId = JSON.parse(localStorage.getItem('cart-id'))
+const cartId = JSON.parse(localStorage.getItem('id'))
 
 const url = `/api/carts/${cartId}`
+
+async function putCart(products) {
+    await fetch(url, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify(products)
+
+    })
+        .then(response => response.json())
+        .catch(error => {
+            console.error('error al procesar la compra', error)
+        })
+}
 
 fetch(url, {
     method: 'GET',
@@ -14,10 +30,10 @@ fetch(url, {
 
         const validacion = data.filter((element) => element.product)
 
-
         validacion.forEach((product) => {
 
             const storedQuantity = JSON.parse(localStorage.getItem(`cart-${product.product._id}`));
+
 
             if (storedQuantity === 0) {
 
@@ -30,6 +46,26 @@ fetch(url, {
         });
 
         const products = validacion.filter((data) => data.quantity > 0)
+
+        function getCartItemsAsArray() {
+            const cartItemsArray = [];
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('cart-')) {
+                    const productId = key.substring('cart-'.length);
+                    const quantity = JSON.parse(localStorage.getItem(key));
+                    cartItemsArray.push({ product: productId, quantity });
+                }
+            }
+            return cartItemsArray;
+        }
+
+        // Uso
+        const cartItemsArray = getCartItemsAsArray();
+
+        const ItemValue = cartItemsArray.filter((item) => item.quantity > 0)
+
+        putCart(ItemValue)
 
         const totalProducto = () => {
 
@@ -140,27 +176,25 @@ fetch(url, {
             const finalizarCompra = document.getElementById('comprar');
             finalizarCompra.addEventListener('click', () => {
 
-                fetch(url, {
-                    method: 'PUT',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                if (carritoFiltrado.length) {
 
-                    body: JSON.stringify(products)
+                    putCart(carritoFiltrado)
 
-                })
-                    .then(response => response.json())
-                    .then(data => {
+                    function removeZeroQuantityItems() {
+                        for (let i = localStorage.length - 1; i >= 0; i--) {
+                            const key = localStorage.key(i);
+                            if (key.startsWith('cart-')) {
+                                JSON.parse(localStorage.getItem(key));
+                                localStorage.removeItem(key);
 
-                        validacion.forEach(element => {
-                            localStorage.removeItem(`cart-${element.product._id}`);
-                        })
+                            }
+                        }
+                    }
 
-                        window.location.href = '/payment'
-                    })
-                    .catch(error => {
-                        console.error('error al procesar la compra', error)
-                    })
+                    removeZeroQuantityItems();
+
+                    window.location.href = '/payment'
+                }
             })
         }
 

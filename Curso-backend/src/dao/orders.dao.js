@@ -7,6 +7,7 @@ const Order = new mongoose.Schema({
     purchase_datetime: { type: Date },
     email: { type: String, require: true },
     ref: { type: String, require: true },
+    status: { type: String, required: true, default: "PENDING"},
     products:
         [{
             product: { type: String, ref: "products" },
@@ -25,7 +26,7 @@ export const order = mongoose.model("Orders", Order);
 
 export class OrderDao {
 
-    async createOrder(user, ref, products, price) {
+    async createOrder(user, ref, status, products, price) {
         try {
             const orders = await order.create({
                 _id: randomUUID(),
@@ -33,6 +34,7 @@ export class OrderDao {
                 purchase_datetime: Date.now(),
                 email: user,
                 ref: ref,
+                status: status,
                 products: products,
                 price: price,
             });

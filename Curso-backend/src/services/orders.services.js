@@ -3,30 +3,61 @@ import { emailServices } from './email.services.js'
 import { logger } from '../utils/logger.js'
 
 export class OrderService {
-    async createOrderServices(email, ref, products) {
+    async createOrderServices(email, ref, products, validate) {
 
-        const user = await userManager.getUserByEmail(email)
+        try {
+            const user = await userManager.getUserByEmail(email)
 
-        if (!user) throw new Error('el usuario solicitado no existe')
+            if (!user) throw new Error('el usuario solicitado no existe')
 
-        const filterProduct = products.filter((product) => product)
+            const filterProduct = products.filter((product) => product)
 
-        const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
+            if (validate) {
 
-        const order = await orderManager.createOrder(email, ref, filterProduct, total)
+                const status = "FAILED"
 
-        logger.info(order)
+                const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
 
-        await emailServices.send(
-            user.email,
-            'Gracias por Su Compra',
-            `Su compra fue Realizada con exito \n Nro de Ticket: ${order.code}`
-        )
+                const order = await orderManager.createOrder(email, ref, status, filterProduct, total)
 
-        user.orders.push(order._id)
-        
-        await userManager.updateUser(user._id, user)
+                logger.info(order)
 
-        return order
+                await emailServices.send(
+                    user.email,
+                    'Algo Salio MAL',
+                    `Su compra fue Rechazada`
+                )
+
+                user.orders.push(order._id)
+
+                await userManager.updateUser(user._id, user)
+
+                return order
+            }
+
+            const status = "SUCCESS"
+
+            const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
+
+            const order = await orderManager.createOrder(email, ref, status, filterProduct, total)
+
+            logger.info(order)
+
+            await emailServices.send(
+                user.email,
+                'Gracias por Su Compra',
+                `Su compra fue Realizada con exito \n Nro de Ticket: ${order.code}`
+            )
+
+            user.orders.push(order._id)
+
+            await userManager.updateUser(user._id, user)
+
+            return order
+
+        } catch (error) {
+            throw new Error('Error al crear Order: ' + error)
+        }
+
     }
 }

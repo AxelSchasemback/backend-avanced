@@ -9,7 +9,7 @@ fetch('/api/current', {
     .then(data => {
 
         if (data) {
-            localStorage.setItem('cart-id', JSON.stringify(data.payload.cartId))
+            localStorage.setItem('id', JSON.stringify(data.payload.cartId))
             Toastify({
                 text: `Bienvenido ${data.payload.name}`,
                 duration: 4000,
