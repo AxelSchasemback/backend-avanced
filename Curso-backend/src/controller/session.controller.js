@@ -20,7 +20,7 @@ export const currentUser = (req, res) => {
 };
 
 export function deleteCurrentUser(req, res, next) {
-    (req, res, async function () {
+    (async function () {
         await removeJwtFromCookies(req, res, next),
             res.json({ status: 'success', message: 'logout OK' });
     })
@@ -37,7 +37,7 @@ export function getGithubCallback(req, res, next) {
 export function logoutUser(req, res) {
     req.logout(error => {
         if (error) {
-            console.log(error);
+            console.log('error en el logout: ' + error)
         }
         res.redirect('/api/login');
     });

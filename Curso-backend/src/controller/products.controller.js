@@ -18,7 +18,6 @@ export const getProduct = async (req, res) => {
         }
 
         logger.info(user)
-        console.log(user)
 
         let data;
 

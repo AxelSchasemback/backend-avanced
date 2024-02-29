@@ -9,8 +9,6 @@ export const createOrder = async (req, res) => {
 
         const validarStock = await new productsServices().stockProduct(filterProducts)
 
-        console.log(validarStock)
-
         const order = await new OrderService().createOrderServices(email, ref, filterProducts, validarStock)
 
         res.status(201).json(order)

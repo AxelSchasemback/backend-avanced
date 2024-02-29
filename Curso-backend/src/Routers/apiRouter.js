@@ -8,9 +8,11 @@ import { middleSession } from "../middlewares/middle-session.js";
 import { middleProducts } from "../middlewares/middle-products.js";
 import { offerRouter } from './offerRouter.js';
 import { comboRouter } from "./comboRouter.js";
+import { swaggerRouter } from "../config/swaggerConfig.js";
 
 export const apiRouter = Router()
 
+apiRouter.use('/', swaggerRouter)
 apiRouter.use('/account', accountRouter)
 apiRouter.use('/products', productsRouter)
 apiRouter.use('/carts', CartsRouter)

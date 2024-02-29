@@ -2,26 +2,24 @@ import winston from 'winston';
 
 const optionLevels = {
     levels: {
-        fatal: 0,
-        error: 1,
-        warning: 2,
-        info: 3,
-        succes: 4,
-        http: 5,
-        debug: 6
+        fatal: 1,
+        error: 2,
+        success: 3,
+        http: 4,
+        warning: 5,
+        info: 6
     },
     colors: {
         fatal: 'black',
         error: 'red',
+        success: 'green',
+        http: 'cyan',
         warning: 'yellow',
-        info: 'blue',
-        succes: 'green',
-        http: 'skyblue',
-        debug: 'white'
+        info: 'blue'
     }
 };
 
-winston.addColors(optionLevels)
+winston.addColors(optionLevels.colors);
 
 export const logger = winston.createLogger({
     levels: optionLevels.levels,
@@ -31,14 +29,9 @@ export const logger = winston.createLogger({
                 winston.format.colorize(),
                 winston.format.simple(),
                 winston.format.printf((info) => {
-                    const { level, message, ...rest } = info;
+                    const { level, message } = info;
 
-                    // Imprime objetos y arrays de manera legible utilizando prettyPrint
-                    const prettyPrintedRest = Object.keys(rest).length
-                        ? `\n${JSON.stringify(rest, null, 2)}`
-                        : '';
-
-                    return ` - [${level}]: ${message}${prettyPrintedRest}`;
+                    return ` - [${level}]: ${JSON.stringify(message, null, 2)}`;
                 }),
             ),
         }),

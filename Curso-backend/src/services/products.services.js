@@ -22,8 +22,6 @@ export class productsServices {
                 }
             })
 
-            console.log({failure})
-
            return failure.length ? false : true
 
         } catch (error) {

@@ -21,79 +21,97 @@ export const Carts = mongoose.model("carts", schemaCart);
 export class CartDao {
 
     async createCart(cartId) {
-
-        const existingCart = await Carts.findOne({ _id: cartId });
-
-        if (existingCart) {
-            return existingCart.toObject();
+        try {
+            const existingCart = await Carts.findOne({ _id: cartId });
+    
+            if (existingCart) {
+                return existingCart.toObject();
+            }
+    
+            const cart = await Carts.create({ _id: cartId, products: [] });
+    
+            return cart.toObject();
+            
+        } catch (error) {
+            throw new Error('error al crear el carrito: ' + error)
         }
 
-        const cart = await Carts.create({ _id: cartId, products: [] });
-
-        return cart.toObject();
     }
 
 
-    async addCart(idCarrito, idProducto) {
+    async addCart(cartId, productId) {
 
         try {
 
-            const cart = await Carts.findById(idCarrito);
+            const cart = await Carts.findById(cartId);
 
             if (cart) {
 
-                const existingProduct = cart.products.find(product => product.product === idProducto);
+                const existingProduct = cart.products.find(product => product.product === productId);
 
                 if (!existingProduct) {
 
                     await Carts.findByIdAndUpdate(
-                        idCarrito,
-                        { $push: { products: { product: idProducto, quantity: 1 } } },
+                        cartId,
+                        { $push: { products: { product: productId, quantity: 1 } } },
                         { new: true }
                     );
                 } else {
                     const updatedCart = await Carts.findOneAndUpdate(
-                        { _id: idCarrito, 'products.product': idProducto },
+                        { _id: cartId, 'products.product': productId },
                         { $inc: { 'products.$.quantity': 1 } },
                         { new: true }
                     );
 
                     return updatedCart;
                 }
-            } else {
-                console.log('El carrito no fue encontrado.');
             }
         } catch (error) {
-            console.error('Error al añadir el producto al carrito:', error.message);
+            console.error('Error al añadir el producto al carrito:', error);
         }
     };
 
     async getCarts() {
-        return await Carts.find().lean()
+        try {
+            return await Carts.find().lean()
+            
+        } catch (error) {
+            throw new Error('error al obtener todos los carritos: ' + error)
+        }
     };
 
-    async getPopulate(idc) {
-        return await Carts.findById(idc).populate('products.product').lean()
+    async getPopulate(productId) {
+        try {
+            return await Carts.findById(productId).populate('products.product').lean()
+            
+        } catch (error) {
+            throw new Error('error al hacer populate al id del carrito: ' + error)
+        }
     }
 
     async getCartById(id) {
-        const searchCart = await Carts.findbyId(id).lean()
-        if (!searchCart) {
-            throw new new Error('error al buscar: Carrito no encontrado')
+        try {
+            const searchCart = await Carts.findById(id).lean()
+            return searchCart
+        } catch (error) {
+            throw new Error('error al buscar: Carrito no encontrado ' + error)
         }
-        return searchCart
     }
 
-    async getCartProduct(idC, idP) {
-        const idCarrito = await Carts.findById(idC).lean()
-        const prod = idCarrito.products.find(prod => prod.product === idP)
-        console.log(prod)
-        return prod
+    async getCartProduct(cartId, productId) {
+        try {
+            const cart = await Carts.findById(cartId).lean()
+            const product = cart.products.find(prod => prod.product === productId)
+            return product
+            
+        } catch (error) {
+            throw new Error('Error al obtener los productos: ' + error)
+        }
     }
 
-    async restarCart(idC) {
+    async restarCart(cartId) {
         const updatedCart = await Carts.findByIdAndUpdate(
-            idC,
+            cartId,
             { $set: { products: [] } },
             { new: true }
         ).lean();
@@ -101,60 +119,71 @@ export class CartDao {
     }
 
     async delCart(id) {
+        try {
 
-        const deleteCart = await Carts.findByIdAndDelete(id).lean()
-        if (!deleteCart) {
-            throw new new Error('error al borrar: Carrito no encontrado')
+            const deleteCart = await Carts.findByIdAndDelete(id).lean()
+            return deleteCart
+
+        } catch (error) {
+            throw new Error('error al borrar: Carrito no encontrado ' + error)
         }
-        return deleteCart
     }
 
-    async delProdCart(idC, idP) {
+    async delProdCart(cartId, productId) {
+        try {
 
-        const idCart = await Carts.findById(idC).lean()
+            const cart = await Carts.findById(cartId).lean()
 
-        if (idCart) {
+            if (cart) {
 
-            const idProd = idCart.products.find(prod => prod._id === idP)
+                const productsinCart = cart.products.find(producto => producto._id === productId)
 
-            if (idProd) {
-                await Carts.findByIdAndUpdate(
-                    idC,
-                    { $pull: { products: { product: idP } } },
-                    { new: true }
-                ).lean();
-            } else {
-                throw new Error('error producto no encontrado')
+                if (productsinCart) {
+                    await Carts.findByIdAndUpdate(
+                        cartId,
+                        { $pull: { products: { product: productId } } },
+                        { new: true }
+                    ).lean();
+                } else {
+                    throw new Error('error producto no encontrado')
+                }
+
             }
-
-        } else {
-
-            throw new Error('error al encontrar el Carrito')
+        } catch (error) {
+            throw new Error('error al encontrar el Carrito: ' + error)
         }
+
     }
 
     async updateCart(id, update) {
-        const updateCart = await Carts.findByIdAndUpdate(id, { $set: { products: update } }, { new: true }).lean()
-        if (!updateCart) {
-            throw new Error('error al actualizar carrito')
+        try {
+
+            const updateCart = await Carts.findByIdAndUpdate(id, { $set: { products: update } }, { new: true }).lean()
+            return updateCart
+
+        } catch (error) {
+            throw new Error('error al actualizar carrito: ' + error)
+
         }
-        return updateCart
     }
 
-    async updateQuantity(idC, idP, quantity) {
-
-        const updateQuantity = await Carts.findByIdAndUpdate(idC, {
-            $set: {
-                products: {
-                    product: idP,
-                    quantity
+    async updateQuantity(cartId, productId, quantity) {
+        try {
+            const updateQuantity = await Carts.findByIdAndUpdate(cartId, {
+                $set: {
+                    products: {
+                        product: productId,
+                        quantity
+                    }
                 }
-            }
-        },
-            { new: true }
-        )
-        if (!updateQuantity) {
-            throw new Error('error al actualizar la cantidad del carrito')
+            },
+                { new: true }
+            )
+            return updateQuantity
+
+        } catch (error) {
+            throw new Error('error al actualizar la cantidad del carrito: ' + error)
+
         }
     }
 }
