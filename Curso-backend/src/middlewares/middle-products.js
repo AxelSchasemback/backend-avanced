@@ -7,7 +7,7 @@ middleProducts.use('/products', (req, res, next) => {
     const limit = parseInt(req.query.limit)
     if ( limit > 28 || limit <= 0) {
 
-        return next(new error(`limite de producto inaccesible`))
+        return next(new Error(`limite de producto inaccesible`))
     } else {
         next()
     }
@@ -17,7 +17,7 @@ middleProducts.use('/products/:id', (req, res, next) => {
 
     if (req.params['id']) {
 
-        return next(new error(`el ID: ${req.params['id']} del Producto no existe`))
+        return next(new Error(`el ID: ${req.params['id']} del Producto no existe`))
     } else {
         next()
     }

@@ -2,6 +2,17 @@ import { productManager } from "../dao/index.dao.js"
 import { Product } from "../dao/product.dao.js"
 import { logger } from "../utils/logger.js"
 
+export const getsProducts = async (req, res) => {
+    try {
+
+        res.status(200).json(await productManager.getProduct())
+
+    } catch (error) {
+
+        res.status(500).json({ message: error.message });
+    }
+}
+
 export const getProduct = async (req, res) => {
 
     try {
@@ -76,7 +87,7 @@ export const getProduct = async (req, res) => {
 export const getById = async (req, res) => {
     try {
         const search = await productManager.getProductById(req.params['id'])
-        res.status(200).json({ Product: search })
+        res.status(200).json(search)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

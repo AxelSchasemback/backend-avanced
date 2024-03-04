@@ -37,7 +37,7 @@ export class ProductDao {
     async getProductById(id) {
         const searchProd = await Product.findById(id).lean()
         if (!searchProd) {
-            throw new new Error('error al buscar: producto no encontrado')
+            throw new Error('error al buscar: producto no encontrado')
         }
         return searchProd
     };
@@ -45,7 +45,7 @@ export class ProductDao {
     async getProductByCategory(category) {
         const searchCat = await Product.find({ category: category }).lean()
         if (!searchCat) {
-            throw new new Error('error al buscar: categoria no encontrada')
+            throw new Error('error al buscar: categoria no encontrada')
         }
         return searchCat
     }
@@ -53,7 +53,7 @@ export class ProductDao {
     async updateProduct(id, update) {
         const updateProd = await Product.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
         if (!updateProd) {
-            throw new new Error('error al actualizar: producto no encontrado')
+            throw new Error('error al actualizar: producto no encontrado')
         }
         return updateProd
     }
@@ -61,7 +61,7 @@ export class ProductDao {
     async delProduct(id) {
         const deleteProd = await Product.findByIdAndDelete(id).lean()
         if (!deleteProd) {
-            throw new new Error('error al actualizar: producto no encontrado')
+            throw new Error('error al actualizar: producto no encontrado')
         }
         return deleteProd
     }

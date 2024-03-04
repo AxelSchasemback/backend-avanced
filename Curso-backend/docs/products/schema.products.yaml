@@ -1,0 +1,75 @@
+components:
+  schemas:
+    Products:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del producto
+        title:
+          type: string
+          description: titulo del producto
+        category:
+          type: string
+          description: categoria del producto
+        description:
+          type: string
+          description: descripcion del producto
+        price:
+          type: number
+          description: precio del producto
+        thumbnail:
+          type: string
+          description: ubicacion de la imagen del producto
+        code:
+          type: string
+          description: codigo del producto
+        stock:
+          type: number
+          description: stock total del producto
+      example:
+        id: 'fdd72084-79af-4e4d-a4cd-b94351a87482'
+        title: 'Mouse HyperX'
+        category: 'Mouse'
+        description: 'Mouse HyperX'
+        price: 4000
+        thumbnail: 'mouse-hyperx.png'
+        code: 'as67asd56gaf6ags5678asf'
+        stock: 10
+  requesBodies:
+    DataProduct:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del producto
+        title:
+          type: string
+          description: titulo del producto
+        category:
+          type: string
+          description: categoria del producto
+        description:
+          type: string
+          description: descripcion del producto
+        price:
+          type: number
+          description: precio del producto
+        thumbnail:
+          type: string
+          description: ubicacion de la imagen del producto
+        code:
+          type: string
+          description: codigo del producto
+        stock:
+          type: number
+          description: stock total del producto
+      example:
+        id: 'fdd72084-79af-4e4d-a4cd-b94351a87482'
+        title: 'Mouse HyperX'
+        category: 'Mouse'
+        description: 'Mouse HyperX'
+        price: 4000
+        thumbnail: 'mouse-hyperx.png'
+        code: 'as67asd56gaf6ags5678asf'
+        stock: 10

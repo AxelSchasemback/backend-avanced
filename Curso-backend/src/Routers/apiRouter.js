@@ -8,7 +8,7 @@ import { middleSession } from "../middlewares/middle-session.js";
 import { middleProducts } from "../middlewares/middle-products.js";
 import { offerRouter } from './offerRouter.js';
 import { comboRouter } from "./comboRouter.js";
-import { swaggerRouter } from "../config/swaggerConfig.js";
+import { swaggerRouter } from "./swaggerRouter.js";
 
 export const apiRouter = Router()
 

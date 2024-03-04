@@ -3,7 +3,7 @@ import { logger } from '../utils/logger.js';
 export const httpLoggerMiddleware = (req, res, next) => {
     req.logger = logger;
 
-    if (req.url.startsWith('/static')) {
+    if (req.url.startsWith('/static') || req.url.startsWith('/api/docs')) {
         return next();
     }
 

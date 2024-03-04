@@ -87,7 +87,7 @@ const schemaUser = new mongoose.Schema(
   }
 );
 
-schemaUser.pre('save', async function (next) {
+schemaUser.pre("save", async function (next) {
   if (!this.isModified('password')) {
     return next();
   }
@@ -101,13 +101,13 @@ export const User = mongoose.model('users', schemaUser);
 
 export class UserDao {
   async getUser() {
-    return await Product.find().lean()
+    return await User.find().lean()
   };
 
   async getUserById(id) {
     const searchUser = await User.findById(id).lean()
     if (!searchUser) {
-      throw new new Error('error al buscar: usuario no encontrado')
+      throw new Error('error al buscar: usuario no encontrado')
     }
     return searchUser
   };
@@ -115,7 +115,7 @@ export class UserDao {
   async getUserByEmail(email) {
     const searchEmail = await User.findOne({ email: email }).lean()
     if (!searchEmail) {
-      throw new new Error('error al buscar: email de usuario no encontrado')
+      throw new Error('error al buscar: email de usuario no encontrado')
     }
     return searchEmail
   }
@@ -123,7 +123,7 @@ export class UserDao {
   async updateUser(id, update) {
     const updateUser = await User.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
     if (!updateUser) {
-      throw new new Error('error al actualizar: usuario no encontrado')
+      throw new Error('error al actualizar: usuario no encontrado')
     }
     return updateUser
   }
@@ -131,7 +131,7 @@ export class UserDao {
   async delUser(id) {
     const deleteUser = await User.findByIdAndDelete(id).lean()
     if (!deleteUser) {
-      throw new new Error('error al borrar: usuario no encontrado')
+      throw new Error('error al borrar: usuario no encontrado')
     }
     return deleteUser
   }
