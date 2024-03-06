@@ -117,8 +117,9 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     const { id } = req.params
     try {
+        const product = await productManager.getProductById(id)
         await productManager.delProduct(id)
-        res.status(201).json(`se borro el producto de id: ${id}`)
+        res.status(201).json({ productoBorrado: product })
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

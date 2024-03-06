@@ -1,5 +1,12 @@
 import { cartManager } from "../dao/index.dao.js";
 
+export const getAllCarts = async (req, res) => {
+    try {
+        res.status(200).json(await cartManager.getCarts())
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
 
 export const addToCart = async (req, res) => {
     const { idCarrito, idProducto } = req.params;

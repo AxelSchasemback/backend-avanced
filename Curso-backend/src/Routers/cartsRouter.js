@@ -1,10 +1,12 @@
 import { Router } from "express";
-import { addToCart, cartInfo, deleteCart, getCart, updateCart, updateProductToCart, resetCart} from "../controller/carts.controller.js";
+import { getAllCarts, addToCart, cartInfo, deleteCart, getCart, updateCart, updateProductToCart, resetCart} from "../controller/carts.controller.js";
 import { createOrder } from "../controller/order.controller.js";
 import { usersOnly, adminsOnly } from "../middlewares/auth.js";
 import { gzipMiddleware } from "../middlewares/middle-gzip.js";
 
 export const CartsRouter = Router()
+
+CartsRouter.get('/', getAllCarts, adminsOnly)
 
 CartsRouter.post('/:idCarrito/products/:idProducto', addToCart, usersOnly);
 

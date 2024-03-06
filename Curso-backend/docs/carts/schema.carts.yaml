@@ -1,0 +1,75 @@
+components:
+  schemas:
+    Carts:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID del carrito
+        products:
+          type: array
+          description: Array de productos en el carrito
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto en el carrito
+              quantity:
+                type: number
+                description: Cantidad del producto en el carrito
+        example:
+          id: '61d00dff-2009-47b5-833d-932131cb862b'
+          products:
+            - product: '82c2e7a5-db4b-4ec0-b40e-6178e13d6af9'
+              quantity: 1
+            - product: '4c20826b-5f09-482b-aacc-6883a2f6105a'
+              quantity: 3
+            - product: 'fdd72084-79af-4e4d-a4cd-b94351a87482'
+              quantity: 1
+
+    CartPopulate:
+      type: object
+      properties:
+        product:
+          type: object
+          properties:
+            _id:
+              type: string
+              description: ID del producto
+            title:
+              type: string
+              description: Título del producto
+            category:
+              type: string
+              description: Categoría del producto
+            description:
+              type: string
+              description: Descripción del producto
+            price:
+              type: number
+              description: Precio del producto
+            thumbnail:
+              type: string
+              description: Ubicación de la imagen del producto
+            code:
+              type: string
+              description: Código del producto
+            stock:
+              type: number
+              description: Stock total del producto
+          description: Detalles del producto
+        quantity:
+          type: number
+          description: Cantidad del producto en el carrito
+      example:
+        product:
+          id: '82c2e7a5-db4b-4ec0-b40e-6178e13d6af9'
+          title: 'Mouse Logitech'
+          category: 'Mouse'
+          description: 'Mouse Logitech'
+          price: 7500
+          thumbnail: 'mouse-logitech.png'
+          code: 'kj51kjh5412ñkj4hñ1jl2'
+          stock: 20
+        quantity: 1

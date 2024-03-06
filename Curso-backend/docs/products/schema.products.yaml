@@ -36,6 +36,7 @@ components:
         thumbnail: 'mouse-hyperx.png'
         code: 'as67asd56gaf6ags5678asf'
         stock: 10
+
   requesBodies:
     DataProduct:
       type: object
@@ -65,7 +66,6 @@ components:
           type: number
           description: stock total del producto
       example:
-        id: 'fdd72084-79af-4e4d-a4cd-b94351a87482'
         title: 'Mouse HyperX'
         category: 'Mouse'
         description: 'Mouse HyperX'
