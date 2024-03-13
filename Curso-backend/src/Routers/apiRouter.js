@@ -9,16 +9,16 @@ import { middleProducts } from "../middlewares/middle-products.js";
 import { offerRouter } from './offerRouter.js';
 import { comboRouter } from "./comboRouter.js";
 import { swaggerRouter } from "./swaggerRouter.js";
+import { logResponseStatus } from "../middlewares/handle-logger.js";
+import { httpLoggerMiddleware } from "../middlewares/middle-logger.js";
 
 export const apiRouter = Router()
 
-apiRouter.use('/', swaggerRouter)
+apiRouter.use('/', logResponseStatus, httpLoggerMiddleware)
 apiRouter.use('/account', accountRouter)
 apiRouter.use('/products', productsRouter)
 apiRouter.use('/carts', CartsRouter)
 apiRouter.use('/offer', offerRouter)
 apiRouter.use('/combo', comboRouter)
-apiRouter.use('/', userRouter)
-apiRouter.use('/', sessionRouter)
-apiRouter.use('/', middleSession)
-apiRouter.use('/', middleProducts)
+apiRouter.use('/', userRouter, swaggerRouter, sessionRouter, middleSession, middleProducts)
+

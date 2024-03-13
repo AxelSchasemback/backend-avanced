@@ -18,17 +18,75 @@ components:
               quantity:
                 type: number
                 description: Cantidad del producto en el carrito
-        example:
-          id: '61d00dff-2009-47b5-833d-932131cb862b'
-          products:
-            - product: '82c2e7a5-db4b-4ec0-b40e-6178e13d6af9'
-              quantity: 1
-            - product: '4c20826b-5f09-482b-aacc-6883a2f6105a'
-              quantity: 3
-            - product: 'fdd72084-79af-4e4d-a4cd-b94351a87482'
-              quantity: 1
+      example:
+        id: '6840f315-574e-49df-b83c-9ca072c2e9a7'
+        products:
+          - product: '82c2e7a5-db4b-4ec0-b40e-6178e13d6af9'
+            quantity: 1
+          - product: '4c20826b-5f09-482b-aacc-6883a2f6105a'
+            quantity: 3
+          - product: 'fdd72084-79af-4e4d-a4cd-b94351a87482'
+            quantity: 1
+    
+    Orders:
+      type: object
+      properties:
+        _id:
+          type: string
+          description: ID del pedido
+        code:
+          type: string
+          description: Código del pedido
+        purchase_datetime:
+          type: object
+          properties:
+            $date:
+              type: string
+              format: date-time
+          description: Fecha y hora de la compra
+        email:
+          type: string
+          description: Email del usuario
+        ref:
+          type: string
+          description: Email de referencia
+        status:
+          type: string
+          description: Estado del pedido
+          enum:
+            - SUCCESS
+            - PENDING
+            - FAILED
+        products:
+          type: array
+          description: Lista de productos en el pedido
+          items:
+            type: object
+            properties:
+              product:
+                type: string
+                description: ID del producto
+              quantity:
+                type: integer
+                description: Cantidad del producto en el pedido
+        price:
+          type: number
+          description: Precio total del pedido
+      example:
+        _id: "656bd911-c6ac-4f91-b89a-16c7bab6c01e"
+        code: "3049570b2c45"
+        purchase_datetime:
+          $date: "2024-03-10T20:47:51.102Z"
+        email: "123123@hotmail.com"
+        ref: "deluxe_shot.gamer@hotmail.com"
+        status: "SUCCESS"
+        products:
+          - product: "fdd72084-79af-4e4d-a4cd-b94351a87482"
+            quantity: 5
+        price: 20000
 
-    CartPopulate:
+  cartPolulate:
+    dataCart:
       type: object
       properties:
         product:
@@ -73,3 +131,64 @@ components:
           code: 'kj51kjh5412ñkj4hñ1jl2'
           stock: 20
         quantity: 1
+
+  requesBodies:
+    userOrder:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Email del usuario
+        ref:
+          type: string
+          description: Email de la persona que le va a llegar la orden de compra
+        products:
+          type: array
+          description: Los productos de la orden
+          items:
+            type: object
+            properties:
+              product:
+                type: object
+                properties:
+                  _id:
+                    type: string
+                    description: ID del producto
+                  title:
+                    type: string
+                    description: Nombre del producto
+                  category:
+                    type: string
+                    description: Categoría del producto
+                  description:
+                    type: string
+                    description: Descripción del producto
+                  price:
+                    type: number
+                    description: Precio del producto
+                  thumbnail:
+                    type: string
+                    description: Imagen del producto
+                  code:
+                    type: string
+                    description: Código del producto
+                  stock:
+                    type: integer
+                    description: Stock disponible del producto
+              quantity:
+                type: integer
+                description: Cantidad del producto en la orden
+      example:
+        email: "123123@hotmail.com"
+        ref: "deluxe_shot.gamer@hotmail.com"
+        products:
+          - product:
+              _id: "fdd72084-79af-4e4d-a4cd-b94351a87482"
+              title: "Mouse HyperX"
+              category: "Mouse"
+              description: "Mouse HyperX"
+              price: 4000
+              thumbnail: "mouse-hyperx.png"
+              code: "as67asd56gaf6ags5678asf"
+              stock: 10
+            quantity: 5

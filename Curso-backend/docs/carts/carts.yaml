@@ -41,7 +41,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/CartPopulate'
+                  $ref: '#components/cartPopulate/dataCart'
         '404':
           description: Error carrito id no encontrado
         '500':
@@ -62,14 +62,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schema/CartPopulate'
+              $ref: '#components/schemas/Carts'
       responses:
         '201':
           description: Respuesta exitosa
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/CartPopulate'
+                $ref: '#components/schemas/Carts'
         '404':
           description: Error carrito id no encontrado
         '500':
@@ -91,7 +91,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/CartPopulate'
+                $ref: 'Carrito borrado con exito'
         '404':
           description: Error carrito id no encontrado
         '500':
@@ -99,7 +99,66 @@ paths:
   
   /api/carts/{uid}/products/{pid}:
     get:
-      summary: Obtener los datos de los productos del carrito.
+      summary: Obtener los datos populados de un carrito
+      tags:
+        - Carts
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del carrito a buscar
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto a buscar
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#components/cartPolulate/dataCart'
+        '404':
+          description: Error carrito id no encontrado
+        '500':
+          description: Error interno del servidor
+    post:
+      summary: Agrega un nuevo producto al carrito
+      tags:
+        - Carts
+      parameters:
+        - name: uid
+          in: path
+          required: true
+          description: ID del carrito a buscar
+          schema:
+            type: string
+        - name: pid
+          in: path
+          required: true
+          description: ID del producto para a agregar al carrito
+          schema:
+            type: string
+      responses:
+        '201':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Carts'
+        '404':
+          description: producto no encontrado
+        '500':
+          description: Error interno del servidor      
+  /api/carts/{uid}/purchase:
+    get:
+      summary: Obtener los datos de los productos del carrito que se esta por comprar.
       tags:
         - Carts
       parameters:
@@ -117,57 +176,63 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#components/schemas/CartPopulate'
+                  $ref: '#components/cartPolulate/dataCart'
         '404':
           description: Error carrito id no encontrado
         '500':
           description: Error interno del servidor
-    put:
-      summary: Actualiza el carrito a gusto
-      tags:
-        - Carts
-      parameters:
-      - name: uid
-        in: path
-        required: true
-        description: Id del carrito a actualizar
-        schema:
-          $type: String
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#components/schema/CartPopulate'
-      responses:
-        '201':
-          description: Respuesta exitosa
-          content:
-            application/json:
-              schema:
-                $ref: '#components/schemas/CartPopulate'
-        '404':
-          description: Error carrito id no encontrado
-        '500':
-          description: Error interno del servidor
-    delete:
-      summary: Borra todo el carrito
+  /api/carts/{uid}/reset:
+    post:
+      summary: Setea el carrito y lo deja vacio despues de la compra
       tags:
         - Carts
       parameters:
         - name: uid
           in: path
           required: true
-          description: ID del carrito a borrar
+          description: ID del carrito a buscar
           schema:
             type: string
       responses:
-        '201':
+        '200':
           description: Respuesta exitosa
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/CartPopulate'
+                type: object
+                properties:
+                  _id:
+                    type: string
+                  products:
+                    type: array
+                    items: {}
+              examples:
+                resetCart:
+                  value:
+                    _id: "6f134513-982e-45f0-8cac-ba3de02c46fb"
+                    products: []
+        '404':
+          description: Error carrito id no encontrado
+        '500':
+          description: Error interno del servidor
+  /api/carts/payment:
+    post:
+      summary: Agrega un nuevo producto al carrito
+      tags:
+        - Carts
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/requesBodies/userOrder'
+      responses:
+        '200':
+          description: Respuesta exitosa
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Orders'
         '404':
           description: Error carrito id no encontrado
         '500':

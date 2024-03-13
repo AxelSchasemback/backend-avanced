@@ -20,18 +20,21 @@ export const Carts = mongoose.model("carts", schemaCart);
 
 export class CartDao {
 
+    /**
+     * @param {string} cartId
+     */
     async createCart(cartId) {
         try {
             const existingCart = await Carts.findOne({ _id: cartId });
-    
+
             if (existingCart) {
                 return existingCart.toObject();
             }
-    
+
             const cart = await Carts.create({ _id: cartId, products: [] });
-    
+
             return cart.toObject();
-            
+
         } catch (error) {
             throw new Error('error al crear el carrito: ' + error)
         }
@@ -39,56 +42,64 @@ export class CartDao {
     }
 
 
+    /**
+     * @param {String} cartId
+     * @param {String} productId
+     */
     async addCart(cartId, productId) {
 
         try {
 
             const cart = await Carts.findById(cartId);
 
-            if (cart) {
+            const existingProduct = cart.products.find(product => product.product === productId);
 
-                const existingProduct = cart.products.find(product => product.product === productId);
+            if (!existingProduct) {
 
-                if (!existingProduct) {
+                const addCart = await Carts.findByIdAndUpdate(
+                    cartId,
+                    { $push: { products: { product: productId, quantity: 1 } } },
+                    { new: true }
+                );
+                return addCart
+            } else {
+                const updatedCart = await Carts.findOneAndUpdate(
+                    { _id: cartId, 'products.product': productId },
+                    { $inc: { 'products.$.quantity': 1 } },
+                    { new: true }
+                );
+                return updatedCart;
 
-                    await Carts.findByIdAndUpdate(
-                        cartId,
-                        { $push: { products: { product: productId, quantity: 1 } } },
-                        { new: true }
-                    );
-                } else {
-                    const updatedCart = await Carts.findOneAndUpdate(
-                        { _id: cartId, 'products.product': productId },
-                        { $inc: { 'products.$.quantity': 1 } },
-                        { new: true }
-                    );
-
-                    return updatedCart;
-                }
             }
         } catch (error) {
-            console.error('Error al añadir el producto al carrito:', error);
+            throw new Error('Error al añadir el producto al carrito: ' + error);
         }
     };
 
     async getCarts() {
         try {
             return await Carts.find().lean()
-            
+
         } catch (error) {
             throw new Error('error al obtener todos los carritos: ' + error)
         }
     };
 
+    /**
+     * @param {String} productId
+     */
     async getPopulate(productId) {
         try {
             return await Carts.findById(productId).populate('products.product').lean()
-            
+
         } catch (error) {
             throw new Error('error al hacer populate al id del carrito: ' + error)
         }
     }
 
+    /**
+     * @param {String} id
+     */
     async getCartById(id) {
         try {
             const searchCart = await Carts.findById(id).lean()
@@ -98,17 +109,24 @@ export class CartDao {
         }
     }
 
-    async getCartProduct(cartId, productId) {
+    /**
+     * @param {String} cartId
+     */
+    async getCartProduct(cartId) {
         try {
             const cart = await Carts.findById(cartId).lean()
-            const product = cart.products.find(prod => prod.product === productId)
-            return product
-            
+            if (cart) {
+                const product = cart.products.map( product => product)
+                return product
+            }
         } catch (error) {
             throw new Error('Error al obtener los productos: ' + error)
         }
     }
 
+    /**
+     * @param {String} cartId
+     */
     async restarCart(cartId) {
         const updatedCart = await Carts.findByIdAndUpdate(
             cartId,
@@ -118,6 +136,9 @@ export class CartDao {
         return updatedCart
     }
 
+    /**
+     * @param {String} id
+     */
     async delCart(id) {
         try {
 
@@ -129,6 +150,10 @@ export class CartDao {
         }
     }
 
+    /**
+     * @param {String} cartId
+     * @param {String} productId
+     */
     async delProdCart(cartId, productId) {
         try {
 
@@ -136,6 +161,7 @@ export class CartDao {
 
             if (cart) {
 
+                // @ts-ignore
                 const productsinCart = cart.products.find(producto => producto._id === productId)
 
                 if (productsinCart) {
@@ -152,9 +178,12 @@ export class CartDao {
         } catch (error) {
             throw new Error('error al encontrar el Carrito: ' + error)
         }
-
     }
 
+    /**
+     * @param {String} id
+     * @param {any} update
+     */
     async updateCart(id, update) {
         try {
 
@@ -167,6 +196,11 @@ export class CartDao {
         }
     }
 
+    /**
+     * @param {String} cartId
+     * @param {String} productId
+     * @param {Number} quantity
+     */
     async updateQuantity(cartId, productId, quantity) {
         try {
             const updateQuantity = await Carts.findByIdAndUpdate(cartId, {

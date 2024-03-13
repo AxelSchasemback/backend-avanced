@@ -1,11 +1,12 @@
+// @ts-nocheck
 const cartId = JSON.parse(localStorage.getItem('id'));
 
-function addToCart(productId, productName, productStock) {
+async function addToCart(productId, productName, productStock) {
     try {
         const dataStorage = JSON.parse(localStorage.getItem(`cart-${productId}`))
         // Realiza la validación del stock
         if (productStock > 0 && dataStorage < productStock) {
-            fetch(`/api/carts/${cartId}/products/${productId}`, {
+            await fetch(`/api/carts/${cartId}/products/${productId}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -7,10 +7,7 @@ import { serverSession } from './middlewares/middle-session.js';
 import cookieParser from 'cookie-parser'
 import { MONGODB_URL, PORT, COOKIE_SECRET } from './config/config.js';
 import { authenticate } from './middlewares/passport.js';
-import { httpLoggerMiddleware } from './middlewares/middle-logger.js';
 import { logger } from './utils/logger.js';
-import { logResponseStatus } from './middlewares/handle-logger.js';
-
 
 await mongoose.connect(`${MONGODB_URL}`);
 
@@ -18,9 +15,8 @@ logger.info(`Base de datos conectada`);
 
 const app = express();
 
-app.use(logResponseStatus)
-app.use(httpLoggerMiddleware)
 app.use(serverSession)
+
 app.use(authenticate)
 
 app.use(express.json());
@@ -40,7 +36,6 @@ app.set('view engine', 'handlebars');
 app.use('/api', apiRouter);
 
 app.use('/', viewsRouter);
-
 
 app.listen(PORT, () => {
     logger.info(`Listening on port ${PORT}`);

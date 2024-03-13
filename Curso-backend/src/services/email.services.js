@@ -23,7 +23,6 @@ class EmailService {
         }
 
         await transport.sendMail(emailOptions)
-        logger.info(emailOptions)
     }
 
 }

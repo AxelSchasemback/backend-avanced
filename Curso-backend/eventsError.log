@@ -1,0 +1,13 @@
+{"level":"fatal","message":"POST /f8f97f3c-b5a3-4a7b-a58d-c363a6d6e5bb/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 201 (Unknown) - Unknown status code received","timestamp":"2024-03-10T19:58:34.697Z"}
+{"level":"error","message":"POST /f8f97f3c-b5a3-4a7b-a58d-c363a6d6e5bb/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 201 (Created) - Resource successfully created","timestamp":"2024-03-10T19:59:41.815Z"}
+{"level":"fatal","message":"POST /61d00dff-2009-47b5-833d-932131cb862b/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-10T20:02:42.084Z"}
+{"level":"fatal","message":"POST /61d00dff-2009-47b5-833d-932131cb862b/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-10T20:03:28.638Z"}
+{"level":"fatal","message":"POST /payment - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-10T20:45:02.418Z"}
+{"level":"fatal","message":"GET / - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-10T20:50:24.855Z"}
+{"level":"fatal","message":"GET /swagger-ui-init.js - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-10T20:50:25.450Z"}
+{"level":"fatal","message":"GET / - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-10T20:54:59.198Z"}
+{"level":"fatal","message":"GET / - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:37:29.636Z"}
+{"level":"fatal","message":"GET / - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:38:53.017Z"}
+{"level":"fatal","message":"GET /swagger-ui-init.js - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:38:54.504Z"}
+{"level":"fatal","message":"GET / - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:39:06.013Z"}
+{"level":"fatal","message":"GET /swagger-ui-init.js - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:39:07.411Z"}
