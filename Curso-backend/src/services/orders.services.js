@@ -1,7 +1,6 @@
 // En tu archivo principal
 import { userManager, orderManager } from '../dao/index.dao.js'
 import { emailServices } from './email.services.js'
-import { logger } from '../utils/logger.js'
 import { emailBody } from './email.js';
 
 export class OrderService {
@@ -17,7 +16,6 @@ export class OrderService {
                 const status = "SUCCESS"
                 const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
                 const order = await orderManager.createOrder(email, ref, status, filterProduct, total)
-                logger.info(order)
 
                 // Enviar correo con contenido HTML importado
                 await emailServices.send(
@@ -34,7 +32,6 @@ export class OrderService {
                 const status = "FAILED"
                 const total = filterProduct.reduce((total, product) => total + (product.quantity * product.product.price), 0)
                 const order = await orderManager.createOrder(email, ref, status, filterProduct, total)
-                logger.info(order)
 
                 // Enviar correo con contenido HTML importado
                 await emailServices.send(

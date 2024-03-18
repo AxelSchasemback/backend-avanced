@@ -8,6 +8,7 @@ import { middleSession } from "../middlewares/middle-session.js";
 import { middleProducts } from "../middlewares/middle-products.js";
 import { offerRouter } from './offerRouter.js';
 import { comboRouter } from "./comboRouter.js";
+import { ordeRouter } from "./orderRouter.js";
 import { swaggerRouter } from "./swaggerRouter.js";
 import { logResponseStatus } from "../middlewares/handle-logger.js";
 import { httpLoggerMiddleware } from "../middlewares/middle-logger.js";
@@ -20,5 +21,6 @@ apiRouter.use('/products', productsRouter)
 apiRouter.use('/carts', CartsRouter)
 apiRouter.use('/offer', offerRouter)
 apiRouter.use('/combo', comboRouter)
+apiRouter.use('/order', ordeRouter)
 apiRouter.use('/', userRouter, swaggerRouter, sessionRouter, middleSession, middleProducts)
 

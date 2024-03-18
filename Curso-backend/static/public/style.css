@@ -1551,7 +1551,7 @@ footer {
   overflow: hidden;
 }
 
-.sectioKey::before {
+/* .sectioKey::before {
   content: '';
   position: absolute;
   width: 60em;
@@ -1569,7 +1569,7 @@ footer {
   100% {
     transform: translateY(100%);
   }
-}
+} */
 
 .sectioKey span {
   position: relative;

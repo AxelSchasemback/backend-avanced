@@ -26,6 +26,13 @@ export const order = mongoose.model("Orders", Order);
 
 export class OrderDao {
 
+    /**
+     * @param {string} user
+     * @param {string} ref
+     * @param {string} status
+     * @param {Array} products
+     * @param {Number} price
+     */
     async createOrder(user, ref, status, products, price) {
         try {
             const orders = await order.create({
@@ -48,26 +55,36 @@ export class OrderDao {
         return await order.find().lean()
     };
 
+    /**
+     * @param {string} id
+     */
     async getOrderById(id) {
         const searchOrder = await order.findById(id).lean()
         if (!searchOrder) {
-            throw new new Error('error al buscar: orden no encontrada')
+            throw new Error('error al buscar: orden no encontrada')
         }
         return searchOrder
     };
 
+    /**
+     * @param {string} id
+     * @param {any} update
+     */
     async updateOrder(id, update) {
         const updateOrder = await order.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
         if (!updateOrder) {
-            throw new new Error('error al actualizar: orden no encontrada')
+            throw new Error('error al actualizar: orden no encontrada')
         }
         return updateOrder
     }
 
+    /**
+     * @param {string} id
+     */
     async delOrder(id) {
         const deleteOrder = await order.findByIdAndDelete(id).lean()
         if (!deleteOrder) {
-            throw new new Error('error al borrar: orden no encontrada')
+            throw new Error('error al borrar: orden no encontrada')
         }
         return deleteOrder
     }

@@ -33,7 +33,7 @@ viewsRouter.get('/api/account', (req, res) => {
     })
 })
 
-viewsRouter.get('/reset', (req, res) => {
+viewsRouter.get('/api/reset', (req, res) => {
     res.render('reset', {
         titulo: 'Reset Password'
     })

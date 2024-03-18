@@ -1,6 +1,5 @@
 import nodemailer from 'nodemailer'
 import { EMAIL_USER, EMAIL_PASSWORD } from '../config/config.js'
-import { logger } from '../utils/logger.js'
 
 const transport = nodemailer.createTransport({
     service: 'hotmail',

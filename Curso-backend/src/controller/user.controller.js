@@ -10,13 +10,12 @@ export const passportRegister = (req, res, next) => {
     });
 }
 
-export const passportReset = () => {
+export const passportReset = (req, res) => {
     passport.authenticate('local-reset', {
         failWithError: true
-    }),
-        async function (req, res) {
-            res.status(201).redirect('/api/login')
-        }
+    })(req, res, function () {
+        res.status(201).redirect('/api/login')
+    })
 }
 
 export const githubLogin = () => {

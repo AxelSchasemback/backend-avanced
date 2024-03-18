@@ -7,9 +7,40 @@ export class productsServices {
 
             const getProduct = await productManager.getProduct()
 
+            await products.forEach(productos => {
+
+                const bdProduct = getProduct.find(search => search._id === productos.product._id)
+
+                const newStockProduct = bdProduct.stock - productos.quantity
+
+                console.log({valorStock: newStockProduct})
+
+                const { title, category, description, price, thumbnail, code } = bdProduct
+
+                if (newStockProduct < 0) {
+                    const putStock = productManager.updateProduct(bdProduct._id, { title, category, description, price, thumbnail, code, stock: newStockProduct })
+
+                    console.log({ putProducts: putStock })
+
+                    return putStock
+                }
+
+            })
+        } catch (error) {
+            throw new Error("Error en calcular el stock de producto: " + error)
+        }
+    }
+
+    async stockvalidate(products) {
+        try {
+
+            console.log(products.filter(e => e.product))
+
+            const getProduct = await productManager.getProduct()
+
             let failure = []
 
-             products.forEach(productos => {
+            products.forEach(productos => {
 
                 const bdProduct = getProduct.find(search => search._id === productos.product._id)
 
@@ -22,10 +53,10 @@ export class productsServices {
                 }
             })
 
-           return failure.length ? false : true
+            return failure.length ? false : true
 
         } catch (error) {
-            throw new Error('Error: los stock de los productos no son correctos')
+            throw new Error('Error: los stock de los productos no son correctos: ' + error)
         }
     }
 

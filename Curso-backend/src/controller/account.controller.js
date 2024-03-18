@@ -44,7 +44,7 @@ export const getDataUser = async (req, res) => {
             description: usuario.description
         })
     } catch (error) {
-        res.status(500).redirect('/api/login');
+        res.status(401).redirect('/api/login');
     }
 }
 

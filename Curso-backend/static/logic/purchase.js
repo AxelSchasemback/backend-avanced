@@ -18,18 +18,18 @@ fetch('/api/current', {
                 'Content-Type': 'application/json',
             },
         })
-        .then(resp => resp.json())
-        .then(async data => {
+            .then(resp => resp.json())
+            .then(data => {
 
-            const products = data.filter(data => data);
+                const products = data.filter(data => data);
 
-            const total = products.reduce((total, product) => total + (product.quantity * product.product.price), 0);
+                const total = products.reduce((total, product) => total + (product.quantity * product.product.price), 0);
 
-            const card = document.getElementById('card');
+                const card = document.getElementById('card');
 
-            function genCard() {
-                for (const element of products) {
-                    card.innerHTML += `
+                function genCard() {
+                    for (const element of products) {
+                        card.innerHTML += `
                         <div class="border border-warning col h-25 p-0 w-100">
                             <div class="h-100 bg-black bg-opacity-50 w-100" style="
                                 background-color: #0a0a0a;
@@ -48,57 +48,45 @@ fetch('/api/current', {
                             </div>
                         </div>
                     `;
-                }
-                card.innerHTML += `
+                    }
+                    card.innerHTML += `
                     <div class="d-flex flex-lg-shrink-0 justify-content-evenly w-100">
                         <h2 class="bg-black bg-opacity-50 border border-warning px-3">Total</h2>
                         <h2 class="bg-black bg-opacity-50 border border-warning px-3">${total}</h2>
                     </div>
                 `;
-            }
+                }
 
-            genCard();
+                genCard();
 
-            const Compra = document.getElementById('botonCompra');
-            const inputEmail = document.getElementById('email')
-            Compra.addEventListener('click', async () => {
-                try {
-                    await Promise.all(products.map(async (element) => {
-                        const { product, quantity } = element;
-                        const { _id, ...productDetails } = product;
-                        const newStock = productDetails.stock - quantity;
+                const Compra = document.getElementById('botonCompra');
+                const inputEmail = document.getElementById('email')
+                Compra.addEventListener('click', () => {
+                    try {
 
-                        await fetch(`/api/products/${_id}`, {
-                            method: 'PUT',
+                        // Realizar la compra mediante POST
+                        fetch('/api/order', {
+                            method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
                             },
-                            body: JSON.stringify({ _id, ...productDetails, stock: newStock }),
+                            // @ts-ignore
+                            body: JSON.stringify({ email: user.payload.email, ref: inputEmail.value, products: products }),
+                        })
+
+                        // Resetear el carrito
+                        fetch(`${url}/reset`, {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
                         });
-                    }));
 
-                    // Realizar la compra mediante POST
-                    await fetch('/api/carts/payment', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ email: user.payload.email, ref:inputEmail.value, products: products }),
-                    });
-
-                    // Resetear el carrito
-                    await fetch(`${url}/reset`, {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                    });
-
-                    // Redirigir a la página de cuenta
-                    window.location.href = '/api/account';
-                } catch (error) {
-                    console.error('Error al realizar la compra:', error);
-                }
+                        // Redirigir a la página de cuenta
+                        window.location.href = '/api/account';
+                    } catch (error) {
+                        console.error('Error al realizar la compra:', error);
+                    }
+                });
             });
-        });
     });

@@ -11,3 +11,29 @@
 {"level":"fatal","message":"GET /swagger-ui-init.js - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:38:54.504Z"}
 {"level":"fatal","message":"GET / - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:39:06.013Z"}
 {"level":"fatal","message":"GET /swagger-ui-init.js - Status: 304 (Unknown) - Unknown status code received","timestamp":"2024-03-12T21:39:07.411Z"}
+{"level":"error","message":"GET /current - Status: 401 (Client Error) - Client error occurred while processing the request","timestamp":"2024-03-14T21:24:08.560Z"}
+{"level":"error","message":"GET /current - Status: 401 (Client Error) - Client error occurred while processing the request","timestamp":"2024-03-14T21:24:13.717Z"}
+{"level":"error","message":"GET /current - Status: 401 (Client Error) - Client error occurred while processing the request","timestamp":"2024-03-16T17:42:26.807Z"}
+{"level":"error","message":"GET /current - Status: 401 (Client Error) - Client error occurred while processing the request","timestamp":"2024-03-17T19:10:44.758Z"}
+{"level":"fatal","message":"POST /null/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:06.131Z"}
+{"level":"fatal","message":"POST /null/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:06.261Z"}
+{"level":"fatal","message":"POST /null/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:06.418Z"}
+{"level":"fatal","message":"POST /null/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:06.572Z"}
+{"level":"fatal","message":"POST /null/products/f6c8aee2-3bf2-40ff-a328-57c42f2506a9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:08.092Z"}
+{"level":"fatal","message":"POST /null/products/f6c8aee2-3bf2-40ff-a328-57c42f2506a9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:08.267Z"}
+{"level":"fatal","message":"POST /null/products/f6c8aee2-3bf2-40ff-a328-57c42f2506a9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:08.398Z"}
+{"level":"fatal","message":"POST /null/products/f6c8aee2-3bf2-40ff-a328-57c42f2506a9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:08.553Z"}
+{"level":"fatal","message":"POST /null/products/f6c8aee2-3bf2-40ff-a328-57c42f2506a9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:08.674Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:09.758Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:10.082Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:10.223Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:10.340Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:10.583Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:10.756Z"}
+{"level":"fatal","message":"POST /null/products/60dc94af-8694-457c-b9db-70d62299782c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:10.882Z"}
+{"level":"fatal","message":"POST /null/products/194bf8fd-6c6a-4e91-a1cb-50b5073f59cf - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:11.501Z"}
+{"level":"fatal","message":"POST /null/products/194bf8fd-6c6a-4e91-a1cb-50b5073f59cf - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:11.642Z"}
+{"level":"fatal","message":"POST /null/products/194bf8fd-6c6a-4e91-a1cb-50b5073f59cf - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T20:50:11.795Z"}
+{"level":"fatal","message":"GET /f6ecbd2a-4f21-454e-91dc-aebbdc19d685 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T21:11:31.568Z"}
+{"level":"fatal","message":"GET /f05f9526-0098-4838-a7d0-809c7a6f0d3e - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T21:12:32.100Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T22:01:31.880Z"}

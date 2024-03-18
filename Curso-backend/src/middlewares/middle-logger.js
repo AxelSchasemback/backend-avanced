@@ -7,6 +7,6 @@ export const httpLoggerMiddleware = (req, res, next) => {
         return next();
     }
 
-    req.logger.http(`${req.method} en ${req.url} - ${new Date().toLocaleTimeString()}`);
+    logger.http(`${req.method} en ${req.url} - ${new Date().toLocaleTimeString()}`);
     next();
 };

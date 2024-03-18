@@ -25,6 +25,9 @@ export const logResponseStatus = (req, res, next) => {
     } else if (statusCode === 304) {
       statusMessage = 'Not Modified';
       logger.http(`${req.method} ${req.url} - Status: ${statusCode} (${statusMessage}) - Resource not modified`);
+    } else if (statusCode === 401) {
+      statusMessage = 'Unauthorized';
+      logger.error(`${req.method} ${req.url} - Status: ${statusCode} (${statusMessage}) - Email or password is wrong`);
     } else if (statusCode === 404) {
       statusMessage = 'Not Found';
       logger.error(`${req.method} ${req.url} - Status: ${statusCode} (${statusMessage}) - The requested resource was not found`);

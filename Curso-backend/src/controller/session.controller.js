@@ -3,17 +3,19 @@ import { appendJwtAsCookie, removeJwtFromCookies } from "../middlewares/passport
 
 export function loginUser(req, res, next) {
     passport.authenticate('local-login', {
-        failWithError: true
+        failWithError: true,
+        failureRedirect: '/api/login'
     })(req, res, async function () {
-        await appendJwtAsCookie(req, res, next),
-            res.status(201).redirect('/api/products');
+            await appendJwtAsCookie(req, res, next)
+                res.status(201).redirect('/api/products');
+        
     });
 }
 
 
 export const currentUser = (req, res) => {
     passport.authenticate('jwt', {
-        failWithError: true
+        failWithError: true,
     })(req, res, function () {
         res.json({ status: 'success', payload: req.user });
     });

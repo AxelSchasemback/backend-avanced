@@ -13,12 +13,10 @@ CartsRouter.put('/:Cid', updateCart, adminsOnly)
 
 CartsRouter.delete('/:Cid', deleteCart, adminsOnly)
 
-CartsRouter.get('/:Cid/products/:Pid',   cartInfo, usersOnly)
+CartsRouter.get('/:Cid/products/:Pid',  cartInfo, usersOnly)
 
 CartsRouter.post('/:idCarrito/products/:idProducto', addToCart, usersOnly);
 
-CartsRouter.get('/:Cid/purchase',  cartInfo, usersOnly )
+CartsRouter.get('/:Cid/purchase', cartInfo, usersOnly )
 
 CartsRouter.post('/:Cid/reset', resetCart, usersOnly)
-
-CartsRouter.post('/payment', createOrder, usersOnly)
