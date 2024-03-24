@@ -1,4 +1,3 @@
-// @ts-nocheck
 import { userManager } from "../dao/index.dao.js";
 
 export const getUser = async (req, res) => {
@@ -16,7 +15,6 @@ export const getUser = async (req, res) => {
 export const getAllUser = async (req, res) => {
     try {
         const user = await userManager.getUser()
-        console.log(user)
         res.status(200).json(await userManager.getUser())
 
     } catch (error) {

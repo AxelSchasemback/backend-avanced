@@ -1,7 +1,8 @@
 // En tu archivo principal
 import { userManager, orderManager } from '../dao/index.dao.js'
-import { emailServices } from './email.services.js'
-import { emailBody } from './email.js';
+import { emailServices } from './email.service.js'
+import { emailBody as emailSuccess } from './configEmail/email.Succes.js';
+import { emailBody as emailFailed } from './configEmail/email.Failed.js';
 
 export class OrderService {
     async createOrderServices(email, ref, products, validate) {
@@ -21,7 +22,7 @@ export class OrderService {
                 await emailServices.send(
                     user.email,
                     'Gracias por Su Compra',
-                    emailBody
+                    emailSuccess
                 )
 
                 user.orders.push(order._id)
@@ -37,7 +38,7 @@ export class OrderService {
                 await emailServices.send(
                     user.email,
                     'Algo Salio MAL',
-                    emailBody
+                    emailFailed
                 )
 
                 user.orders.push(order._id)

@@ -37,3 +37,21 @@
 {"level":"fatal","message":"GET /f6ecbd2a-4f21-454e-91dc-aebbdc19d685 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T21:11:31.568Z"}
 {"level":"fatal","message":"GET /f05f9526-0098-4838-a7d0-809c7a6f0d3e - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T21:12:32.100Z"}
 {"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-17T22:01:31.880Z"}
+{"level":"fatal","message":"DELETE /f8f97f3c-b5a3-4a7b-a58d-c363a6d6e5bb/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-21T00:05:32.430Z"}
+{"level":"fatal","message":"DELETE /6840f315-574e-49df-b83c-9ca072c2e9a7/products/82c2e7a5-db4b-4ec0-b40e-6178e13d6af9 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-21T00:06:11.841Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-21T00:20:32.236Z"}
+{"level":"fatal","message":"GET /a4d45713-9694-4a37-a8e9-933f324c712c - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-21T00:39:33.161Z"}
+{"level":"fatal","message":"PUT /fdd72084-79af-4e4d-a4cd-b94351a87482 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T17:20:21.097Z"}
+{"level":"fatal","message":"DELETE /fdd72084-79af-4e4d-a4cd-b94351a87482 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T17:20:21.460Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-24T17:59:14.235Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T19:34:12.306Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T19:38:30.602Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T19:41:02.228Z"}
+{"level":"fatal","message":"POST /b5a3-4a7b-admin-c363a6d6e5bb/products/4c20826b-5f09-482b-aacc-6883a2f6105a - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T19:51:27.671Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T19:57:38.249Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T20:08:47.522Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T20:34:07.096Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T20:34:23.357Z"}
+{"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T20:35:07.807Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-24T21:04:37.263Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-24T21:05:40.381Z"}

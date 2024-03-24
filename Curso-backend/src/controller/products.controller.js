@@ -89,7 +89,7 @@ export const getById = async (req, res) => {
         const search = await productManager.getProductById(req.params['id'])
         res.status(200).json(search)
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(404).json({ message: error.message });
     }
 }
 

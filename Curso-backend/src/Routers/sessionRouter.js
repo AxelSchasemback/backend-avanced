@@ -1,14 +1,14 @@
 import { Router } from 'express'
 import { deleteCurrentUser, currentUser, getGithubCallback, loginUser, logoutUser } from '../controller/session.controller.js'
-import { usersOnly, adminsOnly } from '../middlewares/auth.js'
+import { usersOnly, adminsOnly } from '../middlewares/authorization.js'
 
 export const sessionRouter = Router()
 
 sessionRouter.post('/login', loginUser)
 
-sessionRouter.get('/current', currentUser, usersOnly)
+sessionRouter.get('/current', currentUser)
 
-sessionRouter.delete('/current', deleteCurrentUser, adminsOnly)
+sessionRouter.delete('/current', deleteCurrentUser, usersOnly)
 
 sessionRouter.get('/githubcallback', getGithubCallback, usersOnly)
 

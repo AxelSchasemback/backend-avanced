@@ -39,7 +39,7 @@ export function getGithubCallback(req, res, next) {
 export function logoutUser(req, res) {
     req.logout(error => {
         if (error) {
-            console.log('error en el logout: ' + error)
+            throw new Error('error en el logout: ' + error)
         }
         res.redirect('/api/login');
     });

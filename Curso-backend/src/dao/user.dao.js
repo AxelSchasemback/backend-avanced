@@ -2,7 +2,6 @@
 import mongoose from "mongoose";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
-import { cartManager } from "./index.dao.js";
 
 const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Al menos 8 caracteres, una mayúscula y un número
 
@@ -21,70 +20,13 @@ const schemaUser = new mongoose.Schema(
     },
     rol: { type: String, default: 'user', required: true },
     cartId: { type: String, ref: 'carts' },
-    orders: [{ type: String, ref: 'Orders' }]
+    orders: [{ type: String, ref: 'Orders' }],
+    documents: [{ name: String, reference: String }],
+    last_connection: { type: Date, default: null }
   },
   {
     versionKey: false,
     strict: 'throw',
-    methods: {
-      async validarContraseña(contraseña) {
-        return await bcrypt.compare(contraseña, this.password);
-      },
-    },
-    statics: {
-      cartId: async function () {
-        return await cartManager.createCart(randomUUID())
-      },
-
-      userData: function (data) {
-        const dataUser = {
-          name: data.name,
-          email: data.email,
-          sex: data.sex,
-          date: data.date,
-          description: data.description,
-          cartId: data.cartId,
-          orders: data.orders
-        };
-        return dataUser;
-      },
-
-      register: async function (reqBody) {
-        const newUser = new this({
-          _id: randomUUID(),
-          name: reqBody.name,
-          date: reqBody.date,
-          sex: reqBody.sex,
-          email: reqBody.email,
-          password: reqBody.password,
-          cartId: await this.cartId(),
-          orders: []
-        });
-
-        await newUser.save();
-        const data = this.userData(newUser);
-        return data;
-      },
-
-      validate: async function (email, pass) {
-
-        const usuario = await this.findOne({ email });
-
-        if (!usuario) {
-          throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
-        }
-
-        const contraseñaValida = await usuario.validarContraseña(pass);
-
-        if (!contraseñaValida) {
-          throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
-        }
-
-        const data = this.userData(usuario);
-
-        return data;
-      },
-    },
   }
 );
 
@@ -104,6 +46,10 @@ export class UserDao {
   async getUser() {
     return await User.find().lean()
   };
+
+  async getUserByData(data) {
+    return await User.findOne({ data }).lean()
+  }
 
   async getUserById(id) {
     const searchUser = await User.findById(id).lean()

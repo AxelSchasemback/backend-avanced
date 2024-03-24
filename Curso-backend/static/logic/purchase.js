@@ -60,7 +60,7 @@ fetch('/api/current', {
                 genCard();
 
                 const Compra = document.getElementById('botonCompra');
-                const inputEmail = document.getElementById('email')
+                const inputEmail = document.getElementById('email');
                 Compra.addEventListener('click', () => {
                     try {
 
@@ -70,8 +70,9 @@ fetch('/api/current', {
                             headers: {
                                 'Content-Type': 'application/json',
                             },
+                            
                             // @ts-ignore
-                            body: JSON.stringify({ email: user.payload.email, ref: inputEmail.value, products: products }),
+                            body: JSON.stringify({ email: user.payload.email, ref: inputEmail.value, products: products })
                         })
 
                         // Resetear el carrito

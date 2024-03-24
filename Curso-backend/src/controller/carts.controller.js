@@ -4,7 +4,7 @@ export const getAllCarts = async (req, res) => {
     try {
         res.status(200).json(await cartManager.getCarts());
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(404).json({ message: 'Error al obtener todos los carritos', error: error.message })
     }
 }
 
@@ -16,7 +16,7 @@ export const addToCart = async (req, res) => {
 
         res.status(201).json(addCart);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al agregar producto al carrito', error: error.message })
     }
 }
 
@@ -28,7 +28,7 @@ export const getCart = async (req, res) => {
 
         res.status(200).json(cartProduct);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(404).json({ message: 'Error al obtener el carrito', error: error.message })
     }
 }
 
@@ -41,7 +41,7 @@ export const cartInfo = async (req, res) => {
         }
 
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(404).json({ message: 'Error al obtener datos de los productos dentro del carrito', error: error.message })
     }
 }
 
@@ -53,7 +53,18 @@ export const updateCart = async (req, res) => {
 
         res.status(201).json(updateCarrito);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al Actualizar el carrito', error: error.message })
+    }
+}
+
+export const updatedQuantity = async (req, res) => {
+    try {
+        const { Cid, Pid } = req.params
+        const { quantity } = req.body
+        const updatedQuantity = await cartManager.updateQuantity(Cid, Pid, quantity)
+        res.status(201).json(updatedQuantity)
+    } catch (error) {
+        res.status(500).json({ message: 'Error al Actualizar la cantidad', error: error.message })
     }
 }
 
@@ -63,7 +74,17 @@ export const resetCart = async (req, res) => {
 
         res.status(201).json(restart);
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al resetear el carrito', error: error.message })
+    }
+}
+
+export const deleteProdCart = async (req, res) => {
+    try {
+        const { Cid, Pid } = req.params
+        const delProduct = await cartManager.delProdCart(Cid, Pid)
+        res.status(201).json({ productoBorrado: delProduct })
+    } catch (error) {
+        res.status(500).json({ message: 'Error al borrar el producto del carrito', error: error.message })
     }
 }
 
@@ -71,8 +92,8 @@ export const deleteCart = async (req, res) => {
     try {
         const delCart = await cartManager.delCart(req.params['Cid']);
 
-        res.status(201).json({ productoBorrado: delCart });
+        res.status(201).json({ carritoBorrado: delCart });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(500).json({ message: 'Error al borrar el carrito', error: error.message })
     }
 }

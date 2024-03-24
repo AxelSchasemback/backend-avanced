@@ -1,5 +1,17 @@
 import jwt from "jsonwebtoken"
 import { JWT_PRIVATE_KEY } from "../config/config.js"
+import { hashSync, compareSync, genSaltSync } from 'bcryptjs';
+
+export function hashPassword(frase) {
+    if (!frase) throw new Error('invalid data to hash')
+    return hashSync(frase, genSaltSync(10))
+}
+
+export function comparePassword(recibida, almacenada) {
+    if (!recibida) throw new Error('invalid data to decode')
+    if (!almacenada) throw new Error('invalid data to compare')
+    return compareSync(recibida, almacenada)
+}
 
 
 export function encrypt(user) {

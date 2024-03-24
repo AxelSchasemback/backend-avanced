@@ -52,7 +52,7 @@ export class CartDao {
 
             const cart = await Carts.findById(cartId);
 
-            const existingProduct = cart.products.find(product => product.product === productId);
+            const existingProduct = cart.products.find(products => products.product === productId);
 
             if (!existingProduct) {
 
@@ -116,7 +116,7 @@ export class CartDao {
         try {
             const cart = await Carts.findById(cartId).lean()
             if (cart) {
-                const product = cart.products.map( product => product)
+                const product = cart.products.map(product => product)
                 return product
             }
         } catch (error) {
@@ -159,22 +159,18 @@ export class CartDao {
 
             const cart = await Carts.findById(cartId).lean()
 
-            if (cart) {
+            const productsinCart = cart.products.find(producto => producto.product === productId)
 
-                // @ts-ignore
-                const productsinCart = cart.products.find(producto => producto._id === productId)
+            if (productsinCart) {
+                const delProdCart = await Carts.findByIdAndUpdate(
+                    cartId,
+                    { $pull: { products: { product: productId } } },
+                    { new: true }
+                ).lean();
 
-                if (productsinCart) {
-                    await Carts.findByIdAndUpdate(
-                        cartId,
-                        { $pull: { products: { product: productId } } },
-                        { new: true }
-                    ).lean();
-                } else {
-                    throw new Error('error producto no encontrado')
-                }
-
+                return delProdCart
             }
+
         } catch (error) {
             throw new Error('error al encontrar el Carrito: ' + error)
         }

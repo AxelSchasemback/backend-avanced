@@ -18,6 +18,7 @@ class EmailService {
             from: EMAIL_USER,
             to: destinatario,
             subject: asunto,
+            amp: mensaje,
             html: mensaje
         }
 

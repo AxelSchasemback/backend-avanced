@@ -13,14 +13,10 @@ export class productsServices {
 
                 const newStockProduct = bdProduct.stock - productos.quantity
 
-                console.log({valorStock: newStockProduct})
-
                 const { title, category, description, price, thumbnail, code } = bdProduct
 
                 if (newStockProduct < 0) {
                     const putStock = productManager.updateProduct(bdProduct._id, { title, category, description, price, thumbnail, code, stock: newStockProduct })
-
-                    console.log({ putProducts: putStock })
 
                     return putStock
                 }
@@ -33,8 +29,6 @@ export class productsServices {
 
     async stockvalidate(products) {
         try {
-
-            console.log(products.filter(e => e.product))
 
             const getProduct = await productManager.getProduct()
 

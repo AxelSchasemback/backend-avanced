@@ -1,6 +1,6 @@
-import { OrderService } from "../services/orders.services.js";
+import { OrderService } from "../services/orders.service.js";
 import { orderManager } from "../dao/index.dao.js";
-import { productsServices } from "../services/products.services.js";
+import { productsServices } from "../services/products.service.js";
 
 export const createOrder = async (req, res) => {
     try {
@@ -8,11 +8,7 @@ export const createOrder = async (req, res) => {
 
         const filterProducts = products.filter(e => e)
 
-        console.log(filterProducts)
-
         const validarStock = await new productsServices().stockvalidate(filterProducts)
-
-        console.log({ booleanStock: validarStock })
 
         if (validarStock) {
             await new productsServices().stockProduct(filterProducts)

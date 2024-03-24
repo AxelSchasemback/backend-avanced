@@ -13,7 +13,7 @@ await mongoose.connect(`${MONGODB_URL}`);
 
 logger.info(`Base de datos conectada`);
 
-const app = express();
+export const app = express();
 
 app.use(serverSession)
 
