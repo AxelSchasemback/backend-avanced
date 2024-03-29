@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 import { serverSession } from './middlewares/middle-session.js';
 import cookieParser from 'cookie-parser'
 import { MONGODB_URL, PORT, COOKIE_SECRET } from './config/config.js';
-import { authenticate } from './middlewares/passport.js';
+import { authenticate } from './middlewares/authentication.js';
 import { logger } from './utils/logger.js';
 
 await mongoose.connect(`${MONGODB_URL}`);

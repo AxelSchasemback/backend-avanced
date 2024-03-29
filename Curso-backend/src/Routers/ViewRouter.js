@@ -19,9 +19,9 @@ viewsRouter.get('/carrito', (req, res) => {
     })
 })
 
-viewsRouter.get('/api/products', (req, res) => {
+viewsRouter.get('/products', (req, res) => {
     res.render('producto', {
-        titulo: 'PG - productos'
+        titulo: 'PG - productos',
     })
 })
 
@@ -39,7 +39,7 @@ viewsRouter.get('/api/reset', (req, res) => {
     })
 })
 
-viewsRouter.get('/api/login', (req, res) => {
+viewsRouter.get('/login', (req, res) => {
     res.render('login', { titulo: 'PG - login' })
 })
 

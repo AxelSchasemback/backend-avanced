@@ -60,7 +60,7 @@ export class UserDao {
   };
 
   async getUserByEmail(email) {
-    const searchEmail = await User.findOne({ email: email }).lean()
+    const searchEmail = await User.findOne({email}).lean()
     if (!searchEmail) {
       throw new Error('error al buscar: email de usuario no encontrado')
     }

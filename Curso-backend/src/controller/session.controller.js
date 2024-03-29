@@ -1,30 +1,41 @@
 import passport from "passport";
 import { appendJwtAsCookie, removeJwtFromCookies } from "../middlewares/passport.js";
+import { UserDto } from "../dto/userDto.js";
 
 export function loginUser(req, res, next) {
     passport.authenticate('local-login', {
-        failWithError: true,
-        failureRedirect: '/api/login'
-    })(req, res, async function () {
+        failWithError: true
+    })(req, res, async function (error) {
+        try {
+            if (error) {
+                throw new Error('Failed: email or password is wrong');
+            }
             await appendJwtAsCookie(req, res, next)
-                res.status(201).redirect('/api/products');
-        
+            const payload = new UserDto(req.user)
+            res.json({ status: 'success', payload })
+        } catch (error) {
+            res.json({ status: 'failed', payload:'Failed: email or password is wrong' })
+        }
     });
 }
 
 
-export const currentUser = (req, res) => {
+export const currentUser = (req, res, next) => {
     passport.authenticate('jwt', {
         failWithError: true,
     })(req, res, function () {
-        res.json({ status: 'success', payload: req.user });
+        if (!req.user) {
+            return res.json({ status: 'failed', payload: 'unauthorized' });
+        }
+        const payload = new UserDto(req.user)
+        res.json({ status: 'success', payload });
     });
 };
 
 export function deleteCurrentUser(req, res, next) {
     (async function () {
         await removeJwtFromCookies(req, res, next),
-            res.json({ status: 'success', message: 'logout OK' });
+            res.json({ status: 'success', message: 'logout Ok' });
     })
 }
 
@@ -41,6 +52,7 @@ export function logoutUser(req, res) {
         if (error) {
             throw new Error('error en el logout: ' + error)
         }
-        res.redirect('/api/login');
+        res.json({ status: "success", payload: 'Logout Ok' })
+            .redirect('/login')
     });
 };

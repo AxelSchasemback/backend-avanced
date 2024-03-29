@@ -1,67 +1,37 @@
+import passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import { Strategy as GitHubStrategy } from "passport-github2"
+import { gitHubCallBackUrl, gitHubClientSecret, gitHubClientId } from "../config/config.js";
+import { userLogin, userRegister, userReset, verification } from "../controller/authentication.controller.js";
 
-import passport from 'passport'
-import { Strategy as LocalStrategy } from 'passport-local'
-import { ExtractJwt, Strategy as JwtStrategy } from 'passport-jwt'
-import { sessionsService } from '../services/user.service.js'
-import { encrypt } from '../utils/cryptography.js'
-import { JWT_PRIVATE_KEY } from '../config/config.js'
+passport.use('github', new GitHubStrategy({
+    clientID: gitHubClientId,
+    clientSecret: gitHubClientSecret,
+    callbackURL: gitHubCallBackUrl
+}, verification))
 
+passport.use('local-register', new LocalStrategy({
+    passReqToCallback: true,
+    usernameField: 'email'
+}, userRegister))
 
-const COOKIE_OPTS = { signed: true, maxAge: 1000 * 60 * 60, httpOnly: true }
+passport.use('local-login', new LocalStrategy({
+    usernameField: 'email'
+}, userLogin))
 
-passport.use('localRegister', new LocalStrategy(
-    { passReqToCallback: true },
-    async (req, _username, _password, done) => {
-        try {
-            const user = await sessionsService.register(req.body)
-            done(null, user)
-        } catch (error) {
-            done(error)
-        }
-    })
-)
-
-passport.use('localLogin', new LocalStrategy(
-    async (email, password, done) => {
-        try {
-            const user = await sessionsService.login({ email, password })
-            done(null, user)
-        } catch (error) {
-            done(error)
-        }
-    })
-)
-
-passport.use('jwtAuth', new JwtStrategy({
-    jwtFromRequest: ExtractJwt.fromExtractors([function (req) {
-        let token = null
-        if (req?.signedCookies) {
-            token = req.signedCookies['authorization']
-        }
-        return token
-    }]),
-    secretOrKey: JWT_PRIVATE_KEY
-}, (user, done) => {
-    done(null, user)
-}))
-
-export async function appendJwtAsCookie(req, res, next) {
-    try {
-        const jwt = await encrypt(req.user)
-        res.cookie('authorization', jwt, COOKIE_OPTS)
-        next()
-    } catch (error) {
-        next(error)
-    }
-}
-
-export async function removeJwtFromCookies(req, res, next) {
-    res.clearCookie('authorization', COOKIE_OPTS)
-    next()
-}
+passport.use('local-reset', new LocalStrategy({
+    passReqToCallback: true,
+    usernameField: 'email'
+}, userReset))
 
 passport.serializeUser((user, next) => { next(null, user) })
 passport.deserializeUser((user, next) => { next(null, user) })
 
-export const passportInitialize = passport.initialize()
-export const passportSession = passport.session()
+const passportInitialize = passport.initialize()
+const passportSession = passport.session()
+
+export function authenticate(req, res, next) {
+    passportInitialize(req, res, () => {
+        passportSession(req, res, next)
+    })
+}

@@ -10,13 +10,13 @@ export class SessionsService {
         this.dao = dao
     }
 
-    async login({ email, password }) {
+    async login(email, password) {
         if (!email || !password) {
             throw new Error('Error de autenticación: Faltan credenciales');
         }
 
         try {
-            const user = await this.dao.getUserByEmail({ email });
+            const user = await userManager.getUserByEmail(email);
 
             if (!user) {
                 throw new Error('Error de autenticación: Correo electrónico no encontrado');
@@ -28,11 +28,9 @@ export class SessionsService {
                 throw new Error('Error de autenticación: Contraseña incorrecta');
             }
 
-            return {
-                email
-            };
+            return user
         } catch (error) {
-            throw new Error('Error de autenticación');
+            throw new Error('Error de autenticación: ' + error.message);
         }
     }
 
@@ -61,21 +59,23 @@ export class SessionsService {
     }
 
     async validate(email, pass) {
-        const usuario = await userManager.getUserByEmail({ email });
+        try {
+            const usuario = await userManager.getUserByEmail(email);
 
-        if (!usuario) {
-            throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
+            if (!usuario) {
+                throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
+            }
+
+            const contraseñaValida = await comparePassword(pass, usuario.password);
+
+            if (!contraseñaValida) {
+                throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
+            }
+
+            return new UserDto(usuario);
+        } catch (error) {
+            throw new Error('Error de autenticación: ' + error.message);
         }
-
-        const contraseñaValida = await comparePassword(pass, usuario.password);
-
-        if (!contraseñaValida) {
-            throw new Error('Error 401: Correo electrónico o contraseña incorrecta');
-        }
-
-        const data = new UserDto(usuario);
-
-        return data;
     }
 
 }

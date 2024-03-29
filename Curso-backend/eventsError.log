@@ -55,3 +55,56 @@
 {"level":"fatal","message":"POST / - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-24T20:35:07.807Z"}
 {"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-24T21:04:37.263Z"}
 {"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-24T21:05:40.381Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-25T22:20:27.006Z"}
+{"kind":"string","level":"error","path":"email","reason":null,"stringValue":"\"{ email: 'schasemback_axel@hotmail.com' }\"","timestamp":"2024-03-25T22:20:35.258Z","value":{"email":"schasemback_axel@hotmail.com"},"valueType":"Object"}
+{"kind":"string","level":"error","path":"email","reason":null,"stringValue":"\"{ email: 'schasemback_axel@hotmail.com' }\"","timestamp":"2024-03-25T22:52:35.399Z","value":{"email":"schasemback_axel@hotmail.com"},"valueType":"Object"}
+{"level":"error","message":"Cast to string failed for value \"{ email: 'schasemback_axel@hotmail.com' }\" (type Object) at path \"email\" for model \"users\"","timestamp":"2024-03-25T22:55:56.983Z"}
+{"level":"error","message":"Cast to string failed for value \"{ email: 'deluxe_shot.gamer@hotmail.com' }\" (type Object) at path \"email\" for model \"users\"","timestamp":"2024-03-25T22:57:23.578Z"}
+{"level":"error","message":"Cast to string failed for value \"{ email: 'schasemback_axel@hotmail.com' }\" (type Object) at path \"email\" for model \"users\"","timestamp":"2024-03-25T23:01:05.100Z"}
+{"level":"error","message":"Cast to string failed for value \"{ email: 'schasemback_axel@hotmail.com' }\" (type Object) at path \"email\" for model \"users\"","timestamp":"2024-03-25T23:04:01.925Z"}
+{"level":"error","message":"Cast to string failed for value \"{ email: 'schasemback_axel@hotmail.com' }\" (type Object) at path \"email\" for model \"users\"","timestamp":"2024-03-25T23:10:35.001Z"}
+{"level":"error","message":"Error de autenticación","timestamp":"2024-03-25T23:21:18.976Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-25T23:27:24.492Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T00:04:10.215Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T21:57:47.172Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T21:57:51.115Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T21:58:08.322Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T21:58:27.619Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T21:59:27.559Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T22:12:44.687Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-26T22:14:45.467Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T22:26:55.351Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-26T22:28:23.703Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T22:28:43.930Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T22:35:59.402Z"}
+{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-26T22:40:09.682Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:08:34.791Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:00.331Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:15.464Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:28.696Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:39.977Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:40.278Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:40.396Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:40.572Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:10:41.428Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:17:17.210Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:18:30.301Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:21:34.749Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T22:58:55.495Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T23:07:05.597Z"}
+{"level":"error","message":"POST /login - Status: 404 (Not Found) - The requested resource was not found","timestamp":"2024-03-27T23:07:39.571Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T23:08:50.396Z"}
+{"level":"error","message":"POST /login - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-27T23:09:01.565Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T23:18:56.611Z"}
+{"level":"error","message":"POST /login - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-27T23:19:12.313Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T23:20:24.429Z"}
+{"level":"error","message":"POST /login - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-27T23:20:47.939Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-27T23:21:15.531Z"}
+{"level":"error","message":"POST /login - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-27T23:21:20.783Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-28T11:50:49.239Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-28T11:51:41.738Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-28T11:55:42.341Z"}
+{"level":"error","message":"POST /login - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-28T11:55:50.721Z"}
+{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-03-28T12:00:02.741Z"}
+{"level":"error","message":"POST /login - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-03-28T12:00:07.580Z"}
+{"level":"fatal","message":"GET /?limit=%2010%20&page=%202%20%20undefined%20&sort=%20undefined - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-03-28T13:33:26.439Z"}

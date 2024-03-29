@@ -14,7 +14,6 @@ export const getUser = async (req, res) => {
 
 export const getAllUser = async (req, res) => {
     try {
-        const user = await userManager.getUser()
         res.status(200).json(await userManager.getUser())
 
     } catch (error) {
@@ -22,7 +21,6 @@ export const getAllUser = async (req, res) => {
         res.status(404).json({ message: error.message });
     }
 }
-
 
 export const getDataUser = async (req, res) => {
     try {
@@ -42,7 +40,7 @@ export const getDataUser = async (req, res) => {
             description: usuario.description
         })
     } catch (error) {
-        res.status(401).redirect('/api/login');
+        res.status(401).redirect('/login');
     }
 }
 

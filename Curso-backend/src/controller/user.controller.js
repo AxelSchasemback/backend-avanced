@@ -1,12 +1,14 @@
 import passport from "passport";
 import { appendJwtAsCookie } from "../middlewares/passport.js";
+import { UserDto } from "../dto/userDto.js";
 
 export const passportRegister = (req, res, next) => {
     passport.authenticate('local-register', {
         failWithError: true
     })(req, res, async function () {
-        await appendJwtAsCookie(req, res, next),
-            res.status(201).redirect('/api/products');
+        await appendJwtAsCookie(req, res, next)
+        const payload = new UserDto(req.user)
+        res.status(201).json({ status: 'success', payload })
     });
 }
 
@@ -14,7 +16,8 @@ export const passportReset = (req, res) => {
     passport.authenticate('local-reset', {
         failWithError: true
     })(req, res, function () {
-        res.status(201).redirect('/api/login')
+        const payload = new UserDto(req.user)
+        res.status(201).json({ status: 'success', payload })
     })
 }
 
@@ -24,7 +27,7 @@ export const githubLogin = () => {
 
 export const githubCallback = () => {
     passport.authenticate('github', {
-        successRedirect: '/api/products',
-        failureRedirect: '/api/login'
+        successRedirect: '/products',
+        failureRedirect: '/login'
     })
 }

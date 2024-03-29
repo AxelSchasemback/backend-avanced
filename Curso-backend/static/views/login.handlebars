@@ -4,7 +4,7 @@
             <div class="signin">
                 <div class="content">
                     <h2>Sign In</h2>
-                    <form action="http://localhost:8080/api/login" class="form" method="post">
+                    <form id="loginForm" class="form">
                         <div class="inputBox">
                             <input type="email" name="email" id="email" required><i>Email</i>
                         </div>
@@ -14,7 +14,7 @@
                         <div class="links"> <a href="/api/reset">Forgot Password</a> <a href="/api/register">Signup</a>
                         </div>
                         <div class="inputBox">
-                            <input type="submit" class="logInput" value="Login">
+                            <button type="submit" class="logInput" id="loginButton">Login</button>
                             <a href="/api/githublogin"><img src="/static/public/img/github.svg"
                                     class="bi bi-github"></a>
                         </div>
@@ -24,3 +24,4 @@
         </section>
     </div>
 </main>
+<script src="/static/logic/login.js"></script>

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { adminsOnly, usersOnly } from "../middlewares/auth.js";
+import { adminsOnly, usersOnly } from "../middlewares/authorization.js";
 import { createOrder, getOrder, delOrder, putOrder, getOrderById } from "../controller/order.controller.js";
 
 export const ordeRouter = Router()

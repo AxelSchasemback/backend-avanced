@@ -35,7 +35,7 @@ function combosCards(productos) {
                     <span class="price-prod">$${producto.price}</span>
                     ${cartId
                 ? `<button class="btn-cart btn-outline-dark" id="btn-add-${producto._id}">Add to Cart</button>`
-                : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
+                : `<a href="/login" class="btn-cart btn-outline-dark">iniciar session</a>`
             }
                 </div>
         </div>
@@ -54,7 +54,7 @@ function combosCards(productos) {
                 <span class="price-prod">$${producto.price}</span>
                 ${cartId
                 ? `<button class="btn-cart btn-outline-dark" id="btn-add-${producto._id}">Add to Cart</button>`
-                : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
+                : `<a href="/login" class="btn-cart btn-outline-dark">iniciar session</a>`
             }
             </div>
     </div>

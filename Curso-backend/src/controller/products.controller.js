@@ -1,7 +1,7 @@
 import { productManager } from "../dao/index.dao.js"
 import { Product } from "../dao/product.dao.js"
-import { logger } from "../utils/logger.js"
 
+// @ts-ignore
 export const getsProducts = async (req, res) => {
     try {
 
@@ -19,66 +19,31 @@ export const getProduct = async (req, res) => {
 
         const filter = req.query.category ? { category: req.query.category } : {}
 
-        const user = req.user || ''
-
         const pagination = {
             limit: req.query.limit || 10,
             page: req.query.page || 1,
-            sort: req.query.sort,
+            sort: req.query.sort || null,
             lean: true
         }
-
-        logger.info(user)
 
         let data;
 
         if (req.query.sort === 'asc') {
 
+            // @ts-ignore
             data = await Product.paginate(filter, { ...pagination, sort: { price: 1 } });
 
         } else if (req.query.sort === 'desc') {
 
+            // @ts-ignore
             data = await Product.paginate(filter, { ...pagination, sort: { price: -1 } });
         } else {
 
+            // @ts-ignore
             data = await Product.paginate(filter, pagination);
         }
 
-        const products = data.docs.map(prod => ({
-            html: `<div class="fond-card1">
-            <img class="img-p" src="../static/public/img/productos/${prod.thumbnail}" alt="${prod.thumstail}">
-                    <span class="stock" id="segunStock">${prod.stock}</span>
-                    <span class="fav-start fa fa-star"></span>
-                    <div class="col-md-subCard">
-                        <p class="name-prod">${prod.title}</p>
-                        <span class="price-prod">$${prod.price}</span>
-                        ${user
-                    ? `<button class="btn-cart btn-outline-dark" onclick="addToCart('${prod._id}', '${prod.title}', ${prod.stock})")>Add to Cart</button>`
-                    : `<a href="/api/login" class="btn-cart btn-outline-dark">Iniciar sesión</a>`
-                }
-                </div>
-                </div>`
-        }));
-
-        const context = {
-            session: user,
-            cartId: user.cartId,
-            products: products,
-            docs: data.docs,
-            titulo: 'PG - Productos',
-            sortExist: req.query.sort,
-            sort: req.query.sort,
-            pageTitle: 'paginado',
-            limit: data.limit,
-            page: data.page,
-            totalPages: data.totalPages,
-            hasNextPage: data.hasNextPage,
-            nextPage: data.nextPage,
-            hasPrevPage: data.hasPrevPage,
-            prevPage: data.prevPage,
-        };
-
-        res.status(200).render('producto', context)
+        res.status(200).json(data)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

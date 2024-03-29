@@ -38,7 +38,7 @@ function actualizarTarjetas(productos) {
                                 <p class="price-prod text-success"><s>$${producto.price + 5000}</s> $${producto.price}</p>
                                 ${cartId
                 ? `<button class="btn-cart btn-outline-dark" id="btn-add-${producto._id}">Add to Cart</button>`
-                : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
+                : `<a href="/login" class="btn-cart btn-outline-dark">iniciar session</a>`
             }
                             </div>
                         </div>
@@ -60,7 +60,7 @@ function actualizarTarjetas(productos) {
                             <span class="price-prod">$${producto.price}</span>
                             ${cartId
                 ? `<button class="btn-cart btn-outline-dark" id="btn-add-${producto._id}">Add to Cart</button>`
-                : `<a href="/api/login" class="btn-cart btn-outline-dark">iniciar session</a>`
+                : `<a href="/login" class="btn-cart btn-outline-dark">iniciar session</a>`
             }
                         </div>
                     </div>

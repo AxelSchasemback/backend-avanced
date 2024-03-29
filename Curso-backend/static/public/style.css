@@ -1,36 +1,53 @@
 @keyframes spinner-line-fade-more {
-  0%, 100% {
-    opacity: 0; /* minimum opacity */
+
+  0%,
+  100% {
+    opacity: 0;
+    /* minimum opacity */
   }
+
   1% {
     opacity: 1;
   }
 }
 
 @keyframes spinner-line-fade-quick {
-  0%, 39%, 100% {
-    opacity: 0.25; /* minimum opacity */
+
+  0%,
+  39%,
+  100% {
+    opacity: 0.25;
+    /* minimum opacity */
   }
+
   40% {
     opacity: 1;
   }
 }
 
 @keyframes spinner-line-fade-default {
-  0%, 100% {
-    opacity: 0.22; /* minimum opacity */
+
+  0%,
+  100% {
+    opacity: 0.22;
+    /* minimum opacity */
   }
+
   1% {
     opacity: 1;
   }
 }
 
 @keyframes spinner-line-shrink {
-  0%, 25%, 100% {
+
+  0%,
+  25%,
+  100% {
     /* minimum scale and opacity */
     transform: scale(0.5);
     opacity: 0.25;
   }
+
   26% {
     transform: scale(1);
     opacity: 1;
@@ -1626,8 +1643,9 @@ footer {
   display: flex;
   position: relative;
   width: 100%;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  align-items: center;
 }
 
 .sectioKey .signin .content .form .inputBox input {
@@ -1685,6 +1703,15 @@ footer {
   font-size: 1.35em;
   letter-spacing: 0.05em;
   cursor: pointer;
+}
+
+.logInput {
+  width: 100%;
+  background-color: #131313;
+}
+
+.logInput:hover {
+  transform: scale(1.03);
 }
 
 .logInput[type="submit"]:active {

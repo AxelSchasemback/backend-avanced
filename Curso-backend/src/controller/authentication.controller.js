@@ -1,9 +1,10 @@
-import { sessionsService } from "../services/user.service.js"
-import { userManager } from "../dao/index.dao.js"
-import { UserDto } from "../dto/userDto.js"
-import { logger } from "../utils/logger.js"
+// authHandlers.js
+import { sessionsService } from "../services/user.service.js";
+import { userManager } from "../dao/index.dao.js";
+import { UserDto } from "../dto/userDto.js";
+import { logger } from "../utils/logger.js";
 
-export const verefication = async (accessToken, refreshToken, profile, done) => {
+export const verification = async (accessToken, refreshToken, profile, done) => {
     try {
         let user = await userManager.getUserByEmail({ email: profile.username });
         
@@ -22,7 +23,7 @@ export const verefication = async (accessToken, refreshToken, profile, done) => 
     } catch (error) {
         return done(error);
     }
-}
+};
 
 export const userRegister = async (req, _u, _p, done) => {
     try {
@@ -31,16 +32,16 @@ export const userRegister = async (req, _u, _p, done) => {
     } catch (error) {
         done(null, false, logger.error(error));
     }
-}
+};
 
 export const userLogin = async (email, password, done) => {
     try {
-        const user = await sessionsService.validate(email, password);
+        const user = await sessionsService.login(email, password);
         done(null, user);
     } catch (error) {
-        done(null, false, logger.error(error));
+        done(null, false, logger.error(error.message));
     }
-}
+};
 
 export const userReset = async (req, email, password, done) => {
     try {
@@ -61,4 +62,4 @@ export const userReset = async (req, email, password, done) => {
     } catch (error) {
         done(null, false, console.error(error));
     }
-}
+};

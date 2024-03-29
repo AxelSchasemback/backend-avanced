@@ -15,6 +15,7 @@ import { httpLoggerMiddleware } from "../middlewares/middle-logger.js";
 
 export const apiRouter = Router()
 
+apiRouter.use('/', middleProducts)
 apiRouter.use('/', logResponseStatus, httpLoggerMiddleware)
 apiRouter.use('/account', accountRouter)
 apiRouter.use('/products', productsRouter)
@@ -22,5 +23,5 @@ apiRouter.use('/carts', CartsRouter)
 apiRouter.use('/offer', offerRouter)
 apiRouter.use('/combo', comboRouter)
 apiRouter.use('/order', ordeRouter)
-apiRouter.use('/', userRouter, swaggerRouter, sessionRouter, middleSession, middleProducts)
+apiRouter.use('/', userRouter, swaggerRouter, sessionRouter, middleSession )
 

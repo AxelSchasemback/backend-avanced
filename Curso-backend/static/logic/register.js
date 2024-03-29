@@ -1,3 +1,4 @@
+// @ts-nocheck
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.querySelector('.form-reg');
 
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             },
         })
             .then((response) => {
-                if (response) window.location.href = "/api/products"
+                if (response) window.location.href = "/products"
             })
     })
 

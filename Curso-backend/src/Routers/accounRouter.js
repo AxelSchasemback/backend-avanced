@@ -1,6 +1,6 @@
 import { Router } from "express"
 import { getUser, getAllUser, getDataUser, postDescription } from "../controller/account.controller.js";
-import { usersOnly, adminsOnly } from "../middlewares/auth.js";
+import { usersOnly, adminsOnly } from "../middlewares/authorization.js";
 
 export const accountRouter = Router()
 

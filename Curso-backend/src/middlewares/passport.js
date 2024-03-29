@@ -1,5 +1,7 @@
 import passport from "passport";
+import { decrypt, encrypt } from "../utils/cryptography.js";
 import { ExtractJwt, Strategy as JwtStrategy } from "passport-jwt";
+import { JWT_PRIVATE_KEY } from "../config/config.js";
 
 const COOKIE_OPTS = { signed: true, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
 
@@ -9,7 +11,6 @@ export async function appendJwtAsCookie(req, res, next) {
         res.cookie('authorization', accessToken, COOKIE_OPTS);
         next()
     } catch (error) {
-        console.error(error);
         next(error);
     }
 }
@@ -36,43 +37,3 @@ passport.use('jwt', new JwtStrategy({
         done(error, false);
     }
 }));
-
-// -----------------------------------------------------------------
-
-import { Strategy as LocalStrategy } from "passport-local";
-import { Strategy as GitHubStrategy } from "passport-github2"
-import { gitHubCallBackUrl, gitHubClientSecret, gitHubClientId, JWT_PRIVATE_KEY } from "../config/config.js";
-import { decrypt, encrypt } from "../utils/cryptography.js";
-import { userLogin, userRegister, userReset, verefication } from "../controller/authentication.controller.js";
-
-passport.use('github', new GitHubStrategy({
-    clientID: gitHubClientId,
-    clientSecret: gitHubClientSecret,
-    callbackURL: gitHubCallBackUrl
-}, verefication))
-
-passport.use('local-register', new LocalStrategy({
-    passReqToCallback: true,
-    usernameField: 'email'
-}, userRegister))
-
-passport.use('local-login', new LocalStrategy({
-    usernameField: 'email'
-}, userLogin))
-
-passport.use('local-reset', new LocalStrategy({
-    passReqToCallback: true,
-    usernameField: 'email'
-}, userReset))
-
-passport.serializeUser((user, next) => { next(null, user) })
-passport.deserializeUser((user, next) => { next(null, user) })
-
-const passportInitialize = passport.initialize()
-const passportSession = passport.session()
-
-export function authenticate(req, res, next) {
-    passportInitialize(req, res, () => {
-        passportSession(req, res, next)
-    })
-}

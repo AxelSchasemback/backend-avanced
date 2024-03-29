@@ -1,8 +1,8 @@
 const cartId = JSON.parse(localStorage.getItem('id'));
-const url = `/api/carts/${cartId}`;
+const urlCart = `/api/carts/${cartId}`;
 
 function putCart(products) {
-    fetch(url, {
+    fetch(urlCart, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
