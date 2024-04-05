@@ -43,31 +43,15 @@ export const User = mongoose.model('users', schemaUser);
 // ----------------------------------------
 
 export class UserDao {
-  async getUser() {
+  async findMany() {
     return await User.find().lean()
   };
 
-  async getUserByData(data) {
-    return await User.findOne({ data }).lean()
+  async findOne(criteria) {
+    return await User.findOne( criteria ).lean()
   }
 
-  async getUserById(id) {
-    const searchUser = await User.findById(id).lean()
-    if (!searchUser) {
-      throw new Error('error al buscar: usuario no encontrado')
-    }
-    return searchUser
-  };
-
-  async getUserByEmail(email) {
-    const searchEmail = await User.findOne({email}).lean()
-    if (!searchEmail) {
-      throw new Error('error al buscar: email de usuario no encontrado')
-    }
-    return searchEmail
-  }
-
-  async updateUser(id, update) {
+  async updateOne(id, update) {
     const updateUser = await User.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
     if (!updateUser) {
       throw new Error('error al actualizar: usuario no encontrado')
@@ -75,7 +59,7 @@ export class UserDao {
     return updateUser
   }
 
-  async delUser(id) {
+  async deleteOne(id) {
     const deleteUser = await User.findByIdAndDelete(id).lean()
     if (!deleteUser) {
       throw new Error('error al borrar: usuario no encontrado')

@@ -22,6 +22,8 @@ viewsRouter.get('/carrito', (req, res) => {
 viewsRouter.get('/products', (req, res) => {
     res.render('producto', {
         titulo: 'PG - productos',
+        userExist: req.user,
+        session: req.user
     })
 })
 
@@ -33,9 +35,17 @@ viewsRouter.get('/api/account', (req, res) => {
     })
 })
 
-viewsRouter.get('/api/reset', (req, res) => {
+viewsRouter.get('/reset-password/', (req, res) => {
     res.render('reset', {
-        titulo: 'Reset Password'
+        titulo: 'Reset Password',
+    })
+})
+
+viewsRouter.get('/reset-password/:token', (req, res) => {
+const token = req.params['token'] || null
+    res.render('reset', {
+        titulo: 'Reset Password',
+        token
     })
 })
 

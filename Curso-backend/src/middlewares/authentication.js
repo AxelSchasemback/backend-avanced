@@ -2,7 +2,7 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 import { Strategy as GitHubStrategy } from "passport-github2"
 import { gitHubCallBackUrl, gitHubClientSecret, gitHubClientId } from "../config/config.js";
-import { userLogin, userRegister, userReset, verification } from "../controller/authentication.controller.js";
+import { userLogin, userRegister, userResetPassword, verification } from "../controller/authentication.controller.js";
 
 passport.use('github', new GitHubStrategy({
     clientID: gitHubClientId,
@@ -22,7 +22,7 @@ passport.use('local-login', new LocalStrategy({
 passport.use('local-reset', new LocalStrategy({
     passReqToCallback: true,
     usernameField: 'email'
-}, userReset))
+}, userResetPassword))
 
 passport.serializeUser((user, next) => { next(null, user) })
 passport.deserializeUser((user, next) => { next(null, user) })

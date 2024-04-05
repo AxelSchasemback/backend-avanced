@@ -52,7 +52,6 @@ export function logoutUser(req, res) {
         if (error) {
             throw new Error('error en el logout: ' + error)
         }
-        res.json({ status: "success", payload: 'Logout Ok' })
-            .redirect('/login')
+        res.redirect('/login')
     });
 };

@@ -1,13 +1,12 @@
 // En tu archivo principal
 import { userManager, orderManager } from '../dao/index.dao.js'
 import { emailServices } from './email.service.js'
-import { emailBody as emailSuccess } from './configEmail/email.Succes.js';
-import { emailBody as emailFailed } from './configEmail/email.Failed.js';
+import { sendEmail} from './configEmail/sendEmail.js';
 
 export class OrderService {
     async createOrderServices(email, ref, products, validate) {
         try {
-            const user = await userManager.getUserByEmail(email)
+            const user = await userManager.findOne({ email })
 
             if (!user) throw new Error('el usuario solicitado no existe')
 
@@ -22,11 +21,11 @@ export class OrderService {
                 await emailServices.send(
                     user.email,
                     'Gracias por Su Compra',
-                    emailSuccess
+                    sendEmail('Gracias por su Compra')
                 )
 
                 user.orders.push(order._id)
-                await userManager.updateUser(user._id, user)
+                await userManager.updateOne(user._id, user)
 
                 return order
             } else {
@@ -38,11 +37,11 @@ export class OrderService {
                 await emailServices.send(
                     user.email,
                     'Algo Salio MAL',
-                    emailFailed
+                    sendEmail('Su compra Fallo')
                 )
 
                 user.orders.push(order._id)
-                await userManager.updateUser(user._id, user)
+                await userManager.updateOne(user._id, user)
 
                 return order
             }

@@ -8,7 +8,8 @@ fetch('/api/current', {
 
     .then(data => {
 
-        if (data.payload) {
+        if (data.status == 'success') {
+            console.log(data.status)
             localStorage.setItem('id', JSON.stringify(data.payload.cartId))
         }
         else { 

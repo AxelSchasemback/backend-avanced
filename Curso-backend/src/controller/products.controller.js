@@ -1,11 +1,10 @@
 import { productManager } from "../dao/index.dao.js"
 import { Product } from "../dao/product.dao.js"
 
-// @ts-ignore
 export const getsProducts = async (req, res) => {
     try {
 
-        res.status(200).json(await productManager.getProduct())
+        res.status(200).json(await productManager.findMany())
 
     } catch (error) {
 
@@ -51,7 +50,7 @@ export const getProduct = async (req, res) => {
 
 export const getById = async (req, res) => {
     try {
-        const search = await productManager.getProductById(req.params['id'])
+        const search = await productManager.findOne({ _id: req.params['id'] })
         res.status(200).json(search)
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -72,7 +71,7 @@ export const updateProduct = async (req, res) => {
     try {
         const { id } = req.params
         const { title, category, description, price, thumbnail, code, stock } = req.body;
-        const update = await productManager.updateProduct(id, { title, category, description, price, thumbnail, code, stock })
+        const update = await productManager.updateOne(id, { title, category, description, price, thumbnail, code, stock })
         res.status(201).json(update)
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -82,8 +81,8 @@ export const updateProduct = async (req, res) => {
 export const deleteProduct = async (req, res) => {
     const { id } = req.params
     try {
-        const product = await productManager.getProductById(id)
-        await productManager.delProduct(id)
+        const product = await productManager.findOne({_id: id})
+        await productManager.deleteOne(id)
         res.status(201).json({ productoBorrado: product })
     } catch (error) {
         res.status(500).json({ message: error.message });

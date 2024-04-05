@@ -1,3 +1,4 @@
+const parseId = JSON.parse(localStorage.getItem('id'))
 let page;
 let limit;
 let sort;
@@ -23,7 +24,6 @@ sort = urlParams.get('sort') || '';
             return response.json();
         })
         .then(data => {
-            console.log(data)
             genProducts(data);
             generatePagination(data);
         })
@@ -31,7 +31,6 @@ sort = urlParams.get('sort') || '';
             console.error(error)
         })
 
-const parseId = JSON.parse(localStorage.getItem('id')) || null
 const htmlProducts = document.getElementById('productsId')
 const htmlPagination = document.getElementById('pagination')
 const buttonBuy = document.getElementById('botonCompra')

@@ -3,11 +3,9 @@
         <section class="sectioKey">
             <div class="signin">
                 <div class="content">
+                    {{#if token}}
                     <h2>reset password</h2>
-                    <form action="http://localhost:8080/api/reset" class="form" method="post">
-                        <div class="inputBox">
-                            <input type="email" name="email" id="email" required><i>Email</i>
-                        </div>
+                    <form class="form" id="resetForm">
                         <div class="inputBox">
                             <input type="password" name="password" id="password" required> <i>Password</i>
                         </div>
@@ -17,11 +15,23 @@
                         <div class="links"> <a href="/api/reset"></a> <a href="/api/register">Signup</a>
                         </div>
                         <div class="inputBox">
-                            <input type="submit" class="logInput" value="Reset">
+                            <button type="submit" class="logInput" value="Reset">Reset Password</button>
                         </div>
                     </form>
+                    {{else}}
+                    <h2>colocar Email</h2>
+                    <form class="form" id="emailForm">
+                        <div class="inputBox">
+                            <input type="email" name="email" id="email" required> <i>email</i>
+                        </div>
+                        <div class="inputBox">
+                            <button type="submit" class="logInput" value="Reset">Reset Password</button>
+                        </div>
+                    </form>
+                    {{/if}}
                 </div>
             </div>
         </section>
     </div>
 </main>
+<script src="/static/logic/resetPassword.js"></script>

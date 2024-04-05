@@ -1,4 +1,6 @@
-export const emailBody = `
+export function sendEmail (title) {
+
+const emailBody = `
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 <head>
@@ -156,7 +158,7 @@ table, td { color: #000000; } #u_body a { color: #ffffff; text-decoration: under
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="font-family: georgia,palatino; font-size: 27px; color: #ffffff; line-height: 140%; text-align: left; word-wrap: break-word;">
-    <p style="line-height: 140%;"><strong>Gracias por la compra!</strong></p>
+    <p style="line-height: 140%;"><strong>${title}</strong></p>
   </div>
 
       </td>
@@ -476,3 +478,5 @@ table, td { color: #000000; } #u_body a { color: #ffffff; text-decoration: under
 
 </html>
 `
+return emailBody
+}

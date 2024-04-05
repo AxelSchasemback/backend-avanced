@@ -9,7 +9,7 @@ const schemaProduct = new mongoose.Schema({
     description: { type: String, required: true },
     price: { type: Number, required: true },
     thumbnail: { type: String, required: true },
-    code: { type: String, required: true},
+    code: { type: String, required: true },
     stock: { type: Number, required: true }
 }, {
     versionKey: false,
@@ -30,27 +30,19 @@ export class ProductDao {
         return products.toObject();
     };
 
-    async getProduct() {
+    async findMany() {
         return await Product.find().lean()
     };
 
-    async getProductById(id) {
-        const searchProd = await Product.findById(id).lean()
+    async findOne(criteria) {
+        const searchProd = await Product.findById(criteria).lean()
         if (!searchProd) {
             throw new Error('error al buscar: producto no encontrado')
         }
         return searchProd
     };
 
-    async getProductByCategory(category) {
-        const searchCat = await Product.find({ category: category }).lean()
-        if (!searchCat) {
-            throw new Error('error al buscar: categoria no encontrada')
-        }
-        return searchCat
-    }
-
-    async updateProduct(id, update) {
+    async updateOne(id, update) {
         const updateProd = await Product.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
         if (!updateProd) {
             throw new Error('error al actualizar: producto no encontrado')
@@ -58,7 +50,7 @@ export class ProductDao {
         return updateProd
     }
 
-    async delProduct(id) {
+    async deleteOne(id) {
         const deleteProd = await Product.findByIdAndDelete(id).lean()
         if (!deleteProd) {
             throw new Error('error al actualizar: producto no encontrado')
