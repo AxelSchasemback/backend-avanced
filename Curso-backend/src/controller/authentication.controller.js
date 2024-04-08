@@ -27,7 +27,10 @@ export const verification = async (accessToken, refreshToken, profile, done) => 
 
 export const userRegister = async (req, _u, _p, done) => {
     try {
-        const user = await sessionsService.register(req.body);
+        const { name, email, password, date, sex } = req.body
+
+        const user = await sessionsService.register(name, email, password, date, sex);
+        
         done(null, user);
     } catch (error) {
         done(null, false, logger.error(error));
@@ -39,7 +42,7 @@ export const userLogin = async (email, password, done) => {
         const user = await sessionsService.login(email, password);
         done(null, user);
     } catch (error) {
-        done(null, false, logger.error(error.message));
+        done(null, false, logger.error(error));
     }
 };
 

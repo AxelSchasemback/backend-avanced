@@ -26,11 +26,35 @@
         <tr class="gen-card">
           <!-- Table Data - datos de Tablas -->
           <td class="prdt-1 card-product" id="productsId">
-            
+            {{#each products}}
+            <div class="fond-card1">
+              <img class="img-p" src="../static/public/img/productos/{{ thumbnail }}" alt="{{ thumbnail }}">
+              <span class="stock" id="segunStock">{{ stock }}</span>
+              <span class="fav-start fa fa-star"></span>
+              <div class="col-md-subCard">
+                <p class="name-prod">{{ title }}</p>
+                <span class="price-prod">${{ price }}</span>
+                {{#if ../userExist}}
+                <button class="btn-cart btn-outline-dark" id="botonCompra-{{_id}}">Add to Cart</button>
+                {{else}}
+                <a href="/login" class="btn-cart btn-outline-dark">Iniciar sesión</a>
+                {{/if}}
+              </div>
+            </div>
+            {{/each}}
           </td>
       </div>
     </table>
     <div class="pagination" id="pagination">
+      {{#if hasPrevPage}}
+      <a id="prevPageButton"
+        href="/products?limit={{ limit }}&page={{ prevPage }}{{#if sort}}&sort={{ sort }}{{/if}}">«</a>
+      {{/if}}
+      <b>{{ page }}</b>
+      {{#if hasNextPage}}
+      <a id="nextPageButton"
+        href="/products?limit={{ limit }}&page={{ nextPage }}{{#if sort}}&sort={{ sort }}{{/if}}">»</a>
+      {{/if}}
     </div>
   </div>
 </main>

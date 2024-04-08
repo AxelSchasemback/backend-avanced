@@ -24,24 +24,33 @@ export const Product = mongoose.model("products", schemaProduct);
 
 export class ProductDao {
 
+    /**
+     * @param {{ title?: string; category?: string; description?: string; price?: number; thumbnail?: string; code?: string; stock?: number; _id?: string; }} dataProduct
+     */
     async creteProduct(dataProduct) {
         dataProduct._id = randomUUID()
         const products = await Product.create(dataProduct)
         return products.toObject();
     };
 
-    async findMany() {
-        return await Product.find().lean()
+    async findMany(criteria) {
+        return await Product.find(criteria).lean()
     };
 
-    async findOne(criteria) {
-        const searchProd = await Product.findById(criteria).lean()
+    /**
+     * @param {{ _id: string; }} id
+     */
+    async findOne(id) {
+        const searchProd = await Product.findById(id).lean()
         if (!searchProd) {
             throw new Error('error al buscar: producto no encontrado')
         }
         return searchProd
     };
 
+    /**
+     * @param {string} id
+     */
     async updateOne(id, update) {
         const updateProd = await Product.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
         if (!updateProd) {
@@ -50,6 +59,9 @@ export class ProductDao {
         return updateProd
     }
 
+    /**
+     * @param {string} id
+     */
     async deleteOne(id) {
         const deleteProd = await Product.findByIdAndDelete(id).lean()
         if (!deleteProd) {

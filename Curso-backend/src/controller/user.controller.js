@@ -1,24 +1,24 @@
 import passport from "passport";
-import { appendJwtAsCookie } from "../middlewares/passport.js";
+import { appendJwtAsCookie } from "../middlewares/authentication.js";
 import { UserDto } from "../dto/userDto.js";
 
-export const passportRegister = (req, res, next) => {
-    passport.authenticate('local-register', {
-        failWithError: true
-    })(req, res, async function () {
-        await appendJwtAsCookie(req, res, next)
-        const payload = new UserDto(req.user)
-        res.status(201).json({ status: 'success', payload })
-    });
+export const passportRegister = async (req, res, next) => {
+    try {
+            await appendJwtAsCookie(req, res, next);
+            const payload = new UserDto(req.user)
+            res['successfullPost'](payload);
+    } catch (error) {
+        next(error, error)
+    }
 }
 
-export const passportReset = (req, res) => {
-    passport.authenticate('local-reset', {
-        failWithError: true
-    })(req, res, function () {
-        const payload = new UserDto(req.user)
-        res.status(201).json({ status: 'success', payload })
-    })
+export const passportReset = async (req, res, next) => {
+    try {
+        await appendJwtAsCookie(req, res, next),
+            res['successfullPost'](req.user);
+    } catch (error) {
+        next(error);
+    }
 }
 
 export const githubLogin = () => {

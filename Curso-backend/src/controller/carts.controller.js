@@ -2,7 +2,7 @@ import { cartManager } from "../dao/index.dao.js";
 
 export const getAllCarts = async (req, res) => {
     try {
-        res.status(200).json(await cartManager.getCarts());
+        res.status(200).json(await cartManager.findMany());
     } catch (error) {
         res.status(404).json({ message: 'Error al obtener todos los carritos', error: error.message })
     }
@@ -24,7 +24,7 @@ export const getCart = async (req, res) => {
     try {
         const { Cid } = req.params;
 
-        const cartProduct = await cartManager.getCartProduct(Cid)
+        const cartProduct = await cartManager.findOneCartToProducts(Cid)
 
         res.status(200).json(cartProduct);
     } catch (error) {
@@ -34,7 +34,7 @@ export const getCart = async (req, res) => {
 
 export const cartInfo = async (req, res) => {
     try {
-        const data = await cartManager.getPopulate(req.params['Cid']);
+        const data = await cartManager.findOneCartToPopulate(req.params['Cid']);
 
         if (data) {
             res.status(200).json(data.products);
@@ -49,7 +49,7 @@ export const updateCart = async (req, res) => {
     try {
         const products = req.body;
 
-        const updateCarrito = await cartManager.updateCart(req.params['Cid'], products);
+        const updateCarrito = await cartManager.updateOne(req.params['Cid'], products);
 
         res.status(201).json(updateCarrito);
     } catch (error) {
@@ -61,7 +61,7 @@ export const updatedQuantity = async (req, res) => {
     try {
         const { Cid, Pid } = req.params
         const { quantity } = req.body
-        const updatedQuantity = await cartManager.updateQuantity(Cid, Pid, quantity)
+        const updatedQuantity = await cartManager.updateQuantityToProduct(Cid, Pid, quantity)
         res.status(201).json(updatedQuantity)
     } catch (error) {
         res.status(500).json({ message: 'Error al Actualizar la cantidad', error: error.message })
@@ -81,7 +81,7 @@ export const resetCart = async (req, res) => {
 export const deleteProdCart = async (req, res) => {
     try {
         const { Cid, Pid } = req.params
-        const delProduct = await cartManager.delProdCart(Cid, Pid)
+        const delProduct = await cartManager.deleteProductsToCart(Cid, Pid)
         res.status(201).json({ productoBorrado: delProduct })
     } catch (error) {
         res.status(500).json({ message: 'Error al borrar el producto del carrito', error: error.message })
@@ -90,7 +90,7 @@ export const deleteProdCart = async (req, res) => {
 
 export const deleteCart = async (req, res) => {
     try {
-        const delCart = await cartManager.delCart(req.params['Cid']);
+        const delCart = await cartManager.deleteOne(req.params['Cid']);
 
         res.status(201).json({ carritoBorrado: delCart });
     } catch (error) {

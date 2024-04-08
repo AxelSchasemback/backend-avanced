@@ -26,7 +26,7 @@ export const createOrder = async (req, res) => {
 
 export const getOrderById = async (req, res) => {
     try {
-        const getOrderById = await orderManager.getOrderById(req.params['id'])
+        const getOrderById = await orderManager.findOne(req.params['id'])
         res.status(200).json(getOrderById)
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -35,7 +35,7 @@ export const getOrderById = async (req, res) => {
 
 export const getOrder = async (req, res) => {
     try {
-        const getOrder = await orderManager.getOrder()
+        const getOrder = await orderManager.findMany()
         res.status(200).json(getOrder)
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -46,7 +46,7 @@ export const putOrder = async (req, res) => {
     try {
         const order = req.body;
 
-        const updateOrder = await orderManager.updateOrder(req.params['Cid'], order);
+        const updateOrder = await orderManager.updateOne(req.params['Cid'], order);
 
         res.status(201).json(updateOrder);
     } catch (error) {
@@ -57,7 +57,7 @@ export const putOrder = async (req, res) => {
 
 export const delOrder = async (req, res) => {
     try {
-        const delOrder = await orderManager.delOrder(req.params['Cid']);
+        const delOrder = await orderManager.deleteOne(req.params['Cid']);
 
         res.status(201).json({ productoBorrado: delOrder });
     } catch (error) {

@@ -5,7 +5,7 @@ export class productsServices {
     async stockProduct(products) {
         try {
 
-            const getProduct = await productManager.getProduct()
+            const getProduct = await productManager.findMany()
 
             await products.forEach(productos => {
 
@@ -16,7 +16,7 @@ export class productsServices {
                 const { title, category, description, price, thumbnail, code } = bdProduct
 
                 if (newStockProduct < 0) {
-                    const putStock = productManager.updateProduct(bdProduct._id, { title, category, description, price, thumbnail, code, stock: newStockProduct })
+                    const putStock = productManager.updateOne(bdProduct._id, { title, category, description, price, thumbnail, code, stock: newStockProduct })
 
                     return putStock
                 }
@@ -30,7 +30,7 @@ export class productsServices {
     async stockvalidate(products) {
         try {
 
-            const getProduct = await productManager.getProduct()
+            const getProduct = await productManager.findMany()
 
             let failure = []
 

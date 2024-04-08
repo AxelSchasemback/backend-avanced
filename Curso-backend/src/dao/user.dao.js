@@ -2,8 +2,7 @@
 import mongoose from "mongoose";
 import { randomUUID } from "crypto";
 import bcrypt from "bcryptjs";
-
-const passwordRegex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$/; // Al menos 8 caracteres, una mayúscula y un número
+import lastConnectionMiddleware from "../middlewares/last-conection.js";
 
 const schemaUser = new mongoose.Schema(
   {
@@ -13,11 +12,7 @@ const schemaUser = new mongoose.Schema(
     sex: { type: String },
     description: { type: String, default: '' },
     email: { type: String, required: true },
-    password: {
-      type: String, required: true, validate: {
-        validator: value => passwordRegex.test(value), message: 'La contraseña debe tener al menos 8 caracteres, una mayúscula y un número'
-      }
-    },
+    password: {type: String, required: true},
     rol: { type: String, default: 'user', required: true },
     cartId: { type: String, ref: 'carts' },
     orders: [{ type: String, ref: 'Orders' }],
@@ -38,17 +33,28 @@ schemaUser.pre("save", async function (next) {
   next();
 });
 
+schemaUser.plugin(lastConnectionMiddleware);
+
 export const User = mongoose.model('users', schemaUser);
 
 // ----------------------------------------
 
 export class UserDao {
-  async findMany() {
-    return await User.find().lean()
+  async createUser(data) {
+    const user = await User.create(data)
+    return user.toObject();
+  }
+
+  async findMany(criteria) {
+    return await User.find(criteria).lean()
   };
 
+  async findId(id) {
+    return await User.findById(id).lean()
+  }
+
   async findOne(criteria) {
-    return await User.findOne( criteria ).lean()
+    return await User.findOne(criteria).lean()
   }
 
   async updateOne(id, update) {

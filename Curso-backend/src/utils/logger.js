@@ -4,14 +4,16 @@ const optionLevels = {
     levels: {
         fatal: 1,
         error: 2,
-        success: 3,
-        http: 4,
-        warning: 5,
-        info: 6
+        user: 3,
+        success: 4,
+        http: 5,
+        warning: 6,
+        info: 7
     },
     colors: {
         fatal: 'black',
         error: 'red',
+        user: 'orange',
         success: 'green',
         http: 'cyan',
         warning: 'yellow',
@@ -38,6 +40,14 @@ export const logger = winston.createLogger({
         new winston.transports.File({
             level: 'error',
             filename: 'eventsError.log',
+            format: winston.format.combine(
+                winston.format.timestamp(),
+                winston.format.json()
+            )
+        }),
+        new winston.transports.File({
+            level: 'user',
+            filename: 'userDelete.log',
             format: winston.format.combine(
                 winston.format.timestamp(),
                 winston.format.json()

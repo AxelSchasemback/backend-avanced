@@ -52,14 +52,25 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        const body = {
+            name: nameInput.value,
+            email: emailInput.value,
+            password: passwordInput.value,
+            date: dateInput.value,
+            sex: selectedSex 
+        };
+
         await fetch('/api/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
+            body: JSON.stringify(body)
         })
             .then((response) => {
-                if (response) window.location.href = "/products"
+                console.log(response)
+                if (response.ok) window.location.href = "/api/products"
+                else window.location.href = "/register"
             })
     })
 

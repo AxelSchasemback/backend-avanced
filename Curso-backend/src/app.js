@@ -3,10 +3,10 @@ import { apiRouter } from './Routers/apiRouter.js';
 import { viewsRouter } from './Routers/ViewRouter.js';
 import { engine } from 'express-handlebars';
 import mongoose from 'mongoose';
-import { serverSession } from './middlewares/middle-session.js';
+import { serverSession } from './config/sessionConfig.js';
 import cookieParser from 'cookie-parser'
 import { MONGODB_URL, PORT, COOKIE_SECRET } from './config/config.js';
-import { authenticate } from './middlewares/authentication.js';
+import { passportInitialize, passportSession } from './middlewares/authentication.js';
 import { logger } from './utils/logger.js';
 
 await mongoose.connect(`${MONGODB_URL}`);
@@ -17,7 +17,9 @@ export const app = express();
 
 app.use(serverSession)
 
-app.use(authenticate)
+app.use(passportInitialize)
+
+app.use(passportSession)
 
 app.use(express.json());
 

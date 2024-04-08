@@ -11,29 +11,13 @@ viewsRouter.get('/payment', (req, res) => {
     })
 })
 
-viewsRouter.get('/carrito', (req, res) => {
-    res.render('carrito', {
-        titulo: 'PG - producto',
-        userExist: req.user,
-        session: req.user
-    })
-})
-
-viewsRouter.get('/products', (req, res) => {
+viewsRouter.get('/api/products', (req, res) => {
     res.render('producto', {
-        titulo: 'PG - productos',
-        userExist: req.user,
-        session: req.user
-    })
-})
-
-viewsRouter.get('/api/account', (req, res) => {
-    res.render('miCuenta', {
-        titulo: 'PG - account',
-        userExist: req.user || null,
-        session: req.user || null
-    })
-})
+      titulo: 'PG - productos',
+      userExist: req.user || null,
+      session: req.user || null,
+    });
+  });
 
 viewsRouter.get('/reset-password/', (req, res) => {
     res.render('reset', {
@@ -54,17 +38,24 @@ viewsRouter.get('/login', (req, res) => {
 })
 
 viewsRouter.get('/combos', (req, res) => {
-    res.render('combos', { titulo: 'PG - Combos' })
+    res.render('combos', {
+         titulo: 'PG - Combos',
+         userExist: req.user || null,
+         session: req.user || null
+         })
 })
 
 viewsRouter.get('/help', (req, res) => {
-    res.render('ayuda', { titulo: 'PG - Help' })
+    res.render('ayuda', {
+         titulo: 'PG - Help',
+         userExist: req.user || null,
+         session: req.user || null
+         })
 })
 
-viewsRouter.get('/api/register', (req, res) => {
+viewsRouter.get('/register', (req, res) => {
     res.render('registro', {
         titulo: 'PG - Register',
-        script: 'userSesion'
     })
 })
 

@@ -51,14 +51,14 @@ export class OrderDao {
         }
     }
 
-    async getOrder() {
-        return await order.find().lean()
+    async findMany(criteria) {
+        return await order.find(criteria).lean()
     };
 
     /**
      * @param {string} id
      */
-    async getOrderById(id) {
+    async findOne(id) {
         const searchOrder = await order.findById(id).lean()
         if (!searchOrder) {
             throw new Error('error al buscar: orden no encontrada')
@@ -70,7 +70,7 @@ export class OrderDao {
      * @param {string} id
      * @param {any} update
      */
-    async updateOrder(id, update) {
+    async updateOne(id, update) {
         const updateOrder = await order.findByIdAndUpdate(id, { $set: update }, { new: true }).lean()
         if (!updateOrder) {
             throw new Error('error al actualizar: orden no encontrada')
@@ -81,7 +81,7 @@ export class OrderDao {
     /**
      * @param {string} id
      */
-    async delOrder(id) {
+    async deleteOne(id) {
         const deleteOrder = await order.findByIdAndDelete(id).lean()
         if (!deleteOrder) {
             throw new Error('error al borrar: orden no encontrada')

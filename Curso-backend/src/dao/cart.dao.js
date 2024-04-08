@@ -76,7 +76,7 @@ export class CartDao {
         }
     };
 
-    async getCarts() {
+    async findMany() {
         try {
             return await Carts.find().lean()
 
@@ -88,7 +88,7 @@ export class CartDao {
     /**
      * @param {String} productId
      */
-    async getPopulate(productId) {
+    async findOneCartToPopulate(productId) {
         try {
             return await Carts.findById(productId).populate('products.product').lean()
 
@@ -98,11 +98,11 @@ export class CartDao {
     }
 
     /**
-     * @param {String} id
+     * @param {String} criteria
      */
-    async getCartById(id) {
+    async findOne(criteria) {
         try {
-            const searchCart = await Carts.findById(id).lean()
+            const searchCart = await Carts.findById(criteria).lean()
             return searchCart
         } catch (error) {
             throw new Error('error al buscar: Carrito no encontrado ' + error)
@@ -112,7 +112,7 @@ export class CartDao {
     /**
      * @param {String} cartId
      */
-    async getCartProduct(cartId) {
+    async findOneCartToProducts(cartId) {
         try {
             const cart = await Carts.findById(cartId).lean()
             if (cart) {
@@ -139,7 +139,7 @@ export class CartDao {
     /**
      * @param {String} id
      */
-    async delCart(id) {
+    async deleteOne(id) {
         try {
 
             const deleteCart = await Carts.findByIdAndDelete(id).lean()
@@ -154,7 +154,7 @@ export class CartDao {
      * @param {String} cartId
      * @param {String} productId
      */
-    async delProdCart(cartId, productId) {
+    async deleteProductsToCart(cartId, productId) {
         try {
 
             const cart = await Carts.findById(cartId).lean()
@@ -180,7 +180,7 @@ export class CartDao {
      * @param {String} id
      * @param {any} update
      */
-    async updateCart(id, update) {
+    async updateOne(id, update) {
         try {
 
             const updateCart = await Carts.findByIdAndUpdate(id, { $set: { products: update } }, { new: true }).lean()
@@ -197,7 +197,7 @@ export class CartDao {
      * @param {String} productId
      * @param {Number} quantity
      */
-    async updateQuantity(cartId, productId, quantity) {
+    async updateQuantityToProduct(cartId, productId, quantity) {
         try {
             const updateQuantity = await Carts.findByIdAndUpdate(cartId, {
                 $set: {
