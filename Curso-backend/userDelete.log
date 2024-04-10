@@ -1,40 +1,35 @@
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-06T16:12:17.283Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-06T16:12:40.100Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-06T19:18:24.331Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-06T20:01:30.206Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-06T20:03:21.090Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-06T20:29:28.712Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-07T00:17:19.456Z"}
-{"level":"error","message":"GET /current - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-07T00:17:48.033Z"}
-{"level":"error","timestamp":"2024-04-07T19:41:42.541Z"}
-{"level":"error","message":"POST /register - Status: 401 (Unauthorized) - Email or password is wrong","timestamp":"2024-04-07T20:33:08.391Z"}
-{"_message":"users validation failed","errors":{"password":{"kind":"user defined","message":"La contraseña debe tener al menos 8 caracteres, una mayúscula y un número","name":"ValidatorError","path":"password","properties":{"message":"La contraseña debe tener al menos 8 caracteres, una mayúscula y un número","path":"password","type":"user defined","value":"$2a$10$KucthOaQty5tFnEYlaoAlOpTcU3CtP3hrs.34pSrCCqnZtb2pordK"},"value":"$2a$10$KucthOaQty5tFnEYlaoAlOpTcU3CtP3hrs.34pSrCCqnZtb2pordK"}},"level":"error","timestamp":"2024-04-07T21:25:09.756Z"}
-{"_message":"users validation failed","errors":{"password":{"kind":"user defined","message":"La contraseña debe tener al menos 8 caracteres, una mayúscula y un número","name":"ValidatorError","path":"password","properties":{"message":"La contraseña debe tener al menos 8 caracteres, una mayúscula y un número","path":"password","type":"user defined","value":"$2a$10$fAYQfEs4uGqMNJui6vwKHOzux1oLP7CnvP9ko19Sj2k/qdtOTdXRS"},"value":"$2a$10$fAYQfEs4uGqMNJui6vwKHOzux1oLP7CnvP9ko19Sj2k/qdtOTdXRS"}},"level":"error","timestamp":"2024-04-07T21:28:08.188Z"}
-{"level":"error","timestamp":"2024-04-07T22:29:37.998Z"}
-{"level":"error","timestamp":"2024-04-07T22:38:25.116Z"}
-{"level":"error","timestamp":"2024-04-07T22:41:49.366Z"}
-{"level":"error","timestamp":"2024-04-07T22:43:59.482Z"}
-{"level":"error","timestamp":"2024-04-07T22:44:12.097Z"}
-{"level":"error","timestamp":"2024-04-07T22:50:32.073Z"}
-{"level":"error","timestamp":"2024-04-07T23:01:13.721Z"}
-{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:11:33.918Z"}
-{"level":"error","message":"Error de autenticación: Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:18:22.130Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:20:21.820Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:30:00.124Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:30:33.874Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:41:12.017Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:41:29.431Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:44:08.745Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T00:51:34.009Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T01:49:58.159Z"}
-{"level":"error","timestamp":"2024-04-08T01:54:15.270Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T02:04:39.022Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T02:05:38.331Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T02:25:20.857Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T02:25:45.800Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T02:26:08.557Z"}
-{"level":"error","message":"Error de autenticación: Contraseña incorrecta","timestamp":"2024-04-08T02:26:27.863Z"}
-{"level":"error","message":"Error de autenticación: Correo electrónico no encontradoError: Correo electrónico no encontrado","timestamp":"2024-04-08T02:44:04.530Z"}
-{"level":"error","message":"Error de autenticación: Correo electrónico no encontradoError: Correo electrónico no encontrado","timestamp":"2024-04-08T02:45:40.946Z"}
-{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-08T02:46:21.297Z"}
-{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T02:48:32.394Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:20:26.798Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:22:13.163Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:22:53.396Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:23:46.965Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:25:38.459Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T19:37:35.010Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T19:40:00.946Z"}
+{"level":"error","message":"Cannot destructure property 'name' of 'req.body' as it is undefined.","timestamp":"2024-04-09T19:52:54.539Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:06:03.649Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:16:20.455Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:23:15.612Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:23:41.337Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T20:46:02.646Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:02:57.328Z"}
+{"level":"info","message":"Listening on port 8080","timestamp":"2024-04-10T00:02:59.635Z"}
+{"level":"user","message":"sisi dale","timestamp":"2024-04-10T00:03:03.882Z"}
+{"level":"info","message":"Proceso de eliminación de cuentas inactivas completado.","timestamp":"2024-04-10T00:03:08.611Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:04:00.595Z"}
+{"level":"info","message":"Listening on port 8080","timestamp":"2024-04-10T00:04:01.835Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:04:48.227Z"}
+{"level":"info","message":"Listening on port 8080","timestamp":"2024-04-10T00:04:50.429Z"}
+{"level":"user","message":"sisi dale","timestamp":"2024-04-10T00:05:10.445Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:08:25.913Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:08:37.333Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:10:41.655Z"}
+{"level":"info","message":"Listening on port 8080","timestamp":"2024-04-10T00:10:43.322Z"}
+{"level":"http","message":"GET en /products - 21:10:49","timestamp":"2024-04-10T00:10:49.142Z"}
+{"level":"http","message":"GET / - Status: 304 (Not Modified) - Resource not modified","timestamp":"2024-04-10T00:10:49.400Z"}
+{"level":"http","message":"GET en /current - 21:10:51","timestamp":"2024-04-10T00:10:51.650Z"}
+{"level":"http","message":"GET /current - Status: 304 (Not Modified) - Resource not modified","timestamp":"2024-04-10T00:10:51.656Z"}
+{"level":"user","message":"sisi dale","timestamp":"2024-04-10T00:11:03.286Z"}
+{"level":"info","message":"Base de datos conectada","timestamp":"2024-04-10T00:12:52.211Z"}
+{"level":"user","message":"Base","timestamp":"2024-04-10T00:17:29.273Z"}
+{"level":"error","message":"Error al registrar usuario: El usuario Ya existe","timestamp":"2024-04-10T00:18:18.448Z"}
+{"level":"user","message":"Usuario - axel_mago10@hotmail.com - eliminado debido a inactividad.","timestamp":"2024-04-10T00:19:04.905Z"}

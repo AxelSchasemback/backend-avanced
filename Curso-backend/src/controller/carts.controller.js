@@ -1,4 +1,4 @@
-import { cartManager } from "../dao/index.dao.js";
+import { cartManager, productManager } from "../dao/index.dao.js";
 
 export const getAllCarts = async (req, res) => {
     try {
@@ -36,10 +36,7 @@ export const cartInfo = async (req, res) => {
     try {
         const data = await cartManager.findOneCartToPopulate(req.params['Cid']);
 
-        if (data) {
-            res.status(200).json(data.products);
-        }
-
+        res.status(200).json(data.products);
     } catch (error) {
         res.status(404).json({ message: 'Error al obtener datos de los productos dentro del carrito', error: error.message })
     }

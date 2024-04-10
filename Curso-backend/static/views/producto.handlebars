@@ -35,7 +35,8 @@
                 <p class="name-prod">{{ title }}</p>
                 <span class="price-prod">${{ price }}</span>
                 {{#if ../userExist}}
-                <button class="btn-cart btn-outline-dark" id="botonCompra-{{_id}}">Add to Cart</button>
+                <button class="btn-cart btn-outline-dark"
+                 onclick="addProductToCart('{{_id}}', '{{title}}', {{stock}})">Add to Cart</button>
                 {{else}}
                 <a href="/login" class="btn-cart btn-outline-dark">Iniciar sesión</a>
                 {{/if}}

@@ -68,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
             body: JSON.stringify(body)
         })
             .then((response) => {
-                console.log(response)
                 if (response.ok) window.location.href = "/api/products"
                 else window.location.href = "/register"
             })

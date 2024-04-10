@@ -1,8 +1,10 @@
 import dotenv from 'dotenv'
+import Stripe from 'stripe';
 dotenv.config({
     path: './src/config/.env'
 })
 
+export const stripe = new Stripe(process.env.STRIPE_PRIVATE_KEY);
 export const PORT = process.env.PORT
 export const MONGODB_URL = process.env.MONGODB_URL;
 

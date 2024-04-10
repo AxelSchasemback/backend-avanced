@@ -4,8 +4,6 @@ import { randomUUID } from "crypto";
 import { comparePassword, decrypt, encrypt, hashPassword } from '../utils/cryptography.js';
 import { emailServices } from './email.service.js';
 import { resetPasswordEmail } from './configEmail/sendResetEmail.js';
-import { logger } from '../utils/logger.js';
-
 export class SessionsService {
     constructor(dao) {
         this.dao = dao
@@ -22,7 +20,7 @@ export class SessionsService {
                 throw new Error('Correo electrónico no encontrado');
             }
 
-            const isPasswordValid =  comparePassword(password, user.password);
+            const isPasswordValid = await comparePassword(password, user.password);
 
             if (!isPasswordValid) {
                 throw new Error('Contraseña Inconrrecta');
@@ -53,13 +51,15 @@ export class SessionsService {
                 throw new Error(' faltan credenciales');
             }
 
+            const hasPassword = await hashPassword(password)
+
             const newUser = {
                 _id: randomUUID(),
                 name: name,
                 date: date,
                 sex: sex,
                 email: email,
-                password: await hashPassword(password),
+                password: hasPassword,
                 cartId: await this.cartId(),
                 orders: []
             };
@@ -116,46 +116,25 @@ export class SessionsService {
         }
     }
 
-    async resetPasswordAuth(token) {
+    async resetPasswordAuth(token, newPassword) {
         try {
             const decoded = await decrypt(token)
+            if (!decoded) {
+                throw new Error('Error Token no especificado')
+            }
             // @ts-ignore
-            const user = await userManager.findOne({ _id: decoded._Id });
+            const user = await userManager.findId(decoded._id);
 
             if (!user) {
                 throw new Error('Usuario no encontrado');
             }
+            const hasPassword = await hashPassword(newPassword)
 
-            return user
+            const UpdateUser = await userManager.updateOne(user._id, { password: hasPassword });
+
+            return UpdateUser
         } catch (error) {
             throw new Error('Error reset your password: ' + error)
-        }
-    }
-
-    async eliminarCuentasInactivas() {
-        try {
-            const twoDaysAgo = new Date(Date.now() - 2 * 24 * 60 * 60 * 1000); // Calcula la fecha de hace dos días
-
-            // Encuentra los usuarios que no se han conectado en más de dos días
-            const inactivos = await userManager.findMany({ last_connection: { $lt: twoDaysAgo } })
-
-            // Elimina los usuarios inactivos
-            for (const usuario of inactivos) {
-                await emailServices.send(
-                    // @ts-ignore
-                    inactivos.email,
-                    'Restablecimiento de contraseña',
-                    resetPasswordEmail(`http://localhost:8080/register`)
-                );
-                await userManager.deleteOne({ _id: usuario._id });
-                // @ts-ignore
-                logger.user(`Usuario ${usuario._id} eliminado debido a inactividad.`);
-            }
-
-            logger.info('Proceso de eliminación de cuentas inactivas completado.');
-
-        } catch (error) {
-            throw new Error('Error al eliminar cuentas inactivas ' + error);
         }
     }
 

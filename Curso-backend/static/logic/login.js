@@ -5,19 +5,19 @@ const loginButton = document.getElementById('loginButton');
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
 
-    // const email = document.getElementById('email').value;
-    // const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
     fetch('/api/login', {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
+            'Content-Type': 'application/json',
         },
-        body: new URLSearchParams(new FormData(loginForm))
+        body: JSON.stringify({email, password})
     })
         .then(response => {
             if (response.status === 200) {
-                window.location.href = '/products';
+                window.location.href = '/api/products';
             } else {
 
                 Toastify({

@@ -163,3 +163,25 @@
 {"level":"error","message":"Error de autenticación: Correo electrónico no encontradoError: Correo electrónico no encontrado","timestamp":"2024-04-08T02:45:40.945Z"}
 {"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-08T02:46:21.297Z"}
 {"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T02:48:32.394Z"}
+{"level":"error","timestamp":"2024-04-08T16:57:43.215Z"}
+{"level":"error","timestamp":"2024-04-08T17:02:03.454Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T17:08:36.197Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T17:09:58.277Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T22:59:02.375Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T23:12:30.799Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T23:13:54.493Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-08T23:15:20.774Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:20:26.797Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:22:13.162Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:22:53.396Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:23:46.964Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T00:25:38.458Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T19:37:35.008Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T19:40:00.944Z"}
+{"level":"error","message":"Cannot destructure property 'name' of 'req.body' as it is undefined.","timestamp":"2024-04-09T19:52:54.539Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:06:03.648Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:16:20.454Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:23:15.611Z"}
+{"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:23:41.336Z"}
+{"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T20:46:02.644Z"}
+{"level":"error","message":"Error al registrar usuario: El usuario Ya existe","timestamp":"2024-04-10T00:18:18.447Z"}

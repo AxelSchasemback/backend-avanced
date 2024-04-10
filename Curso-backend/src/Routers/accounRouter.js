@@ -8,6 +8,6 @@ accountRouter.get('/user/:id', getUser, adminsOnly)
 
 accountRouter.get('/user', getAllUser, adminsOnly)
 
-accountRouter.get('/', getDataUser, usersOnly)
+accountRouter.get('/', getDataUser, adminsOnly)
 
 accountRouter.post('/', postDescription, usersOnly)

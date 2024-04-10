@@ -8,10 +8,14 @@ import cookieParser from 'cookie-parser'
 import { MONGODB_URL, PORT, COOKIE_SECRET } from './config/config.js';
 import { passportInitialize, passportSession } from './middlewares/authentication.js';
 import { logger } from './utils/logger.js';
+import { deleteInactiveUser } from './utils/inactiveusers.js';
+import cron from 'node-cron'
 
 await mongoose.connect(`${MONGODB_URL}`);
 
 logger.info(`Base de datos conectada`);
+
+cron.schedule('0 0 * * *', deleteInactiveUser);
 
 export const app = express();
 

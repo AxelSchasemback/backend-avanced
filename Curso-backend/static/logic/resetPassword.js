@@ -78,18 +78,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             console.log(token)
 
-            // Objeto con los datos del formulario
-            const formData = {
-                newPassword: newPassword,
-                token: token // Agregar el token al objeto formData
-            }
-
             fetch(`/api/reset-password/${token}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({newPassword, token})
             })
                 .then(response => {
                     if (!response.ok) {
@@ -98,10 +92,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     return response.json();
                 })
                 .then(data => {
-                    // Handle success response, maybe redirect user to login page, show success message, etc.
-                    console.log('Password reset successfully', data);
-                    if (data.ok) {
-                        window.location.href = '/products'
+                    if (data.payload) {
+                        window.location.href = '/api/products'
                     }
                 })
                 .catch(error => {

@@ -15,12 +15,9 @@ passport.use('github', new GitHubStrategy({
 
 passport.use("local-register", new LocalStrategy({ passReqToCallback: true, usernameField: 'email' }, userRegister));
 
-passport.use('local-login', new LocalStrategy({ usernameField: 'email', passwordField:'password' }, userLogin));
+passport.use('local-login', new LocalStrategy({ passwordField: 'password', usernameField: 'email' }, userLogin));
 
-passport.use('local-reset', new LocalStrategy({
-    passReqToCallback: true,
-    usernameField: 'email'
-}, userResetPassword))
+passport.use('local-reset', new LocalStrategy({ passReqToCallback: true, usernameField: 'token', passwordField: 'newPassword' }, userResetPassword))
 
 const COOKIE_OPTS = { signed: true, httpOnly: true, maxAge: 24 * 60 * 60 * 1000 }
 

@@ -13,4 +13,4 @@ sessionRouter.delete('/current', deleteCurrentUser)
 
 sessionRouter.get('/githubcallback', getGithubCallback)
 
-sessionRouter.get('/logout', logoutUser, usersOnly)
+sessionRouter.get('/logout', logoutUser,deleteCurrentUser, usersOnly)

@@ -11,8 +11,8 @@ fetch('/api/current', {
         const cartId = JSON.parse(localStorage.getItem('id'));
         const url = `/api/carts/${cartId}`;
 
-        // Fetch a url + '/purchase'
-        fetch(url + '/purchase', {
+        // Fetch a url + '/populate'
+        fetch(url + '/populate', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

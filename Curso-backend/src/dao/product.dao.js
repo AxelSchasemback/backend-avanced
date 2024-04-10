@@ -38,14 +38,18 @@ export class ProductDao {
     };
 
     /**
-     * @param {{ _id: string; }} id
+     * @param {{ criteria: any }} criteria
      */
-    async findOne(id) {
-        const searchProd = await Product.findById(id).lean()
+    async findOne(criteria) {
+        const searchProd = await Product.findOne(criteria).lean()
         if (!searchProd) {
             throw new Error('error al buscar: producto no encontrado')
         }
         return searchProd
+    };
+
+    async findById(id) {
+        return await Product.findById(id).lean()
     };
 
     /**

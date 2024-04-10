@@ -1,17 +1,17 @@
 import { Router } from "express";
 import { getProduct, getsProducts, getById, createProduct, updateProduct, deleteProduct } from "../controller/products.controller.js";
-import { usersOnly, adminsOnly } from "../middlewares/authorization.js";
+import { adminsOnly, premiumsOnly } from "../middlewares/authorization.js";
 
 export const productsRouter = Router()
 
 productsRouter.get('/', getProduct )
 
-productsRouter.get('/all-products', getsProducts, adminsOnly)
+productsRouter.get('/all-products', getsProducts)
 
-productsRouter.get('/:id', getById, usersOnly)
+productsRouter.get('/:id', getById)
 
-productsRouter.post('/', createProduct, usersOnly)
+productsRouter.post('/', createProduct, adminsOnly, premiumsOnly)
 
-productsRouter.put('/:id', updateProduct, adminsOnly)
+productsRouter.put('/:id', updateProduct, adminsOnly, premiumsOnly)
 
 productsRouter.delete('/:id', deleteProduct, adminsOnly)

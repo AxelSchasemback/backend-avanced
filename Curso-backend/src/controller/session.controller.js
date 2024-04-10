@@ -6,7 +6,7 @@ export const loginUser = async (req, res, next) => {
     try {  
         await appendJwtAsCookie(req, res, next)
         const payload = new UserDto(req.user)
-        res['successfullPost'](payload);
+        res['successfullGet'](payload);
     } catch (error) {
         next(error);
     }

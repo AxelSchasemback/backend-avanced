@@ -1,5 +1,5 @@
 const cartId = JSON.parse(localStorage.getItem('id'));
-const urlCart = `/api/carts/${cartId}`;
+const urlCart = `/api/carts/${cartId}/populate`;
 
 function putCart(products) {
     fetch(urlCart, {
@@ -15,7 +15,7 @@ function putCart(products) {
         });
 }
 
-fetch(`${url}/purchase`, {
+fetch(`${urlCart}`, {
     method: 'GET',
     headers: {
         'Content-Type': 'application/json',
@@ -47,8 +47,9 @@ fetch(`${url}/purchase`, {
 
         const cartItemsArray = getCartItemsAsArray();
         const itemValue = cartItemsArray.filter(item => item.quantity > 0);
-
-        putCart(itemValue);
+        if(itemValue){
+            putCart(itemValue);
+        }
 
         const totalProducto = () => products.reduce((total, product) => total + (product.quantity * product.product.price), 0);
 

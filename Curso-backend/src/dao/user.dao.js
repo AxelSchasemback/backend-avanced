@@ -25,14 +25,6 @@ const schemaUser = new mongoose.Schema(
   }
 );
 
-schemaUser.pre("save", async function (next) {
-  if (!this.isModified('password')) {
-    return next();
-  }
-  this.password = await bcrypt.hash(this.password, 10);
-  next();
-});
-
 schemaUser.plugin(lastConnectionMiddleware);
 
 export const User = mongoose.model('users', schemaUser);

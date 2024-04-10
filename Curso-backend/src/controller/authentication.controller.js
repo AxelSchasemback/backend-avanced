@@ -30,10 +30,10 @@ export const userRegister = async (req, _u, _p, done) => {
         const { name, email, password, date, sex } = req.body
 
         const user = await sessionsService.register(name, email, password, date, sex);
-        
+
         done(null, user);
     } catch (error) {
-        done(null, false, logger.error(error));
+        done(null, false, logger.error(error.message));
     }
 };
 
@@ -42,37 +42,18 @@ export const userLogin = async (email, password, done) => {
         const user = await sessionsService.login(email, password);
         done(null, user);
     } catch (error) {
-        done(null, false, logger.error(error));
+        done(null, false, logger.error(error.message));
     }
 };
 
-export const sendToken = async (req, res) => {
+export const userResetPassword = async (req, _u, _p, done) => {
     try {
-        console.log(req.body.email)
-        const sendToken = await sessionsService.sendTokenAuth(req.body.email)
-        res.json(sendToken)
-    } catch (error) {
-        res.status(400).json({ status: 'failed', message: 'error al crear token' })
-    }
-}
-
-export const userResetPassword = async (req, done) => {
-    try {
-
-        const token2 = req.params.token
-
         const { newPassword, token } = req.body
 
+        const usuario = await sessionsService.resetPasswordAuth(token, newPassword)
 
-        const usuario = await sessionsService.resetPasswordAuth(token)
-
-        // Actualizar la contraseña
-        const updatedUser = await userManager.updateOne(usuario._id, { password: newPassword });
-
-        const loginUser = await sessionsService.login(updatedUser.email, updatedUser.password);
-
-        done(null, loginUser);
+        done(null, usuario);
     } catch (error) {
-        done(null, false, console.error(error));
+        done(null, false, console.error(error.message));
     }
 };

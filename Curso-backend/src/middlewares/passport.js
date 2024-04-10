@@ -8,7 +8,7 @@ export const passportLogin = passport.authenticate('local-login', {
     failWithError: true,
 })
 
-export const passportReset = passport.authenticate('local-reset', {
+export const passportLocalReset = passport.authenticate('local-reset', {
     failWithError: true,
 })
 
