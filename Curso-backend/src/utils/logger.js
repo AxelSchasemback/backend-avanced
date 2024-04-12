@@ -45,11 +45,15 @@ export const logger = winston.createLogger({
       )
     }),
     new winston.transports.File({
-      level: 'user',
       filename: 'userDelete.log',
       format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json()
+        winston.format.json(),
+        winston.format.printf((info) => {
+          if (info.level === 'user') {
+            return ` - [${info.level}]: ${JSON.stringify(info.message, null, 2)}`;
+          }
+        })
       )
     })
   ]

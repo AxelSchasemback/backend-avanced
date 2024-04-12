@@ -185,3 +185,6 @@
 {"level":"error","message":"Error de autenticación: Correo electrónico no encontrado","timestamp":"2024-04-09T20:23:41.336Z"}
 {"level":"error","message":"Error de autenticación: Contraseña Inconrrecta","timestamp":"2024-04-09T20:46:02.644Z"}
 {"level":"error","message":"Error al registrar usuario: El usuario Ya existe","timestamp":"2024-04-10T00:18:18.447Z"}
+{"level":"fatal","message":"PUT /user/3a1f0546-64b6-463e-ac51-449441f8eae3 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-04-11T22:51:31.403Z"}
+{"level":"fatal","message":"PUT /user/3a1f0546-64b6-463e-ac51-449441f8eae3 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-04-11T22:52:28.266Z"}
+{"level":"fatal","message":"PUT /user/3a1f0546-64b6-463e-ac51-449441f8eae3 - Status: 500 (Server Error) - Internal server error occurred while processing the request","timestamp":"2024-04-11T22:52:42.339Z"}

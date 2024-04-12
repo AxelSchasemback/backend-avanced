@@ -5,7 +5,7 @@ export const getUser = async (req, res) => {
 
         const id = req.params['id']
 
-        res.status(200).json( await userManager.findOne({id}))
+        res.status(200).json( await userManager.findId(id))
 
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -53,5 +53,28 @@ export const postDescription = async (req, res) => {
         res.status(201).redirect('/api/account')
     } catch (error) {
         res.status(500).redirect('/api/account')
+    }
+}
+
+export const putDataUser = async (req, res) => {
+    try {
+        const user = req.body;
+
+        const updateUser = await userManager.updateOne(req.params['id'], user);
+
+        res.status(201).json(updateUser);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+
+}
+
+export const delUser = async (req, res) => {
+    try {
+        const delUser = await userManager.deleteOne(req.params['Cid']);
+
+        res.status(201).json({ UseroBorrado: delUser });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
 }

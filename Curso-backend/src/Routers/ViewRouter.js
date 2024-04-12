@@ -65,3 +65,9 @@ viewsRouter.get('/oferta', (req, res) => {
         session: req.user || null
     })
 })
+
+viewsRouter.get('/user-admin', (req, res) => {
+    res.render('userAdmin', {
+        titulo: 'PG - console'
+    })
+})
