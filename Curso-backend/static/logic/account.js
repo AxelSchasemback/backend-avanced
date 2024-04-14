@@ -1,5 +1,6 @@
 function addDesc() {
 
+    // @ts-ignore
     const descriptionValue = document.getElementById('description').value
     const data = {
         description: descriptionValue

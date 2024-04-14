@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { getProductJSON } from "../controller/combo.controller.js";
+import { getProductJSON } from "../../controller/combo.controller.js";
 
 export const comboRouter = Router()
 

@@ -1,4 +1,5 @@
-// @ts-nocheck
+import { hasPermission } from "../../middlewares/authorization.js"
+
 import { Router } from "express"
 
 export const viewsRouter = Router()
@@ -6,18 +7,20 @@ export const viewsRouter = Router()
 viewsRouter.get('/payment', (req, res) => {
     res.render('checkout', {
         titulo: 'PG - payment',
-        userExist: req.user,
-        session: req.user
+    })
+})
+viewsRouter.get('/api/account', (req, res) => {
+    res.render('miCuenta', {
+        titulo: 'PG - perfil',
     })
 })
 
-viewsRouter.get('/api/products', (req, res) => {
+viewsRouter.get('/products', (req, res) => {
+    const { limit, page, sort, category, search } = req.query
     res.render('producto', {
-        titulo: 'PG - productos',
-        userExist: req.user || null,
-        session: req.user || null,
-    });
-});
+        titulo: 'PG - productos', limit, page, sort, category, search
+    })
+})
 
 viewsRouter.get('/reset-password', (req, res) => {
     const token = req.query.token || null;
@@ -31,24 +34,18 @@ viewsRouter.get('/login', (req, res) => {
 viewsRouter.get('/combos', (req, res) => {
     res.render('combos', {
         titulo: 'PG - Combos',
-        userExist: req.user || null,
-        session: req.user || null
     })
 })
 
 viewsRouter.get('/help', (req, res) => {
     res.render('ayuda', {
         titulo: 'PG - Help',
-        userExist: req.user || null,
-        session: req.user || null
     })
 })
 
 viewsRouter.get('/carrito', (req, res) => {
     res.render('carrito', {
         titulo: 'PG - Carrito',
-        userExist: req.user || null,
-        session: req.user || null
     })
 })
 
@@ -61,12 +58,10 @@ viewsRouter.get('/register', (req, res) => {
 viewsRouter.get('/oferta', (req, res) => {
     res.render('ofertas', {
         titulo: 'PG - ofertas',
-        userExist: req.user || null,
-        session: req.user || null
     })
 })
 
-viewsRouter.get('/user-admin', (req, res) => {
+viewsRouter.get('/user-admin', hasPermission('admin'), (req, res) => {
     res.render('userAdmin', {
         titulo: 'PG - console'
     })

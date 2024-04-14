@@ -1,6 +1,7 @@
 // @ts-nocheck
 const loginForm = document.getElementById('loginForm');
 const loginButton = document.getElementById('loginButton');
+localStorage.clear()
 
 loginForm.addEventListener('submit', function (event) {
     event.preventDefault();
@@ -17,7 +18,7 @@ loginForm.addEventListener('submit', function (event) {
     })
         .then(response => {
             if (response.status === 200) {
-                window.location.href = '/api/products';
+                window.location.href = '/products';
             } else {
 
                 Toastify({

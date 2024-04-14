@@ -14,17 +14,13 @@ export const getsProducts = async (req, res) => {
 }
 
 export const getProduct = async (req, res) => {
-
     try {
 
-        const filter = req.query.category ? { category: req.query.category } : {}
-
-        const user = req.user || ''
-
+        const filter = req.query.category || null
         const pagination = {
             limit: req.query.limit || 10,
             page: req.query.page || 1,
-            sort: req.query.sort,
+            sort: req.query.sort || null,
             lean: true
         }
 
@@ -32,36 +28,20 @@ export const getProduct = async (req, res) => {
 
         if (req.query.sort === 'asc') {
 
+            // @ts-ignore
             data = await Product.paginate(filter, { ...pagination, sort: { price: 1 } });
 
         } else if (req.query.sort === 'desc') {
 
+            // @ts-ignore
             data = await Product.paginate(filter, { ...pagination, sort: { price: -1 } });
         } else {
 
+            // @ts-ignore
             data = await Product.paginate(filter, pagination);
         }
 
-        const context = {
-            userExist: req.user,
-            session: req.user,
-            cartId: user.cartId,
-            products: data.docs,
-            docs: data.docs,
-            titulo: 'PG - Productos',
-            sortExist: req.query.sort,
-            sort: req.query.sort,
-            pageTitle: 'paginado',
-            limit: data.limit,
-            page: data.page,
-            totalPages: data.totalPages,
-            hasNextPage: data.hasNextPage,
-            nextPage: data.nextPage,
-            hasPrevPage: data.hasPrevPage,
-            prevPage: data.prevPage,
-        };
-
-        res.status(200).render('producto', context)
+        res.status(200).json(data)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

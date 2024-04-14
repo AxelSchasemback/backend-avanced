@@ -72,7 +72,7 @@ function actualizarTarjetas(productos) {
 
         if (botonAddToCart) {
             botonAddToCart.addEventListener('click', () => {
-                addToCart(producto._Id, producto.title, producto.stock)
+                addProductToCart(producto._Id, producto.title, producto.stock)
             })
         }
     })

@@ -21,17 +21,9 @@ export const currentUser = (req, res, next) => {
     }
 };
 
-export async function deleteCurrentUser(req, res, next) {
+export async function logoutUser(req, res, next) {
     try {
-        removeJwtFromCookies
-        res['successfullDelete']();
-    } catch (error) {
-        next(error);
-    }
-};
-
-export function logoutUser(req, res, next) {
-    try {
+        await removeJwtFromCookies(req, res, next)
         res['successfullDelete']();
     } catch (error) {
         next(error);

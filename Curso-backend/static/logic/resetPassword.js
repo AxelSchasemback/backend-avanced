@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 })
                 .then(data => {
                     if (data.payload) {
-                        window.location.href = '/api/products'
+                        window.location.href = '/products'
                     }
                 })
                 .catch(error => {

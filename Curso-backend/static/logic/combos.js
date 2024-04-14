@@ -21,6 +21,7 @@ const intelCard = document.getElementById('INTEL')
 function combosCards(productos) {
     const productosAMDCategory = productos.filter(producto => producto.category == "AMD")
     const productosINTELCategory = productos.filter(producto => producto.category == "Intel")
+    const cartId = JSON.parse(localStorage.getItem('id'))
 
     amdCard.innerHTML = ''
     productosAMDCategory.forEach(producto => {
@@ -65,7 +66,7 @@ function combosCards(productos) {
 
         if (botonAddToCart) {
             botonAddToCart.addEventListener('click', () => {
-                addToCart(producto._Id, producto.title, producto.stock)
+                addProductToCart(producto._Id, producto.title, producto.stock)
             })
         }
     })

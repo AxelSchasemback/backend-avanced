@@ -1,26 +1,13 @@
-const listOfRolesForAdminContent = ['admin']
+const rolesMap = {
+  user: ['user', 'premium', 'admin'],
+  premium: ['premium', 'admin'],
+  admin: ['admin'],
+};
 
-const listOfRolesForApremiumContent = ['premium']
-
-const listOfRolesForUserContent = ['user', 'premium', 'admin']
-
-export async function usersOnly(req, res, next) {
-  if (!listOfRolesForUserContent.includes(req.user['rol'])) {
-    return next(new Error('not authorized'))
+export const hasPermission = (requiredRoles) => async (req, res, next) => {
+  const userRole = req.user.rol;
+  if (!rolesMap[requiredRoles].includes(userRole)) {
+    return next(new Error('Not authorized'));
   }
-  next()
-}
-
-export async function premiumsOnly(req, res, next) {
-    if (!listOfRolesForApremiumContent.includes(req.user['rol'])) {
-      return next(new Error('not authorized'))
-    }
-    next()
-  }
-
-export async function adminsOnly(req, res, next) {
-  if (!listOfRolesForAdminContent.includes(req.user['rol'])) {
-    return next(new Error('not authorized'))
-  }
-  next()
-}
+  next();
+};

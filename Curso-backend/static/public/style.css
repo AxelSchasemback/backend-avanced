@@ -54,6 +54,16 @@
   }
 }
 
+.infoPay {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.imgPay {
+  height: 7em;
+}
+
 .quantity {
   margin: 0.5em 0em;
 }

@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { passportLocalRegister, passportLocalReset, sessionAuth } from "../middlewares/passport.js";
-import { githubCallback, githubLogin, passportRegister, passportReset, sendToken} from "../controller/user.controller.js";
+import { passportLocalRegister, passportLocalReset, sessionAuth } from "../../middlewares/passport.js";
+import { githubCallback, githubLogin, passportRegister, passportReset, sendToken} from "../../controller/user.controller.js";
 
 export const userRouter = Router()
 

@@ -1,6 +1,6 @@
 import express from 'express';
-import { apiRouter } from './Routers/apiRouter.js';
-import { viewsRouter } from './Routers/ViewRouter.js';
+import { apiRouter } from './Routers/apiRouter/apiRouter.js';
+import { viewsRouter } from './Routers/webRouter/ViewRouter.js';
 import { engine } from 'express-handlebars';
 import mongoose from 'mongoose';
 import { serverSession } from './config/sessionConfig.js';
