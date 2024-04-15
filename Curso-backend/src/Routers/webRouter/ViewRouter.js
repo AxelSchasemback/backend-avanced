@@ -4,12 +4,12 @@ import { Router } from "express"
 
 export const viewsRouter = Router()
 
-viewsRouter.get('/payment', (req, res) => {
+viewsRouter.get('/payment', hasPermission('user'), (req, res) => {
     res.render('checkout', {
         titulo: 'PG - payment',
     })
 })
-viewsRouter.get('/api/account', (req, res) => {
+viewsRouter.get('/perfil', hasPermission('user'), (req, res) => {
     res.render('miCuenta', {
         titulo: 'PG - perfil',
     })
@@ -43,7 +43,7 @@ viewsRouter.get('/help', (req, res) => {
     })
 })
 
-viewsRouter.get('/carrito', (req, res) => {
+viewsRouter.get('/carrito', hasPermission('user'), (req, res) => {
     res.render('carrito', {
         titulo: 'PG - Carrito',
     })

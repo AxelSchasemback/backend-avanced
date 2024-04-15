@@ -310,7 +310,7 @@ export function resetPasswordEmail(urlToken){
        <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
          
    <div style="font-family: georgia,palatino; font-size: 15px; color: #f78f2e; line-height: 140%; text-align: center; word-wrap: break-word;">
-     <p style="line-height: 140%;"><a rel="noopener" href="http://localhost:8080/api/account" target="_blank"><span style="line-height: 21px;"><span style="color: #e67e23; line-height: 21px;">https://www.project.gaming.com/</span></span></a>reset-password</p>
+     <p style="line-height: 140%;"><a rel="noopener" href="http://localhost:8080/perfil" target="_blank"><span style="line-height: 21px;"><span style="color: #e67e23; line-height: 21px;">https://www.project.gaming.com/</span></span></a>reset-password</p>
    </div>
  
        </td>
@@ -786,7 +786,7 @@ export function resetPasswordEmail(urlToken){
        <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
          
    <div style="font-family: georgia,palatino; font-size: 15px; color: #f78f2e; line-height: 140%; text-align: center; word-wrap: break-word;">
-     <p style="line-height: 140%;"><a rel="noopener" href="http://localhost:8080/api/account" target="_blank"><span style="line-height: 21px;"><span style="color: #e67e23; line-height: 21px;">https://www.project.gaming.com/</span></span></a>reset-password</p>
+     <p style="line-height: 140%;"><a rel="noopener" href="http://localhost:8080/perfil" target="_blank"><span style="line-height: 21px;"><span style="color: #e67e23; line-height: 21px;">https://www.project.gaming.com/</span></span></a>reset-password</p>
    </div>
  
        </td>

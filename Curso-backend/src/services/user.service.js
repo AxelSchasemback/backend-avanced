@@ -26,6 +26,13 @@ export class SessionsService {
                 throw new Error('Contraseña Inconrrecta');
             }
 
+            const newDate = await userManager.updateOne(user._id, { last_connection: new Date() })
+
+            if(!newDate) {
+                throw new Error('Error al actualizar fecha de ultima connección')
+            }
+
+
             return user
         } catch (error) {
             throw new Error('Error de autenticación: ' + error.message);

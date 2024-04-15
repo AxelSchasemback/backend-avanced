@@ -233,8 +233,8 @@ table, td { color: #000000; } #u_body a { color: #ffffff; text-decoration: under
         
   <!--[if mso]><style>.v-button {background: transparent !important;}</style><![endif]-->
 <div align="center">
-  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:8080/api/account" style="height:38px; v-text-anchor:middle; width:224px;" arcsize="26.5%"  strokecolor="#000000" strokeweight="3px" fillcolor="#f78f2e"><w:anchorlock/><center style="color:#FFFFFF;font-family: georgia,palatino; "><![endif]-->
-    <a href="http://localhost:8080/api/account" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #f78f2e; border-radius: 10px;-webkit-border-radius: 10px; -moz-border-radius: 10px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-color: #000000; border-top-style: solid; border-top-width: 3px; border-left-color: #000000; border-left-style: solid; border-left-width: 3px; border-right-color: #CCC; border-right-style: solid; border-right-width: 0px; border-bottom-color: #CCC; border-bottom-style: solid; border-bottom-width: 0px;font-family: georgia,palatino; font-size: 15px;">
+  <!--[if mso]><v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://localhost:8080/perfil" style="height:38px; v-text-anchor:middle; width:224px;" arcsize="26.5%"  strokecolor="#000000" strokeweight="3px" fillcolor="#f78f2e"><w:anchorlock/><center style="color:#FFFFFF;font-family: georgia,palatino; "><![endif]-->
+    <a href="http://localhost:8080/perfil" target="_blank" class="v-button" style="box-sizing: border-box;display: inline-block;text-decoration: none;-webkit-text-size-adjust: none;text-align: center;color: #FFFFFF; background-color: #f78f2e; border-radius: 10px;-webkit-border-radius: 10px; -moz-border-radius: 10px; width:auto; max-width:100%; overflow-wrap: break-word; word-break: break-word; word-wrap:break-word; mso-border-alt: none;border-top-color: #000000; border-top-style: solid; border-top-width: 3px; border-left-color: #000000; border-left-style: solid; border-left-width: 3px; border-right-color: #CCC; border-right-style: solid; border-right-width: 0px; border-bottom-color: #CCC; border-bottom-style: solid; border-bottom-width: 0px;font-family: georgia,palatino; font-size: 15px;">
       <span style="display:block;padding:10px 20px;line-height:120%;"><span style="line-height: 16.8px;">Ver estados de mis compras</span></span>
     </a>
     <!--[if mso]></center></v:roundrect><![endif]-->
@@ -311,7 +311,7 @@ table, td { color: #000000; } #u_body a { color: #ffffff; text-decoration: under
       <td style="overflow-wrap:break-word;word-break:break-word;padding:10px;font-family:arial,helvetica,sans-serif;" align="left">
         
   <div style="font-family: georgia,palatino; font-size: 15px; color: #f78f2e; line-height: 140%; text-align: center; word-wrap: break-word;">
-    <p style="line-height: 140%;"><a rel="noopener" href="http://localhost:8080/api/account" target="_blank"><span style="line-height: 19.6px;"><span style="color: #e67e23; line-height: 19.6px;">https://www.project.gaming.com/status</span></span></a></p>
+    <p style="line-height: 140%;"><a rel="noopener" href="http://localhost:8080/perfil" target="_blank"><span style="line-height: 19.6px;"><span style="color: #e67e23; line-height: 19.6px;">https://www.project.gaming.com/status</span></span></a></p>
   </div>
 
       </td>

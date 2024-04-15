@@ -1,11 +1,15 @@
 import { userManager } from "../dao/index.dao.js";
+import { UserDto } from "../dto/userDto.js";
+import { accountService } from "../services/account.service.js";
 
 export const getUser = async (req, res) => {
     try {
 
         const id = req.params['id']
 
-        res.status(200).json( await userManager.findId(id))
+        const usuario = await userManager.findId(id)
+
+        res.status(200).json(usuario)
 
     } catch (error) {
         res.status(404).json({ message: error.message });
@@ -14,7 +18,8 @@ export const getUser = async (req, res) => {
 
 export const getAllUser = async (req, res) => {
     try {
-        res.status(200).json(await userManager.findMany())
+        const usuario = await userManager.findMany()
+        res.status(200).json(usuario)
 
     } catch (error) {
 
@@ -26,19 +31,9 @@ export const getDataUser = async (req, res) => {
     try {
         const user = req.user || null
 
-        const usuario = await userManager.findOne({email: user.email})
+        const usuario = await userManager.findOne({ email: user.email })
 
-        res.status(201).render('miCuenta', {
-            session: user,
-            cartId: usuario.cartId,
-            titulo: 'PG - Account',
-            name: usuario.name,
-            email: usuario.email,
-            sex: usuario.sex,
-            date: usuario.date,
-            orders: usuario.orders,
-            description: usuario.description
-        })
+        res.status(200).json(usuario)
     } catch (error) {
         res.status(401).redirect('/login');
     }
@@ -48,11 +43,29 @@ export const postDescription = async (req, res) => {
     try {
         const user = req.user || null
 
-        await userManager.updateOne(user.email, { description: req.body.description })
+        const updateDescription = await userManager.updateOne(user._id, { description: req.body.description })
 
-        res.status(201).redirect('/api/account')
+        const payload = new UserDto(updateDescription)
+
+        res.satatus(201).json(payload)
     } catch (error) {
-        res.status(500).redirect('/api/account')
+        res.status(500).json({ message: error.message })
+    }
+}
+
+export async function updateUserAvatar(req, res, next) {
+    try {
+        const { email } = req.params
+        const { filename, originalname, path } = req.file;
+
+        const user = await userManager.findOne({ email })
+
+        const updatedUser = await accountService.updateAvatarUser(user._id, email, originalname)
+
+        res.status(201).json(updatedUser)
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message })
     }
 }
 
@@ -62,7 +75,9 @@ export const putDataUser = async (req, res) => {
 
         const updateUser = await userManager.updateOne(req.params['id'], user);
 
-        res.status(201).json(updateUser);
+        const payload = new UserDto(updateUser)
+
+        res.status(201).json(payload)
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
@@ -73,7 +88,7 @@ export const delUser = async (req, res) => {
     try {
         const delUser = await userManager.deleteOne(req.params['Cid']);
 
-        res.status(201).json({ UseroBorrado: delUser });
+        res.status(201).json({usuarioBorrado: delUser});
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

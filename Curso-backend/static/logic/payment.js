@@ -76,7 +76,7 @@ fetch('/api/current', {
                         });
 
                         // Redirigir a la página de cuenta
-                        window.location.href = '/api/account';
+                        window.location.href = '/perfil';
                     } catch (error) {
                         console.error('Error al realizar la compra:', error);
                     }

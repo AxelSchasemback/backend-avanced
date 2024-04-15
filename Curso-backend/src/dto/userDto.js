@@ -9,5 +9,6 @@ export class UserDto {
         this.rol= user.rol;
         this.cartId= user.cartId;
         this.orders= user.orders;
+        this.documents= user.documents;
     }
   }

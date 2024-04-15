@@ -1,6 +1,7 @@
 import passport from "passport";
 import { appendJwtAsCookie, removeJwtFromCookies } from "../middlewares/authentication.js";
 import { UserDto } from "../dto/userDto.js";
+import { userManager } from "../dao/index.dao.js";
 
 export const loginUser = async (req, res, next) => {
     try {  
@@ -12,9 +13,10 @@ export const loginUser = async (req, res, next) => {
     }
 }
 
-export const currentUser = (req, res, next) => {
+export const currentUser = async (req, res, next) => {
     try {
-        const payload = new UserDto(req.user)
+        const user = await userManager.findId(req.user._id)
+        const payload = new UserDto(user)
         res['successfullGet'](payload);
     } catch (error) {
         next(error);

@@ -8,7 +8,7 @@ ordeRouter.get('/', getOrder, hasPermission('admin'))
 
 ordeRouter.get('/:id', getOrderById, hasPermission('admin'))
 
-ordeRouter.post('/', createOrder, hasPermission('users'))
+ordeRouter.post('/', createOrder, hasPermission('user'))
 
 ordeRouter.put('/:id', putOrder, hasPermission('admin'))
 

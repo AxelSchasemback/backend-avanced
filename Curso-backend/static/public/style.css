@@ -54,6 +54,44 @@
   }
 }
 
+.avatarInput:hover {
+  display: block;
+}
+
+.change-avatar-text {
+  cursor: pointer;
+  width: 10em;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 14px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.avatar-container:hover .change-avatar-text {
+  opacity: 1;
+}
+
+.contentAvatar {
+  display: flex;
+  position: relative;
+  /* margin-left: 5em; */
+  flex-direction: row;
+  align-items: center;
+}
+
+.inputFile {
+  display: none;
+  font-size: 12px;
+  z-index: 1;
+}
+
 .infoPay {
   display: flex;
   justify-content: space-around;
@@ -908,11 +946,15 @@ main {
 .div-account {
   display: flex;
   flex-direction: row;
+  align-items: center;
   flex-wrap: wrap;
+  justify-content: space-evenly;
 }
 
 .avatar {
-  margin: 50px;
+  display: inline;
+  /* position: absolute; */
+  /* margin: 50px; */
   border: 2px outset #ff8800;
   width: 15em;
   height: 17em;

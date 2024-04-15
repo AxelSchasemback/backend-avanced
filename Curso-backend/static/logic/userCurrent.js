@@ -18,7 +18,7 @@ fetch('/api/current', {
             const admin = data.payload.rol === 'admin'
             dropMenu.innerHTML = `
             <li class="li-user" id="perfil"><a class="dropdown-item text-white"
-                    href="/api/account">Perfil</a>
+                    href="/perfil">Perfil</a>
             </li>
             <li class="li-user" id="logout"><a class="dropdown-item text-white"
                     href="/api/logout">Logout</a>

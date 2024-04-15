@@ -1,7 +1,6 @@
 // @ts-nocheck
 import mongoose from "mongoose";
 import { randomUUID } from "crypto";
-import bcrypt from "bcryptjs";
 import lastConnectionMiddleware from "../middlewares/last-conection.js";
 
 const schemaUser = new mongoose.Schema(
@@ -12,11 +11,15 @@ const schemaUser = new mongoose.Schema(
     sex: { type: String },
     description: { type: String, default: '' },
     email: { type: String, required: true },
-    password: {type: String, required: true},
+    password: { type: String, required: true },
     rol: { type: String, default: 'user', required: true },
     cartId: { type: String, ref: 'carts' },
     orders: [{ type: String, ref: 'Orders' }],
-    documents: [{ name: String, reference: String }],
+    documents: [{
+      _id: { type: String, default: randomUUID() },
+      user_email: { type: String },
+      title: { type: String }
+    }],
     last_connection: { type: Date, default: null }
   },
   {
