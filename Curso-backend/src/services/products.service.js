@@ -1,6 +1,40 @@
-import { productManager } from "../dao/index.dao.js"
+import { productManager, userManager } from "../dao/index.dao.js"
+import { sendEmail } from "./configEmail/sendEmail.js"
+import { emailServices } from "./email.service.js"
 
 export class productsServices {
+
+    async createOwnerValidate(email, rol) {
+        try {
+            if (rol === 'admin' || rol === 'premium') {
+                return email
+            } else {
+                throw new Error('el rol no es valido')
+            }
+        } catch (error) {
+            throw new Error('Error al verificar el dueño del producto: ' + error.message)
+        }
+    }
+
+    async deleteIsPremium(owner) {
+        try {
+            const user = await userManager.findOne({ email: owner })
+            if (!user) {
+                throw new Error('Error al obtener datos del usuario')
+            }
+
+            if(user.rol === 'premium') {
+                await emailServices.send(
+                    user.email,
+                    'producto Borrado',
+                    sendEmail('producto Borrado')
+                )
+            }
+
+        } catch (error) {
+            throw new Error('Error al verificar el dueño del producto: ' + error.message)
+        }
+    }
 
     async stockProduct(products) {
         try {
@@ -23,7 +57,7 @@ export class productsServices {
 
             })
         } catch (error) {
-            throw new Error("Error en calcular el stock de producto: " + error)
+            throw new Error("Error en calcular el stock de producto: " + error.message)
         }
     }
 
@@ -50,7 +84,7 @@ export class productsServices {
             return failure.length ? false : true
 
         } catch (error) {
-            throw new Error('Error: los stock de los productos no son correctos: ' + error)
+            throw new Error('Error: los stock de los productos no son correctos: ' + error.message)
         }
     }
 

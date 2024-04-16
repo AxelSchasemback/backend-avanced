@@ -1,19 +1,31 @@
+// @ts-nocheck
 import { hasPermission } from "../../middlewares/authorization.js"
 
 import { Router } from "express"
 
 export const viewsRouter = Router()
 
-viewsRouter.get('/payment', hasPermission('user'), (req, res) => {
+viewsRouter.get('/payment', (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/login');
+    }
+    hasPermission('user')(req, res, next);
+}, (req, res) => {
     res.render('checkout', {
         titulo: 'PG - payment',
-    })
-})
-viewsRouter.get('/perfil', hasPermission('user'), (req, res) => {
+    });
+});
+
+viewsRouter.get('/perfil', (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/login');
+    }
+    hasPermission('user')(req, res, next);
+}, (req, res) => {
     res.render('miCuenta', {
         titulo: 'PG - perfil',
-    })
-})
+    });
+});
 
 viewsRouter.get('/products', (req, res) => {
     const { limit, page, sort, category, search } = req.query
@@ -43,11 +55,17 @@ viewsRouter.get('/help', (req, res) => {
     })
 })
 
-viewsRouter.get('/carrito', hasPermission('user'), (req, res) => {
-    res.render('carrito', {
-        titulo: 'PG - Carrito',
-    })
-})
+
+viewsRouter.get('/carrito', (req, res, next) => {
+    if (!req.user) {
+        return res.redirect('/login');
+    }
+    hasPermission('user')(req, res, next)
+}, (req, res) => {
+        res.render('carrito', {
+            titulo: 'PG - carrito',
+        });
+    });
 
 viewsRouter.get('/register', (req, res) => {
     res.render('registro', {
@@ -61,8 +79,14 @@ viewsRouter.get('/oferta', (req, res) => {
     })
 })
 
-viewsRouter.get('/user-admin', hasPermission('admin'), (req, res) => {
+viewsRouter.get('/user-admin', (req, res, next) => {
+    if (req.user['rol'] !== 'admin') {
+        return res.redirect('/products');
+    }
+
+    hasPermission('admin')(req, res, next);
+}, (req, res) => {
     res.render('userAdmin', {
-        titulo: 'PG - console'
-    })
-})
+        titulo: 'PG - console',
+    });
+});

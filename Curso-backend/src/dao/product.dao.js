@@ -10,7 +10,8 @@ const schemaProduct = new mongoose.Schema({
     price: { type: Number, required: true },
     thumbnail: { type: String, required: true },
     code: { type: String, required: true },
-    stock: { type: Number, required: true }
+    stock: { type: Number, required: true },
+    owner: {type: String, default: 'schasemback_axel@hotmail.com'}
 }, {
     versionKey: false,
     strict: 'throw'
@@ -30,6 +31,7 @@ export class ProductDao {
     async creteProduct(dataProduct) {
         dataProduct._id = randomUUID()
         const products = await Product.create(dataProduct)
+        console.log(products)
         return products.toObject();
     };
 

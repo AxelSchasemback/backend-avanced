@@ -12,6 +12,6 @@ productsRouter.get('/:id', getById)
 
 productsRouter.post('/', createProduct, hasPermission('premium'))
 
-productsRouter.put('/:id', updateProduct, hasPermission('premum'))
+productsRouter.put('/:id', updateProduct, hasPermission('premium'))
 
 productsRouter.delete('/:id', deleteProduct, hasPermission('admin'))

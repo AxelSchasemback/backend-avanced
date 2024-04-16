@@ -32,8 +32,13 @@ export async function appendJwtAsCookie(req, res, next) {
 }
 
 export async function removeJwtFromCookies(req, res, next) {
-    res.clearCookie('authorization', COOKIE_OPTS)
-    next()
+    try {
+        res.clearCookie('authorization', COOKIE_OPTS)
+        res.clearCookie('connect.sid')
+        next()
+    } catch (error) {
+        next(error)
+    }
 }
 
 passport.use('jwtAuth', new JwtStrategy({

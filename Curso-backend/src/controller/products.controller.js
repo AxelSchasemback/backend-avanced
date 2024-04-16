@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { productManager } from "../dao/index.dao.js"
 import { Product } from "../dao/product.dao.js"
+import { productsServices } from "../services/products.service.js";
 
 export const getsProducts = async (req, res) => {
     try {
@@ -59,7 +60,18 @@ export const getById = async (req, res) => {
 export const createProduct = async (req, res) => {
     try {
         const { title, category, description, price, thumbnail, code, stock } = req.body;
-        const dataProducts = await productManager.creteProduct({ title, category, description, price, thumbnail, code, stock })
+
+        let isOwner
+
+        if (req.user) {
+            const { email, rol } = req.user;
+            isOwner = await new productsServices().createOwnerValidate(email, rol)
+        }
+
+        const owner = isOwner ? isOwner : 'schasemback_axel@hotmail.com'
+
+        const dataProducts = await productManager.creteProduct({ title, category, description, price, thumbnail, code, stock, owner })
+
         res.status(201).json(dataProducts)
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -81,7 +93,11 @@ export const deleteProduct = async (req, res) => {
     const { id } = req.params
     try {
         const product = await productManager.findOne({ _id: id })
+
+        await new productsServices().deleteIsPremium(product.owner)
+
         await productManager.deleteOne(id)
+        
         res.status(201).json({ productoBorrado: product })
     } catch (error) {
         res.status(500).json({ message: error.message });
