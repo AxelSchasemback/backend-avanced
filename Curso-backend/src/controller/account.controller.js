@@ -47,7 +47,7 @@ export const postDescription = async (req, res) => {
 
         const payload = new UserDto(updateDescription)
 
-        res.satatus(201).json(payload)
+        res.status(201).json(payload)
     } catch (error) {
         res.status(500).json({ message: error.message })
     }
@@ -86,7 +86,7 @@ export const putDataUser = async (req, res) => {
 
 export const delUser = async (req, res) => {
     try {
-        const delUser = await userManager.deleteOne(req.params['Cid']);
+        const delUser = await userManager.deleteOne(req.params['id']);
 
         res.status(201).json({usuarioBorrado: delUser});
     } catch (error) {

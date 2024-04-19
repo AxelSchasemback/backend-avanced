@@ -9,7 +9,7 @@ accountRouter.get('/user/:id', getUser, hasPermission('admin'))
 
 accountRouter.put('/user/:id', putDataUser, hasPermission('admin'))
 
-accountRouter.delete('user/:id', delUser, hasPermission('admin'))
+accountRouter.delete('/user/:id', delUser, hasPermission('admin'))
 
 accountRouter.get('/users', getAllUser, hasPermission('admin'))
 

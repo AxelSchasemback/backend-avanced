@@ -56,7 +56,8 @@ fetch('/api/current', {
             })
                 .then(response => response.json())
                 .then(data => {
-                    document.querySelector('#userInfo p:nth-child(4)').textContent = `Descripción: ${data.payload.description}`;
+                    console.log(data)
+                    document.querySelector('#userInfo p:nth-child(4)').textContent = `Descripción: ${data.description}`;
                     document.getElementById('description').value = '';
                 })
                 .catch(error => console.error(error));

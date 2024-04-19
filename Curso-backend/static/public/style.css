@@ -54,6 +54,14 @@
   }
 }
 
+.fon {
+  padding-bottom: 8em;
+}
+
+.table-admin:hover {
+  border: 1px solid black;
+}
+
 .avatarInput:hover {
   display: block;
 }
@@ -1335,6 +1343,26 @@ main {
 
 .table {
   margin-bottom: 0;
+  display: block;
+  overflow: overlay;
+}
+
+.rol {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 120;
+}
+
+.xdel {
+  height: 25;
+  width: 25;
+  background-color: rgb(70, 2, 2);
+  margin-left: 10px;
+}
+
+.xdel:hover {
+  background-color: rgb(230, 10, 10);
 }
 
 .resumen-buy {
